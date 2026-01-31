@@ -1,0 +1,92 @@
+:root {
+  --foreground-light: #4d4d4d;
+  --background-light: #fffcf4;
+  --foreground-dark: #cdced7;
+  --background-dark: #1f2135;
+  --font-primary: "Google Sans", sans-serif;
+  --fs-xs: clamp(0.75rem, 0.7rem + 0.3vw, 0.875rem); /* 12–14px */
+  --fs-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem); /* 14–16px */
+  --fs-md: clamp(1rem, 0.9rem + 0.4vw, 1.125rem); /* 16–18px */
+  --fs-lg: clamp(1.125rem, 1rem + 0.5vw, 1.375rem); /* 18–22px */
+  --fs-xl: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem); /* 22–28px */
+  --fs-2xl: clamp(1.75rem, 1.5rem + 1.2vw, 2.25rem); /* 28–36px */
+  --fs-3xl: clamp(2.25rem, 2rem + 1.8vw, 3rem); /* 36–48px */
+  --border-radius: 0.5rem;
+  --primary: #161fd2;
+  color-scheme: light dark;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: light-dark(var(--background-light), var(--background-dark));
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  transition: background-color 0.3s ease;
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+select::picker-icon {
+  display: none;
+}
+
+select {
+  background-image: none !important;
+  padding: 0;
+  border: none;
+}
+
+select,
+select::picker(select) {
+  appearance: base-select;
+}
+
+select::picker(select) {
+  background: white;
+  border: 2px solid #333;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the button that triggers the select */
+select > button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #eee;
+}
+
+/* Change button when open */
+select:open > button {
+  outline: 2px solid blue;
+}
+
+@media (min-width: 640px) {
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 1024px) {
+}
+@media (min-width: 1280px) {
+}
+@media (min-width: 1536px) {
+}

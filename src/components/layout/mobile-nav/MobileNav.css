@@ -1,0 +1,45 @@
+.MobileNav {
+  display: flex;
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom);
+  place-content: center;
+
+  .MobileNav__content {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: 0.5rem;
+    place-items: center;
+
+    nav {
+      margin-bottom: 1rem;
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        li {
+          margin-bottom: 0.75rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    .MobileNav__burger-menu-button {
+      width: fit-content;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .MobileNav {
+    display: none;
+  }
+}
