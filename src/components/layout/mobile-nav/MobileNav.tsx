@@ -49,6 +49,9 @@ export default () => {
           <nav>
             <ul>
               <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
                 <Link to="/reminders">List of reminders</Link>
               </li>
               <li>

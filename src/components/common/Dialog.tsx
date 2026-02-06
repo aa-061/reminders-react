@@ -1,3 +1,4 @@
+import "./Misc.css";
 import { useStore } from "@tanstack/react-store";
 import { useEffect, useRef } from "react";
 import { dialogStore } from "@/store";

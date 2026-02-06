@@ -1,5 +1,37 @@
-.RemindersList {
+.ReminderForm {
+  h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: var(--secondary);
+  }
 }
 
 .AddModes {
+}
+
+.UpdateModes {
+}
+
+.AvailableModes {
+  border: none;
+  margin: 1rem 0 0 0;
+  padding: 0;
+
+  legend {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  ul {
+    li {
+      /* border: 1px solid var(--secondary);
+      padding: 0.8rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem; */
+    }
+  }
 }

@@ -3,6 +3,7 @@ import { useStore } from "@tanstack/react-store";
 import { useEffect, useState } from "react";
 import { modesStore, reminderFormStore } from "@/store";
 import ModeForm from "../mode-form/ModeForm";
+import AvailableModes from "./AvailableModes";
 
 export default ({
   onDoneUpdatingModes,
@@ -51,39 +52,12 @@ export default ({
   return (
     <div className="UpdateModes">
       <ModeForm />
-      <fieldset>
-        <legend>Available modes</legend>
-
-        <div>
-          {Object.keys(checkedModes)
-            .map((id) => modes.find((x) => x.id === parseInt(id)))
-            .filter((x) => x !== undefined)
-            .map((mode) => (
-              <div key={mode.id}>
-                <input
-                  type="checkbox"
-                  id={`mode-${mode.id}`}
-                  name={`mode-${mode.id}`}
-                  checked={checkedModes[mode.id]}
-                  onChange={() => addRemoveModes(mode.id)}
-                />
-                <label htmlFor={`mode-${mode.id}`}>
-                  {mode.mode} @ {mode.address}{" "}
-                  <button
-                    onClick={() => {
-                      let newModes = [...modes];
-                      newModes = newModes.filter((m) => m.id !== mode.id);
-                      modesStore.setState(newModes);
-                    }}
-                  >
-                    x
-                  </button>
-                </label>
-              </div>
-            ))}
-        </div>
-      </fieldset>
-      <button type="button" onClick={handleDone}>
+      <AvailableModes
+        addRemoveModes={addRemoveModes}
+        checkedModes={checkedModes}
+        modes={modes}
+      />
+      <button className="btn" type="button" onClick={handleDone}>
         Done
       </button>
     </div>

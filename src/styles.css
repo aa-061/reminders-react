@@ -1,6 +1,6 @@
 :root {
   --foreground-light: #4d4d4d;
-  --background-light: #fffcf4;
+  --background-light: #f5f5f5;
   --foreground-dark: #cdced7;
   --background-dark: #1f2135;
   --font-primary: "Google Sans", sans-serif;
@@ -13,6 +13,7 @@
   --fs-3xl: clamp(2.25rem, 2rem + 1.8vw, 3rem); /* 36–48px */
   --border-radius: 0.5rem;
   --primary: #161fd2;
+  --secondary: #78787b;
   color-scheme: light dark;
 }
 
@@ -47,37 +48,44 @@ select::picker-icon {
 }
 
 select {
-  background-image: none !important;
-  padding: 0;
-  border: none;
+  selectedcontent {
+    width: 100%;
+  }
 }
 
 select,
 select::picker(select) {
   appearance: base-select;
+  border: 1px solid var(--primary);
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
 }
 
-select::picker(select) {
-  background: white;
-  border: 2px solid #333;
-  border-radius: 12px;
-  padding: 8px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+select option {
+  padding: 0.25rem;
+  background-color: white;
 }
 
-/* Style the button that triggers the select */
+select option:hover {
+  background-color: var(--secondary);
+  color: white;
+  cursor: pointer;
+}
+
 select > button {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  background: #eee;
+  width: 100%;
+
+  .chevron {
+    color: var(--secondary);
+  }
 }
 
-/* Change button when open */
 select:open > button {
-  outline: 2px solid blue;
+  outline: 2px solid var(--primary);
 }
 
 th,
@@ -98,6 +106,56 @@ dialog {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+form .form-group {
+  margin-bottom: 1.2rem;
+}
+
+form .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+form input[type="text"],
+form input[type="datetime-local"],
+form textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+}
+
+.btn {
+  background: none;
+  border: none;
+  background-color: var(--primary);
+  padding: 0.8rem 1rem;
+  color: white;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
 }
 
 @media (min-width: 640px) {

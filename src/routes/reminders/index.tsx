@@ -1,9 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import RemindersList from "@/components/reminders-list/RemindersList";
 
 export const Route = createFileRoute("/reminders/")({
   component: RemindersPage,
 });
 
 function RemindersPage() {
-  return <div>all reminders</div>;
+  return (
+    <>
+      <p>Home component</p>
+      <Link to="/reminders/new">Add new reminder</Link>
+      <RemindersList />
+    </>
+  );
 }

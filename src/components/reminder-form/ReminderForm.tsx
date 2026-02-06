@@ -8,27 +8,9 @@ import {
   reminderFormStore,
 } from "@/store";
 import { type IAugmentedReminder, type TCreateReminderField } from "@/types";
+import { SwitchInput } from "../common/Misc";
 import UpdateAlerts from "./UpdateAlerts";
 import UpdateModes from "./UpdateModes";
-
-var returnedNewReminder = {
-  id: 34,
-  title: "Buy gifts from amazon 22434343",
-  date: "2026-27-30T04:58:47.231Z",
-  reminders: [{ mode: "email", address: "dev7c4@gmail.com" }],
-  alerts: [1000],
-  is_recurring: false,
-  description: "This is a reminder to go and buy a bunch of gifts from amazon",
-};
-
-var reminderCreate = {
-  title: "Buy gifts from amazon 22434343",
-  date: "2026-27-30T04:58:47.231Z",
-  reminders: [{ mode: "email", address: "dev7c4@gmail.com" }],
-  alerts: [1000],
-  is_recurring: false,
-  description: "This is a reminder to go and buy a bunch of gifts from amazon",
-};
 
 export default () => {
   const queryClient = useQueryClient();
@@ -37,13 +19,20 @@ export default () => {
   const modes = useStore(modesStore);
   const alerts = useStore(alertsStore);
 
+  const url = import.meta.env.VITE_SERVER_URL;
+
+  if (!url)
+    throw new Error(
+      "No server URL has been provided. Make sure to set VITE_SERVER_URL env var.",
+    );
+
   const { mutate, isPending } = useMutation({
     mutationFn: async (newAugmentedReminder: IAugmentedReminder) => {
-      const response = await fetch("http://localhost:8080/reminders", {
+      const response = await fetch(`${url}/reminders`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": "SECRET_KEY",
         },
         body: JSON.stringify(newAugmentedReminder),
       });
@@ -141,10 +130,7 @@ export default () => {
   }
 
   return (
-    <div
-      className="ReminderForm"
-      style={{ border: "2px solid cyan", padding: "10px", margin: "10px" }}
-    >
+    <div className="ReminderForm">
       <form
         method="POST"
         className="ReminderForm__form"
@@ -164,21 +150,20 @@ export default () => {
           <input
             id="reminder-date"
             type="datetime-local"
-            value={reminderForm.date}
+            value={reminderForm.date ? reminderForm.date.slice(0, 16) : ""}
             onChange={(e) => handleChange(e, "date", "date")}
           />
         </div>
         <div className="form-group">
           <label htmlFor="reminder-is-recurring">Recurring</label>
-          <input
+          <SwitchInput
             id="reminder-is-recurring"
-            type="checkbox"
             checked={reminderForm.is_recurring}
             onChange={(e) => handleChange(e, "is_recurring", "checkbox")}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="reminder-description">Recurring</label>
+          <label htmlFor="reminder-description">Description</label>
           <textarea
             id="reminder-description"
             value={reminderForm.description}
@@ -187,7 +172,7 @@ export default () => {
         </div>
         <div className="form-group">
           <h3>Reminder modes</h3>
-          <button type="button" onClick={handleUpdateModes}>
+          <button className="btn" type="button" onClick={handleUpdateModes}>
             Update modes
           </button>
           {reminderForm.reminders.length <= 0 ? (
@@ -204,6 +189,7 @@ export default () => {
                       <li key={mode.id}>
                         {mode.mode} @ {mode.address}{" "}
                         <button
+                          className="btn"
                           type="button"
                           onClick={() => {
                             reminderFormStore.setState((prevState) => {
@@ -227,7 +213,7 @@ export default () => {
         </div>
         <div className="form-group">
           <h3>Alerts</h3>
-          <button type="button" onClick={handleUpdateAlerts}>
+          <button className="btn" type="button" onClick={handleUpdateAlerts}>
             Update alerts
           </button>
           {reminderForm.alerts.length <= 0 ? (
@@ -244,6 +230,7 @@ export default () => {
                       <li key={alert.id}>
                         {alert.name}
                         <button
+                          className="btn"
                           type="button"
                           onClick={() => {
                             reminderFormStore.setState((prevState) => {
@@ -267,7 +254,9 @@ export default () => {
         </div>
 
         <div className="form-group">
-          <button type="submit">Submit</button>
+          <button className="btn" type="submit">
+            Submit
+          </button>
         </div>
       </form>
     </div>

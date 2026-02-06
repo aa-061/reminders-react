@@ -3,25 +3,6 @@ import { useStore } from "@tanstack/react-store";
 import { modeStore, modesStore } from "@/store";
 import type { TModeField } from "@/types";
 
-var returnedNewReminder = {
-  id: 34,
-  title: "Buy gifts from amazon 22434343",
-  date: "2026-27-30T04:58:47.231Z",
-  reminders: [{ mode: "email", address: "dev7c4@gmail.com" }],
-  alerts: [1000],
-  is_recurring: false,
-  description: "This is a reminder to go and buy a bunch of gifts from amazon",
-};
-
-var reminderCreate = {
-  title: "Buy gifts from amazon 22434343",
-  date: "2026-27-30T04:58:47.231Z",
-  reminders: [{ mode: "email", address: "dev7c4@gmail.com" }],
-  alerts: [1000],
-  is_recurring: false,
-  description: "This is a reminder to go and buy a bunch of gifts from amazon",
-};
-
 export default () => {
   const mode = useStore(modeStore);
   const modes = useStore(modesStore);
@@ -51,10 +32,7 @@ export default () => {
   }
 
   return (
-    <div
-      className="ModeForm"
-      style={{ border: "2px solid pink", padding: "10px", margin: "10px" }}
-    >
+    <div className="ModeForm">
       <h3>Add a new mode</h3>
       <form onSubmit={handleForm} method="POST" className="ModeForm__form">
         <div className="form-group">
@@ -98,7 +76,9 @@ export default () => {
           />
         </div>
         <div className="form-group">
-          <button type="submit">Save</button>
+          <button className="btn" type="submit">
+            Save
+          </button>
         </div>
       </form>
     </div>

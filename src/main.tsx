@@ -7,7 +7,7 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "@/reportWebVitals.ts";
 // Import the generated route tree
 import { routeTree } from "@/routeTree.gen";
-import Dialog from "./components/dialog/Dialog";
+import Dialog from "./components/common/Dialog";
 
 const queryClient = new QueryClient();
 
