@@ -1,7 +1,6 @@
 import "./MobileNav.css";
 import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import MobileNavLinks from "@/components/layout/mobile-nav/MobileNavLinks";
+import { useState } from "react";
 
 // export default () => {
 //   const [theme, setTheme] = useState(() => {

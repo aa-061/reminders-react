@@ -1,5 +1,4 @@
 import { Store } from "@tanstack/store";
-import type { ReactNode } from "react";
 import {
   type IAlert,
   type ICreateReminder,

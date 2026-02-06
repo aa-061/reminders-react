@@ -7,7 +7,8 @@
     "build": "vite build && tsc",
     "preview": "vite preview",
     "test": "vitest run",
-    "sort-imports": "prettier --write \"src/**/*.{ts,tsx}\""
+    "sort-imports": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "sync": "GIT_SSH_COMMAND=\"ssh -i ~/.ssh/github061\" git push -u github061 main"
   },
   "dependencies": {
     "@tanstack/react-devtools": "^0.7.0",

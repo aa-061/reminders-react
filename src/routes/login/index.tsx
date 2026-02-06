@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { signIn } from "@/lib/auth-client";
-import { useSession } from "@/lib/auth-client";
+import { signIn, useSession } from "@/lib/auth-client";
 
 export const Route = createFileRoute("/login/")({
   component: LoginPage,
@@ -11,7 +9,6 @@ export const Route = createFileRoute("/login/")({
 function LoginPage() {
   const [username, setUsername] = useState<string>("");
   const [pass, setPass] = useState<string>("");
-  const navigate = useNavigate();
 
   const { data: session, isPending } = useSession();
 

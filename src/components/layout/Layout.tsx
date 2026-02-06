@@ -1,5 +1,5 @@
 import "./Layout.css";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import Footer from "@/components/layout/footer/Footer";
 import MobileNav from "@/components/layout/mobile-nav/MobileNav";
 import Navbar from "@/components/layout/navbar/Navbar";

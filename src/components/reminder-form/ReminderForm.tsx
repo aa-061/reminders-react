@@ -26,7 +26,7 @@ export default () => {
       "No server URL has been provided. Make sure to set VITE_SERVER_URL env var.",
     );
 
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: async (newAugmentedReminder: IAugmentedReminder) => {
       const response = await fetch(`${url}/reminders`, {
         method: "POST",
