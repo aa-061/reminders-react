@@ -9,6 +9,9 @@ if (!url)
 
 export const authClient = createAuthClient({
   baseURL: url,
+  fetchOptions: {
+    credentials: "include",
+  },
 });
 
 export const { signIn, signUp, signOut, useSession } = authClient;
