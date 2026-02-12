@@ -1,3 +1,29 @@
-.footer__container {
-  background-color: rgba(195, 0, 255, 0.464);
+.HomePage {
+  width: 100%;
+  min-height: 100vh;
+  padding: var(--spacing-lg);
+}
+
+.HomePage__container {
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+.HomePage__header {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  margin-bottom: var(--spacing-2xl);
+}
+
+@media (min-width: 768px) {
+  .HomePage {
+    padding: var(--spacing-xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .HomePage {
+    padding: var(--spacing-2xl);
+  }
 }

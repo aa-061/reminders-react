@@ -1,13 +1,17 @@
 import "./Home.css";
-import { Link } from "@tanstack/react-router";
-import RemindersList from "@/components/reminders-list/RemindersList";
+import QuickStats from "./QuickStats";
+import QuickAddReminder from "./QuickAddReminder";
+import UpcomingReminders from "./UpcomingReminders";
 
-export default () => {
+export default function Home() {
   return (
-    <>
-      <p>Home component</p>
-      <Link to="/reminders/new">Add new reminder</Link>
-      <RemindersList />
-    </>
+    <div className="HomePage">
+      <div className="HomePage__container">
+        <h1 className="HomePage__header">Dashboard</h1>
+        <QuickStats />
+        <QuickAddReminder />
+        <UpcomingReminders />
+      </div>
+    </div>
   );
-};
+}

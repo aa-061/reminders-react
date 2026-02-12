@@ -1,0 +1,154 @@
+.UpcomingReminders {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.UpcomingReminders__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.UpcomingReminders__title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
+
+.UpcomingReminders__view-all {
+  font-size: var(--fs-sm);
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: var(--fw-medium);
+  transition: color var(--transition-base);
+}
+
+.UpcomingReminders__view-all:hover {
+  color: var(--primary-hover);
+}
+
+.UpcomingReminders__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.UpcomingReminders__item {
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border: 1px solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+}
+
+.UpcomingReminders__item:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.UpcomingReminders__item-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+  gap: var(--spacing-lg);
+}
+
+.UpcomingReminders__item-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.UpcomingReminders__item-title {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  margin-bottom: var(--spacing-xs);
+  word-wrap: break-word;
+}
+
+.UpcomingReminders__item-date {
+  font-size: var(--fs-sm);
+  color: var(--secondary);
+}
+
+.UpcomingReminders__item-countdown {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.UpcomingReminders__item-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.UpcomingReminders__action {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  text-decoration: none;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition-base);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+}
+
+.UpcomingReminders__action:hover {
+  color: var(--primary-hover);
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+}
+
+.UpcomingReminders__action--danger {
+  color: var(--error);
+}
+
+.UpcomingReminders__action--danger:hover {
+  background-color: light-dark(var(--error-bg-light), var(--error-bg-dark));
+}
+
+.UpcomingReminders__action:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.UpcomingReminders__loading,
+.UpcomingReminders__empty {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  color: var(--secondary);
+}
+
+.UpcomingReminders__empty {
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border: 1px solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.UpcomingReminders__empty p {
+  font-size: var(--fs-md);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .UpcomingReminders__item-content {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .UpcomingReminders__item-countdown {
+    align-self: flex-start;
+  }
+
+  .UpcomingReminders__item-actions {
+    flex-wrap: wrap;
+  }
+}
