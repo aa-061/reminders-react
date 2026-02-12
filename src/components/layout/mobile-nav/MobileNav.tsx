@@ -1,64 +1,65 @@
 import "./MobileNav.css";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { useSession, signOut } from "@/lib/auth-client";
+import { Menu, X } from "lucide-react";
 
-// export default () => {
-//   const [theme, setTheme] = useState(() => {
-//     if (typeof window === "undefined") return "light";
-//     const savedTheme = localStorage.getItem("theme");
-//     const prefersDark = window.matchMedia(
-//       "(prefers-color-scheme: dark)",
-//     ).matches;
-//     return savedTheme || (prefersDark ? "dark" : "light");
-//   });
-
-//   useEffect(() => {
-//     const root = document.documentElement;
-//     root.setAttribute("data-theme", theme);
-//     localStorage.setItem("theme", theme);
-//   }, [theme]);
-
-//   const toggleTheme = (): void => {
-//     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-//   };
-
-//   return (
-//     <footer className="MobileNav">
-//       <div className="Navbar__logo-container">{"\u{1F4C5}"}</div>
-//       <MobileNavLinks />
-//       <div className="Navbar__nav-actions">
-//         <button onClick={toggleTheme} className="Navbar__theme-toggle">
-//           {theme === "light" ? "\u263E" : "\u263C"}
-//         </button>
-//       </div>
-//     </footer>
-//   );
-// };
 export default () => {
+  const navigate = useNavigate();
+  const { data: session } = useSession();
   const [showMenu, setShowMenu] = useState(false);
 
   function toggleMobileMenu(): void {
     setShowMenu(!showMenu);
   }
 
+  const handleLogout = async (): Promise<void> => {
+    await signOut();
+    setShowMenu(false);
+    navigate({ to: "/login" });
+  };
+
   return (
     <footer className="MobileNav">
       <div className="MobileNav__content">
         {showMenu && (
-          <nav>
+          <nav className="MobileNav__menu">
+            {session && (
+              <div className="MobileNav__user-info">
+                <span className="MobileNav__user-email">{session.user.email}</span>
+              </div>
+            )}
             <ul>
               <li>
-                <Link to="/login">Login</Link>
+                <Link to="/" onClick={() => setShowMenu(false)}>
+                  Home
+                </Link>
               </li>
-              <li>
-                <Link to="/reminders">List of reminders</Link>
-              </li>
-              <li>
-                <Link to="/reminders/new">Create new reminder</Link>
-              </li>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
+              {session ? (
+                <>
+                  <li>
+                    <Link to="/reminders" onClick={() => setShowMenu(false)}>
+                      List of reminders
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/reminders/new" onClick={() => setShowMenu(false)}>
+                      Create new reminder
+                    </Link>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout} className="MobileNav__logout-btn">
+                      Logout
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <li>
+                  <Link to="/login" onClick={() => setShowMenu(false)}>
+                    Login
+                  </Link>
+                </li>
+              )}
             </ul>
           </nav>
         )}
@@ -67,7 +68,7 @@ export default () => {
           onClick={toggleMobileMenu}
           className="MobileNav__burger-menu-button"
         >
-          ☰
+          {showMenu ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
     </footer>

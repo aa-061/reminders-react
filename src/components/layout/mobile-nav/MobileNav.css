@@ -5,40 +5,113 @@
   z-index: 100;
   padding-bottom: env(safe-area-inset-bottom);
   place-content: center;
-
-  .MobileNav__content {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    padding: 0.5rem;
-    place-items: center;
-
-    nav {
-      margin-bottom: 1rem;
-
-      ul {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        li {
-          margin-bottom: 0.75rem;
-
-          &:last-child {
-            margin-bottom: 0;
-          }
-        }
-      }
-    }
-
-    .MobileNav__burger-menu-button {
-      width: fit-content;
-    }
-  }
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  width: 100%;
+  box-sizing: border-box;
 }
 
-@media (min-width: 768px) {
+.MobileNav__content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--spacing-sm);
+  place-items: center;
+  box-sizing: border-box;
+}
+
+.MobileNav__menu {
+  margin-bottom: var(--spacing-lg);
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  width: 100%;
+  max-width: 25rem;
+  box-shadow: var(--shadow-md);
+  box-sizing: border-box;
+}
+
+.MobileNav__user-info {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.MobileNav__user-email {
+  font-size: var(--fs-sm);
+  color: var(--secondary);
+}
+
+.MobileNav nav ul {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.MobileNav nav ul li {
+  margin-bottom: var(--spacing-sm);
+}
+
+.MobileNav nav ul li:last-child {
+  margin-bottom: 0;
+}
+
+.MobileNav nav ul li a,
+.MobileNav nav ul li button {
+  display: block;
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-decoration: none;
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  border: none;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-size: var(--fs-md);
+  width: 100%;
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+  box-sizing: border-box;
+}
+
+.MobileNav nav ul li a:hover,
+.MobileNav nav ul li button:hover {
+  background-color: light-dark(var(--border-light), var(--surface-dark));
+}
+
+.MobileNav__logout-btn {
+  background-color: light-dark(var(--error-bg-light), var(--error-bg-dark)) !important;
+  color: var(--error) !important;
+}
+
+.MobileNav__logout-btn:hover {
+  background-color: light-dark(var(--error-border-light), var(--error-border-dark)) !important;
+}
+
+.MobileNav__burger-menu-button {
+  background-color: var(--primary);
+  color: light-dark(var(--surface-light), var(--surface-dark));
+  border: none;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  font-size: var(--fs-xl);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  width: 3.75rem;
+  height: 3.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-button);
+  transition: background-color var(--transition-base);
+}
+
+.MobileNav__burger-menu-button:hover {
+  background-color: var(--primary-hover);
+}
+
+@media (min-width: 48rem) {
   .MobileNav {
     display: none;
   }

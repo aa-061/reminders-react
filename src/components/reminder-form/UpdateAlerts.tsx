@@ -3,6 +3,7 @@ import { useStore } from "@tanstack/react-store";
 import { useEffect, useState } from "react";
 import AlertForm from "@/components/alert-form/AlertForm";
 import { alertsStore, reminderFormStore } from "@/store";
+import { Trash2 } from "lucide-react";
 
 // import ModeForm from "../alert-form/ModeForm";
 
@@ -80,7 +81,7 @@ export default ({
                       alertsStore.setState(newAlerts);
                     }}
                   >
-                    x
+                    <Trash2 size={18} />
                   </button>
                 </label>
               </div>

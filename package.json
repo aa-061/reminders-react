@@ -18,8 +18,10 @@
     "@tanstack/react-store": "^0.8.0",
     "@tanstack/router-plugin": "^1.132.0",
     "better-auth": "^1.4.18",
+    "lucide-react": "^0.563.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@tanstack/devtools-vite": "^0.3.11",

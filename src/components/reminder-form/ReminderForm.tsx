@@ -11,6 +11,7 @@ import { type IAugmentedReminder, type TCreateReminderField } from "@/types";
 import { SwitchInput } from "../common/Misc";
 import UpdateAlerts from "./UpdateAlerts";
 import UpdateModes from "./UpdateModes";
+import { Trash2 } from "lucide-react";
 
 export default () => {
   const queryClient = useQueryClient();
@@ -202,7 +203,7 @@ export default () => {
                             });
                           }}
                         >
-                          x
+                          <Trash2 size={18} />
                         </button>
                       </li>
                     );
@@ -243,7 +244,7 @@ export default () => {
                             });
                           }}
                         >
-                          x
+                          <Trash2 size={18} />
                         </button>
                       </li>
                     );

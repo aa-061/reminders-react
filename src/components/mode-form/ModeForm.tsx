@@ -2,6 +2,7 @@ import "./ModeForm.css";
 import { useStore } from "@tanstack/react-store";
 import { modeStore, modesStore } from "@/store";
 import type { TModeField } from "@/types";
+import { ChevronDown } from "lucide-react";
 
 export default () => {
   const mode = useStore(modeStore);
@@ -46,7 +47,7 @@ export default () => {
             <button>
               {/* @ts-ignore */}
               <selectedcontent></selectedcontent>
-              <span className="chevron">▼</span>
+              <ChevronDown size={20} className="chevron" />
             </button>
             <option value="email">
               <div className="option-content">

@@ -1,19 +1,5 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(npx eslint:*)",
-      "Bash(git checkout:*)",
-      "Bash(npm install:*)",
-      "Bash(npm uninstall:*)",
-      "Bash(for file in src/**/*.{tsx,ts})",
-      "Bash(do grep -l .css $file)",
-      "Bash(done)",
-      "Bash(chmod:*)",
-      "Bash(npx prettier:*)",
-      "Bash(npm run sort-imports:*)",
-      "WebFetch(domain:tanstack.com)",
-      "WebSearch",
-      "Bash(npm run build:*)"
-    ]
+    "allow": ["Bash", "WebSearch", "WebFetch(domain:upstash.com)"]
   }
 }

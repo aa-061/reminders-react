@@ -1,5 +1,8 @@
 Welcome to your new TanStack app! 
 
+Public URL for client: https://reminders-client.onrender.com
+Public URL for the backend: https://reminders-bun.onrender.com
+
 # Getting Started
 
 To run this application:

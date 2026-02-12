@@ -2,6 +2,7 @@ import "./ReminderForm.css";
 import { modesStore } from "@/store";
 import type { IMode } from "@/types";
 import Tile from "../common/Tile";
+import { Trash2 } from "lucide-react";
 
 export default ({
   checkedModes,
@@ -38,7 +39,7 @@ export default ({
                     modesStore.setState(newModes);
                   }}
                 >
-                  {"\u0078"}
+                  <Trash2 size={18} />
                 </button>
               </label>
             </Tile>
