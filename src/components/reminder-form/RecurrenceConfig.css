@@ -1,0 +1,65 @@
+.RecurrenceConfig {
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border: 1px solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+}
+
+.RecurrenceConfig__title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--spacing-md);
+  color: light-dark(var(--text-light), var(--text-dark));
+}
+
+.RecurrenceConfig__group {
+  margin-bottom: var(--spacing-md);
+}
+
+.RecurrenceConfig__group label {
+  display: block;
+  font-weight: var(--fw-medium);
+  margin-bottom: var(--spacing-xs);
+  color: light-dark(var(--text-light), var(--text-dark));
+}
+
+.RecurrenceConfig__group input,
+.RecurrenceConfig__group select {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-md);
+  background-color: light-dark(var(--bg-light), var(--bg-dark));
+  color: light-dark(var(--text-light), var(--text-dark));
+  transition: var(--transition-fast);
+}
+
+.RecurrenceConfig__group input:focus,
+.RecurrenceConfig__group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(22, 31, 210, 0.1);
+}
+
+.RecurrenceConfig__hint {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: var(--fs-sm);
+  color: light-dark(var(--text-secondary-light), var(--text-secondary-dark));
+}
+
+.RecurrenceConfig__preview {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: light-dark(var(--bg-light), var(--bg-dark));
+  border-radius: var(--radius-sm);
+}
+
+.RecurrenceConfig__preview h4 {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--spacing-xs);
+  color: light-dark(var(--text-light), var(--text-dark));
+}

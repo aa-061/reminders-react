@@ -19,6 +19,10 @@ export interface ICreateReminder {
   reminders: number[];
   alerts: number[];
   is_recurring: boolean;
+  recurrence?: string | null;
+  start_date?: string | null;
+  end_date?: string | null;
+  location?: string | null;
   description: string;
 }
 
@@ -28,6 +32,10 @@ export interface IAugmentedReminder {
   reminders: { mode: string; address: string }[];
   alerts: { id: string; time: number }[];
   is_recurring: boolean;
+  recurrence?: string | null;
+  start_date?: string | null;
+  end_date?: string | null;
+  location?: string | null;
   description: string;
 }
 

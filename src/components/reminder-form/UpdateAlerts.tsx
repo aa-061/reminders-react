@@ -1,9 +1,11 @@
 import "./ReminderForm.css";
+import "./UpdateAlerts.css";
 import { useStore } from "@tanstack/react-store";
 import { useEffect, useState } from "react";
 import AlertForm from "@/components/alert-form/AlertForm";
 import { alertsStore, reminderFormStore } from "@/store";
-import { Trash2 } from "lucide-react";
+import { alertPresets } from "@/lib/validation";
+import { Trash2, Clock } from "lucide-react";
 
 // import ModeForm from "../alert-form/ModeForm";
 
@@ -53,8 +55,44 @@ export default ({
     );
   }
 
+  const addPresetAlert = (preset: (typeof alertPresets)[0]) => {
+    // Check if this preset already exists in alerts store
+    const exists = alerts.some((a) => a.ms === preset.ms && a.name === preset.name);
+    if (!exists) {
+      // Add to alerts store with a unique ID
+      const newId = Math.max(...alerts.map((a) => a.id), 0) + 1;
+      alertsStore.setState([...alerts, { id: newId, name: preset.name, ms: preset.ms }]);
+      // Auto-check the new alert
+      setCheckedAlerts((prev) => ({ ...prev, [newId]: true }));
+    } else {
+      // If it exists, just check it
+      const existingAlert = alerts.find((a) => a.ms === preset.ms && a.name === preset.name);
+      if (existingAlert) {
+        setCheckedAlerts((prev) => ({ ...prev, [existingAlert.id]: true }));
+      }
+    }
+  };
+
   return (
     <div className="UpdateModes">
+      <div className="UpdateAlerts__presets">
+        <h3>
+          <Clock size={18} />
+          Quick Add Common Alerts
+        </h3>
+        <div className="UpdateAlerts__preset-buttons">
+          {alertPresets.map((preset) => (
+            <button
+              key={preset.id}
+              type="button"
+              className="UpdateAlerts__preset-btn"
+              onClick={() => addPresetAlert(preset)}
+            >
+              {preset.name}
+            </button>
+          ))}
+        </div>
+      </div>
       <AlertForm />
       <fieldset>
         <legend>Available alerts</legend>

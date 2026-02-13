@@ -5,6 +5,13 @@ import {
   type IDialog,
   type IMode,
 } from "@/types";
+import type { ToastType } from "@/components/common/Toast";
+
+interface IToast {
+  id: string;
+  message: string;
+  type: ToastType;
+}
 
 export const modeStore = new Store<IMode>({
   id: 0,
@@ -27,6 +34,10 @@ export const reminderFormStore = new Store<ICreateReminder>({
   reminders: [],
   alerts: [],
   is_recurring: false,
+  recurrence: null,
+  start_date: null,
+  end_date: null,
+  location: null,
   description: "",
 });
 
@@ -49,3 +60,5 @@ export const alertsStore = new Store<IAlert[]>([
     ms: 1000,
   },
 ]);
+
+export const toastsStore = new Store<IToast[]>([]);

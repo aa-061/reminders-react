@@ -1,8 +1,17 @@
 import "./ReminderForm.css";
+import "./AvailableModes.css";
 import { modesStore } from "@/store";
 import type { IMode } from "@/types";
 import Tile from "../common/Tile";
-import { Trash2 } from "lucide-react";
+import { Trash2, Mail, MessageSquare, Phone, Bell } from "lucide-react";
+
+const getModeIcon = (mode: string) => {
+  const lowerMode = mode.toLowerCase();
+  if (lowerMode.includes("email")) return <Mail size={18} />;
+  if (lowerMode.includes("sms")) return <MessageSquare size={18} />;
+  if (lowerMode.includes("phone")) return <Phone size={18} />;
+  return <Bell size={18} />;
+};
 
 export default ({
   checkedModes,
@@ -30,9 +39,15 @@ export default ({
               checked={checkedModes[mode.id]}
               onChange={() => addRemoveModes(mode.id)}
             >
-              <label htmlFor={`mode-${mode.id}`}>
-                {mode.mode} @ {mode.address}{" "}
+              <label htmlFor={`mode-${mode.id}`} className="AvailableModes__label">
+                <span className="AvailableModes__icon">{getModeIcon(mode.mode)}</span>
+                <span className="AvailableModes__info">
+                  <span className="AvailableModes__mode">{mode.mode}</span>
+                  <span className="AvailableModes__address">{mode.address}</span>
+                </span>
                 <button
+                  className="AvailableModes__delete"
+                  type="button"
                   onClick={() => {
                     let newModes = [...modes];
                     newModes = newModes.filter((m) => m.id !== mode.id);

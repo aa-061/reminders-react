@@ -1,0 +1,41 @@
+.EditReminderPage {
+  padding: var(--spacing-xl);
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.EditReminderPage h1 {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  margin-bottom: var(--spacing-lg);
+  color: light-dark(var(--text-light), var(--text-dark));
+}
+
+.EditReminderPage__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20rem;
+  font-size: var(--fs-lg);
+  color: light-dark(var(--text-secondary-light), var(--text-secondary-dark));
+}
+
+.EditReminderPage__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 20rem;
+  text-align: center;
+}
+
+.EditReminderPage__error h1 {
+  font-size: var(--fs-xl);
+  color: #ef4444;
+  margin-bottom: var(--spacing-md);
+}
+
+.EditReminderPage__error p {
+  font-size: var(--fs-md);
+  color: light-dark(var(--text-secondary-light), var(--text-secondary-dark));
+}

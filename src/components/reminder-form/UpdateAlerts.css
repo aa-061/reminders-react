@@ -1,0 +1,45 @@
+.UpdateAlerts__presets {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border-radius: var(--radius-md);
+  border: 1px solid light-dark(var(--border-light), var(--border-dark));
+}
+
+.UpdateAlerts__presets h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--spacing-md);
+  color: light-dark(var(--text-light), var(--text-dark));
+}
+
+.UpdateAlerts__preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.UpdateAlerts__preset-btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: light-dark(var(--bg-light), var(--bg-dark));
+  border: 1px solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  color: light-dark(var(--text-light), var(--text-dark));
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.UpdateAlerts__preset-btn:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+.UpdateAlerts__preset-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(22, 31, 210, 0.1);
+}

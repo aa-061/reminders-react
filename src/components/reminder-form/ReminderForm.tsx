@@ -1,24 +1,41 @@
 import "./ReminderForm.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useStore } from "@tanstack/react-store";
+import { useNavigate } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import {
   alertsStore,
   dialogStore,
   modesStore,
   reminderFormStore,
 } from "@/store";
-import { type IAugmentedReminder, type TCreateReminderField } from "@/types";
+import {
+  type IAugmentedReminder,
+  type IReminder,
+  type TCreateReminderField,
+} from "@/types";
+import { createReminderSchema, reminderFormSchema } from "@/lib/validation";
+import { showToast } from "@/components/common/ToastContainer";
 import { SwitchInput } from "../common/Misc";
+import RecurrenceConfig from "./RecurrenceConfig";
 import UpdateAlerts from "./UpdateAlerts";
 import UpdateModes from "./UpdateModes";
-import { Trash2 } from "lucide-react";
+import { Trash2, Loader2 } from "lucide-react";
 
-export default () => {
+interface ReminderFormProps {
+  editMode?: boolean;
+  existingReminder?: IReminder;
+}
+
+export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const reminderForm = useStore(reminderFormStore);
   const dialog = useStore(dialogStore);
   const modes = useStore(modesStore);
   const alerts = useStore(alertsStore);
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const url = import.meta.env.VITE_SERVER_URL;
 
@@ -27,29 +44,84 @@ export default () => {
       "No server URL has been provided. Make sure to set VITE_SERVER_URL env var.",
     );
 
-  const { mutate } = useMutation({
+  // Pre-populate form in edit mode
+  useEffect(() => {
+    if (editMode && existingReminder) {
+      reminderFormStore.setState({
+        title: existingReminder.title,
+        date: existingReminder.date,
+        reminders: existingReminder.reminders.map((r) =>
+          parseInt(r.id.toString()),
+        ),
+        alerts: existingReminder.alerts.map((a) => parseInt(a.id.toString())),
+        is_recurring: existingReminder.is_recurring,
+        recurrence: existingReminder.recurrence,
+        start_date: existingReminder.start_date,
+        end_date: existingReminder.end_date,
+        location: existingReminder.location,
+        description: existingReminder.description || "",
+      });
+    }
+  }, [editMode, existingReminder]);
+
+  const { mutate, isPending } = useMutation({
     mutationFn: async (newAugmentedReminder: IAugmentedReminder) => {
-      const response = await fetch(`${url}/reminders`, {
-        method: "POST",
+      const endpoint = editMode
+        ? `${url}/reminders/${existingReminder?.id}`
+        : `${url}/reminders`;
+      const method = editMode ? "PUT" : "POST";
+
+      const response = await fetch(endpoint, {
+        method,
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newAugmentedReminder),
       });
-      if (!response.ok) throw new Error("Failed to create");
+      if (!response.ok)
+        throw new Error(editMode ? "Failed to update" : "Failed to create");
       return response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["reminders"] });
-      reminderFormStore.setState({
-        title: "",
-        date: "",
-        reminders: [],
-        alerts: [],
-        is_recurring: false,
-        description: "",
-      });
+      if (editMode && existingReminder) {
+        queryClient.invalidateQueries({
+          queryKey: ["reminder", existingReminder.id],
+        });
+      }
+
+      showToast(
+        editMode
+          ? "Reminder updated successfully!"
+          : "Reminder created successfully!",
+        "success",
+      );
+
+      // Reset form only in create mode
+      if (!editMode) {
+        reminderFormStore.setState({
+          title: "",
+          date: "",
+          reminders: [],
+          alerts: [],
+          is_recurring: false,
+          recurrence: null,
+          start_date: null,
+          end_date: null,
+          location: null,
+          description: "",
+        });
+      }
+
+      // Navigate to reminders list
+      navigate({ to: "/reminders" });
+    },
+    onError: (error) => {
+      showToast(
+        error instanceof Error ? error.message : "An error occurred",
+        "error",
+      );
     },
   });
 
@@ -67,6 +139,30 @@ export default () => {
       newFormState[field] = e.target.value as never;
     }
     reminderFormStore.setState(newFormState);
+
+    // Clear error for this field when user types
+    if (errors[field]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
+  }
+
+  function handleRecurrenceChange(field: TCreateReminderField, value: string) {
+    const newFormState = { ...reminderForm };
+    newFormState[field] = value as never;
+    reminderFormStore.setState(newFormState);
+
+    // Clear error for this field
+    if (errors[field]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
   }
 
   function onDoneUpdatingModes(listOfCheckedModes: number[]) {
@@ -118,13 +214,34 @@ export default () => {
 
   function handleCreateNewReminder(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    // Validate form data
+    const schema = editMode ? reminderFormSchema : createReminderSchema;
+    const validation = schema.safeParse(reminderForm);
+
+    if (!validation.success) {
+      const fieldErrors: Record<string, string> = {};
+      validation.error.errors.forEach((error) => {
+        if (error.path[0]) {
+          fieldErrors[error.path[0].toString()] = error.message;
+        }
+      });
+      setErrors(fieldErrors);
+      showToast("Please fix the errors in the form", "error");
+      return;
+    }
+
     const augmentedNewReminder: IAugmentedReminder = {
       ...reminderForm,
-      reminders: modes.map((m) => ({
-        mode: m.mode,
-        address: m.address,
-      })),
-      alerts: alerts.map((a) => ({ id: a.id.toString(), time: a.ms })),
+      reminders: modes
+        .filter((m) => reminderForm.reminders.includes(m.id))
+        .map((m) => ({
+          mode: m.mode,
+          address: m.address,
+        })),
+      alerts: alerts
+        .filter((a) => reminderForm.alerts.includes(a.id))
+        .map((a) => ({ id: a.id.toString(), time: a.ms })),
     };
 
     mutate(augmentedNewReminder);
@@ -138,22 +255,46 @@ export default () => {
         onSubmit={handleCreateNewReminder}
       >
         <div className="form-group">
-          <label htmlFor="reminder-title">Title</label>
+          <label htmlFor="reminder-title">
+            Title <span className="required">*</span>
+          </label>
           <input
             id="reminder-title"
             type="text"
             value={reminderForm.title}
             onChange={(e) => handleChange(e, "title")}
+            className={errors.title ? "input-error" : ""}
           />
+          {errors.title && (
+            <span className="error-message">{errors.title}</span>
+          )}
         </div>
         <div className="form-group">
-          <label htmlFor="reminder-date">Date</label>
+          <label htmlFor="reminder-date">
+            Date & Time <span className="required">*</span>
+          </label>
           <input
             id="reminder-date"
             type="datetime-local"
             value={reminderForm.date ? reminderForm.date.slice(0, 16) : ""}
             onChange={(e) => handleChange(e, "date", "date")}
+            className={errors.date ? "input-error" : ""}
           />
+          {errors.date && <span className="error-message">{errors.date}</span>}
+        </div>
+        <div className="form-group">
+          <label htmlFor="reminder-location">Location (Optional)</label>
+          <input
+            id="reminder-location"
+            type="text"
+            placeholder="Enter a location"
+            value={reminderForm.location || ""}
+            onChange={(e) => handleChange(e, "location")}
+            className={errors.location ? "input-error" : ""}
+          />
+          {errors.location && (
+            <span className="error-message">{errors.location}</span>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="reminder-is-recurring">Recurring</label>
@@ -163,21 +304,34 @@ export default () => {
             onChange={(e) => handleChange(e, "is_recurring", "checkbox")}
           />
         </div>
+        <RecurrenceConfig
+          isRecurring={reminderForm.is_recurring}
+          recurrence={reminderForm.recurrence}
+          startDate={reminderForm.start_date}
+          endDate={reminderForm.end_date}
+          onRecurrenceChange={handleRecurrenceChange}
+        />
         <div className="form-group">
-          <label htmlFor="reminder-description">Description</label>
+          <label htmlFor="reminder-description">Description (Optional)</label>
           <textarea
             id="reminder-description"
             value={reminderForm.description}
             onChange={(e) => handleChange(e, "description")}
+            className={errors.description ? "input-error" : ""}
           ></textarea>
+          {errors.description && (
+            <span className="error-message">{errors.description}</span>
+          )}
         </div>
         <div className="form-group">
-          <h3>Reminder modes</h3>
+          <h3>
+            Reminder modes <span className="required">*</span>
+          </h3>
           <button className="btn" type="button" onClick={handleUpdateModes}>
             Update modes
           </button>
           {reminderForm.reminders.length <= 0 ? (
-            <p>No added modes</p>
+            <p className="info-text">No added modes</p>
           ) : (
             <>
               <p>Added modes:</p>
@@ -211,14 +365,19 @@ export default () => {
               </ul>
             </>
           )}
+          {errors.reminders && (
+            <span className="error-message">{errors.reminders}</span>
+          )}
         </div>
         <div className="form-group">
-          <h3>Alerts</h3>
+          <h3>
+            Alerts <span className="required">*</span>
+          </h3>
           <button className="btn" type="button" onClick={handleUpdateAlerts}>
             Update alerts
           </button>
           {reminderForm.alerts.length <= 0 ? (
-            <p>No added alerts</p>
+            <p className="info-text">No added alerts</p>
           ) : (
             <>
               <p>Added alerts:</p>
@@ -252,11 +411,21 @@ export default () => {
               </ul>
             </>
           )}
+          {errors.alerts && (
+            <span className="error-message">{errors.alerts}</span>
+          )}
         </div>
 
         <div className="form-group">
-          <button className="btn" type="submit">
-            Submit
+          <button className="btn btn-primary" type="submit" disabled={isPending}>
+            {isPending ? (
+              <>
+                <Loader2 size={18} className="spinner" />
+                {editMode ? "Updating..." : "Creating..."}
+              </>
+            ) : (
+              <>{editMode ? "Update Reminder" : "Create Reminder"}</>
+            )}
           </button>
         </div>
       </form>
