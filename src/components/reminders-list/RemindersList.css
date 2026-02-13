@@ -1,2 +1,72 @@
 .RemindersList {
+  width: 100%;
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+.RemindersList__grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.RemindersList__loading,
+.RemindersList__error,
+.RemindersList__empty,
+.RemindersList__no-results {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border-radius: var(--radius-md);
+  border: 0.0625rem solid
+    light-dark(var(--border-light), var(--border-dark));
+}
+
+.RemindersList__loading {
+  font-size: var(--fs-lg);
+  color: var(--secondary);
+}
+
+.RemindersList__error {
+  border-color: var(--error);
+}
+
+.RemindersList__error p:first-child {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--error);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.RemindersList__error-message {
+  font-size: var(--fs-sm);
+  color: var(--secondary);
+  margin: 0;
+}
+
+.RemindersList__empty p:first-child,
+.RemindersList__no-results p:first-child {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.RemindersList__empty-hint,
+.RemindersList__no-results-hint {
+  font-size: var(--fs-md);
+  color: var(--secondary);
+  margin: 0;
+}
+
+@media (min-width: 48rem) {
+  .RemindersList__grid {
+    grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+  }
+}
+
+@media (max-width: 48rem) {
+  .RemindersList {
+    padding: var(--spacing-md);
+  }
 }

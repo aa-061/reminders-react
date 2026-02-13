@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as RemindersIndexRouteImport } from './routes/reminders/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as RemindersNewIndexRouteImport } from './routes/reminders/new/index'
+import { Route as RemindersIdEditIndexRouteImport } from './routes/reminders/$id/edit/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const RemindersNewIndexRoute = RemindersNewIndexRouteImport.update({
   path: '/reminders/new/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RemindersIdEditIndexRoute = RemindersIdEditIndexRouteImport.update({
+  id: '/reminders/$id/edit/',
+  path: '/reminders/$id/edit/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login/': typeof LoginIndexRoute
   '/reminders/': typeof RemindersIndexRoute
   '/reminders/new/': typeof RemindersNewIndexRoute
+  '/reminders/$id/edit/': typeof RemindersIdEditIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginIndexRoute
   '/reminders': typeof RemindersIndexRoute
   '/reminders/new': typeof RemindersNewIndexRoute
+  '/reminders/$id/edit': typeof RemindersIdEditIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,25 @@ export interface FileRoutesById {
   '/login/': typeof LoginIndexRoute
   '/reminders/': typeof RemindersIndexRoute
   '/reminders/new/': typeof RemindersNewIndexRoute
+  '/reminders/$id/edit/': typeof RemindersIdEditIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login/' | '/reminders/' | '/reminders/new/'
+  fullPaths:
+    | '/'
+    | '/login/'
+    | '/reminders/'
+    | '/reminders/new/'
+    | '/reminders/$id/edit/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/reminders' | '/reminders/new'
-  id: '__root__' | '/' | '/login/' | '/reminders/' | '/reminders/new/'
+  to: '/' | '/login' | '/reminders' | '/reminders/new' | '/reminders/$id/edit'
+  id:
+    | '__root__'
+    | '/'
+    | '/login/'
+    | '/reminders/'
+    | '/reminders/new/'
+    | '/reminders/$id/edit/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +87,7 @@ export interface RootRouteChildren {
   LoginIndexRoute: typeof LoginIndexRoute
   RemindersIndexRoute: typeof RemindersIndexRoute
   RemindersNewIndexRoute: typeof RemindersNewIndexRoute
+  RemindersIdEditIndexRoute: typeof RemindersIdEditIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RemindersNewIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reminders/$id/edit/': {
+      id: '/reminders/$id/edit/'
+      path: '/reminders/$id/edit'
+      fullPath: '/reminders/$id/edit/'
+      preLoaderRoute: typeof RemindersIdEditIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +135,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginIndexRoute: LoginIndexRoute,
   RemindersIndexRoute: RemindersIndexRoute,
   RemindersNewIndexRoute: RemindersNewIndexRoute,
+  RemindersIdEditIndexRoute: RemindersIdEditIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
