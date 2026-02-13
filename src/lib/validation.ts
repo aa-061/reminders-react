@@ -58,3 +58,32 @@ export const recurrenceFrequencies = [
   { value: "monthly", label: "Monthly" },
   { value: "custom", label: "Custom (Cron)" },
 ];
+
+// Phone validation using E.164 international format
+const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+
+export const modeFormSchema = z
+  .object({
+    mode: z.enum(["email", "sms", "call"], {
+      errorMap: () => ({ message: "Please select a valid mode" }),
+    }),
+    address: z.string().min(1, "Address is required"),
+    isDefault: z.boolean().default(false),
+  })
+  .refine(
+    (data) => {
+      if (data.mode === "email") {
+        return z.string().email().safeParse(data.address).success;
+      }
+      if (data.mode === "sms" || data.mode === "call") {
+        return phoneRegex.test(data.address);
+      }
+      return true;
+    },
+    {
+      message: "Invalid format for selected mode type",
+      path: ["address"],
+    },
+  );
+
+export type ModeFormData = z.infer<typeof modeFormSchema>;

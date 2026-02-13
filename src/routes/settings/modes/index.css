@@ -1,0 +1,10 @@
+.SettingsModesPage {
+  padding: var(--spacing-2xl);
+  min-height: calc(100vh - 4rem);
+}
+
+@media (max-width: 48rem) {
+  .SettingsModesPage {
+    padding: var(--spacing-lg);
+  }
+}

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RemindersIndexRouteImport } from './routes/reminders/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
+import { Route as SettingsModesIndexRouteImport } from './routes/settings/modes/index'
 import { Route as RemindersNewIndexRouteImport } from './routes/reminders/new/index'
 import { Route as RemindersIdEditIndexRouteImport } from './routes/reminders/$id/edit/index'
 
@@ -30,6 +31,11 @@ const LoginIndexRoute = LoginIndexRouteImport.update({
   path: '/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsModesIndexRoute = SettingsModesIndexRouteImport.update({
+  id: '/settings/modes/',
+  path: '/settings/modes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RemindersNewIndexRoute = RemindersNewIndexRouteImport.update({
   id: '/reminders/new/',
   path: '/reminders/new/',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/login/': typeof LoginIndexRoute
   '/reminders/': typeof RemindersIndexRoute
   '/reminders/new/': typeof RemindersNewIndexRoute
+  '/settings/modes/': typeof SettingsModesIndexRoute
   '/reminders/$id/edit/': typeof RemindersIdEditIndexRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginIndexRoute
   '/reminders': typeof RemindersIndexRoute
   '/reminders/new': typeof RemindersNewIndexRoute
+  '/settings/modes': typeof SettingsModesIndexRoute
   '/reminders/$id/edit': typeof RemindersIdEditIndexRoute
 }
 export interface FileRoutesById {
@@ -61,6 +69,7 @@ export interface FileRoutesById {
   '/login/': typeof LoginIndexRoute
   '/reminders/': typeof RemindersIndexRoute
   '/reminders/new/': typeof RemindersNewIndexRoute
+  '/settings/modes/': typeof SettingsModesIndexRoute
   '/reminders/$id/edit/': typeof RemindersIdEditIndexRoute
 }
 export interface FileRouteTypes {
@@ -70,15 +79,23 @@ export interface FileRouteTypes {
     | '/login/'
     | '/reminders/'
     | '/reminders/new/'
+    | '/settings/modes/'
     | '/reminders/$id/edit/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/reminders' | '/reminders/new' | '/reminders/$id/edit'
+  to:
+    | '/'
+    | '/login'
+    | '/reminders'
+    | '/reminders/new'
+    | '/settings/modes'
+    | '/reminders/$id/edit'
   id:
     | '__root__'
     | '/'
     | '/login/'
     | '/reminders/'
     | '/reminders/new/'
+    | '/settings/modes/'
     | '/reminders/$id/edit/'
   fileRoutesById: FileRoutesById
 }
@@ -87,6 +104,7 @@ export interface RootRouteChildren {
   LoginIndexRoute: typeof LoginIndexRoute
   RemindersIndexRoute: typeof RemindersIndexRoute
   RemindersNewIndexRoute: typeof RemindersNewIndexRoute
+  SettingsModesIndexRoute: typeof SettingsModesIndexRoute
   RemindersIdEditIndexRoute: typeof RemindersIdEditIndexRoute
 }
 
@@ -113,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings/modes/': {
+      id: '/settings/modes/'
+      path: '/settings/modes'
+      fullPath: '/settings/modes/'
+      preLoaderRoute: typeof SettingsModesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reminders/new/': {
       id: '/reminders/new/'
       path: '/reminders/new'
@@ -135,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginIndexRoute: LoginIndexRoute,
   RemindersIndexRoute: RemindersIndexRoute,
   RemindersNewIndexRoute: RemindersNewIndexRoute,
+  SettingsModesIndexRoute: SettingsModesIndexRoute,
   RemindersIdEditIndexRoute: RemindersIdEditIndexRoute,
 }
 export const routeTree = rootRouteImport

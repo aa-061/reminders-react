@@ -4,9 +4,16 @@ export interface IMode {
   id: number;
   mode: string;
   address: string;
+  isDefault: boolean;
 }
 
 export type TModeField = keyof IMode;
+
+export interface IModeFormData {
+  mode: string;
+  address: string;
+  isDefault: boolean;
+}
 
 export interface IReminderMode {
   mode: string;

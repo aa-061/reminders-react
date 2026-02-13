@@ -48,6 +48,11 @@ export default () => {
                     </Link>
                   </li>
                   <li>
+                    <Link to="/settings/modes" onClick={() => setShowMenu(false)}>
+                      Settings
+                    </Link>
+                  </li>
+                  <li>
                     <button onClick={handleLogout} className="MobileNav__logout-btn">
                       Logout
                     </button>
