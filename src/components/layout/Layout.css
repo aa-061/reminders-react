@@ -2,51 +2,27 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
+  overflow-x: hidden;
+}
 
-  main {
-    flex-grow: 1;
-    padding: 1rem;
+.Layout main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-lg);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 48rem) {
+  .Layout main {
+    padding: var(--spacing-xl);
   }
 }
-/* 
-.Layout {
-  display: grid;
-  min-height: 100vh;
-  grid-template-areas:
-    "main"
-    "footer"
-    "header";
-  grid-template-rows: 1fr auto auto;
-}
 
-.Navbar {
-  grid-area: header;
-  position: sticky;
-  bottom: 0;
-  z-index: 50;
-}
-.main {
-  grid-area: main;
-  padding: 20px;
-}
-.footer {
-  grid-area: footer;
-  padding: 20px;
-  background: #f4f4f4;
-} */
-
-/* 3. Desktop Switch */
-@media (min-width: 768px) {
-  /* .Layout {
-    grid-template-areas:
-      "header"
-      "main"
-      "footer";
-    grid-template-rows: auto 1fr auto;
-  } */
-
-  .Layout {
-    /* grid-template-rows: auto 1fr auto 0px; */
+@media (min-width: 64rem) {
+  .Layout main {
+    padding: var(--spacing-2xl);
   }
 }

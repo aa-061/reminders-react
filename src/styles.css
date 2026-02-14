@@ -1,13 +1,15 @@
 :root {
   /* Color Palette - Primary & Secondary */
-  --primary: #161fd2;
-  --primary-hover: #1419a8;
+  /* --primary: #161fd2; */
+  --primary: black;
+  /* --primary-hover: #1419a8; */
+  --primary-hover: #3e3e3e;
   --secondary: #78787b;
 
   /* Foreground & Background Colors */
   --foreground-light: #4d4d4d;
-  --background-light: #f5f5f5;
-  --foreground-dark: #cdced7;
+  --background-light: #ffffff;
+  --foreground-dark: #000000;
   --background-dark: #1f2135;
 
   /* Surface Colors (for cards, navbars, etc.) */
@@ -213,7 +215,8 @@ form textarea:focus {
   justify-content: center;
   align-items: center;
   width: fit-content;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
+  text-decoration: none;
   cursor: pointer;
   transition: background-color var(--transition-base);
 }
@@ -232,6 +235,47 @@ h2,
 h3,
 p {
   margin: 0;
+}
+
+/* Dialog Animations */
+@keyframes Dialog__slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-2rem) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes Dialog__fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes Dialog__slideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-2rem) scale(0.95);
+  }
+}
+
+@keyframes Dialog__fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @media (min-width: 640px) {

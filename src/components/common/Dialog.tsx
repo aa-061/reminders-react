@@ -1,9 +1,9 @@
-import "./Misc.css";
+import "./Dialog.css";
 import { useStore } from "@tanstack/react-store";
 import { useEffect, useRef } from "react";
 import { dialogStore } from "@/store";
 
-export default () => {
+export default function Dialog() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialog = useStore(dialogStore);
   const { isOpen, onClose, children } = dialog;
@@ -44,17 +44,9 @@ export default () => {
       onClose={handleClose} // Triggered by 'Esc' key or dialog.close()
       onClick={handleBackdropClick}
       className="Dialog"
+      aria-modal="true"
     >
-      {/* <button onClick={handleClose}>Close</button> */}
       {children}
     </dialog>
   );
-};
-
-{
-  /* <form method="dialog">
-  {children}
-  <button value="cancel">No</button>
-  <button value="confirm">Yes</button>
-</form>; */
 }

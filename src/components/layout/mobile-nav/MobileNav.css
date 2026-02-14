@@ -1,8 +1,10 @@
 .MobileNav {
   display: flex;
-  position: sticky;
+  position: fixed;
   bottom: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  z-index: 50;
   padding-bottom: env(safe-area-inset-bottom);
   place-content: center;
   background-color: light-dark(var(--surface-light), var(--surface-dark));
@@ -20,14 +22,38 @@
 }
 
 .MobileNav__menu {
-  margin-bottom: var(--spacing-lg);
+  position: fixed;
+  bottom: 5rem;
+  left: var(--spacing-lg);
+  right: var(--spacing-lg);
   background-color: light-dark(var(--surface-light), var(--surface-dark));
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
-  width: 100%;
-  max-width: 25rem;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   box-sizing: border-box;
+  z-index: 51;
+  animation: MobileNav__slideUp var(--transition-base) ease-out;
+}
+
+@keyframes MobileNav__slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.MobileNav__menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--backdrop-opacity);
+  z-index: 49;
 }
 
 .MobileNav__user-info {
@@ -48,58 +74,48 @@
   flex-direction: column;
   align-items: stretch;
   width: 100%;
+  gap: var(--spacing-sm);
   box-sizing: border-box;
 }
 
 .MobileNav nav ul li {
-  margin-bottom: var(--spacing-sm);
+  display: flex;
 }
 
-.MobileNav nav ul li:last-child {
-  margin-bottom: 0;
-}
-
-.MobileNav nav ul li a,
-.MobileNav nav ul li button {
-  display: block;
+.MobileNav nav ul li .MobileNav__link,
+.MobileNav nav ul li .MobileNav__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
   padding: var(--spacing-md) var(--spacing-lg);
-  text-decoration: none;
-  color: light-dark(var(--foreground-light), var(--foreground-dark));
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: var(--primary);
+  color: light-dark(var(--surface-light), var(--surface-dark));
   border: none;
-  border-radius: var(--radius-sm);
-  text-align: center;
-  font-size: var(--fs-md);
-  width: 100%;
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  text-decoration: none;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background-color var(--transition-base);
-  box-sizing: border-box;
+  transition: background-color var(--transition-fast);
 }
 
-.MobileNav nav ul li a:hover,
-.MobileNav nav ul li button:hover {
-  background-color: light-dark(var(--border-light), var(--surface-dark));
-}
-
-.MobileNav__logout-btn {
-  background-color: light-dark(var(--error-bg-light), var(--error-bg-dark)) !important;
-  color: var(--error) !important;
-}
-
-.MobileNav__logout-btn:hover {
-  background-color: light-dark(var(--error-border-light), var(--error-border-dark)) !important;
+.MobileNav nav ul li .MobileNav__link:hover,
+.MobileNav nav ul li .MobileNav__button:hover {
+  background-color: var(--primary-hover);
 }
 
 .MobileNav__burger-menu-button {
   background-color: var(--primary);
   color: light-dark(var(--surface-light), var(--surface-dark));
   border: none;
-  padding: var(--spacing-lg) var(--spacing-xl);
+  padding: var(--spacing-lg);
   font-size: var(--fs-xl);
   border-radius: var(--radius-full);
   cursor: pointer;
-  width: 3.75rem;
-  height: 3.75rem;
+  width: 3.5rem;
+  height: 3.5rem;
   display: flex;
   align-items: center;
   justify-content: center;

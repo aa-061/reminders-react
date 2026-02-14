@@ -77,3 +77,8 @@ export interface IAlert {
 }
 
 export type TAlertField = keyof IAlert;
+
+export interface IAlertFormData {
+  name: string;
+  ms: number;
+}

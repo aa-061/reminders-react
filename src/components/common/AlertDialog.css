@@ -1,0 +1,140 @@
+.AlertDialog {
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0;
+  max-width: min(90vw, 25rem);
+  box-shadow: var(--shadow-lg);
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  animation: Dialog__slideIn var(--transition-base) ease-out;
+}
+
+.AlertDialog::backdrop {
+  background: var(--backdrop-opacity);
+  backdrop-filter: var(--backdrop-blur);
+  animation: Dialog__fadeIn var(--transition-base) ease-out;
+}
+
+.AlertDialog__content {
+  padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  text-align: center;
+  position: relative;
+}
+
+.AlertDialog__close {
+  position: absolute;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  transition: background-color var(--transition-fast);
+}
+
+.AlertDialog__close:hover {
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+}
+
+.AlertDialog__close:active {
+  transform: scale(0.95);
+}
+
+.AlertDialog__icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--spacing-md);
+}
+
+.AlertDialog__icon--success {
+  color: #28a745;
+}
+
+.AlertDialog__icon--error {
+  color: var(--error);
+}
+
+.AlertDialog__icon--warning {
+  color: #ff9800;
+}
+
+.AlertDialog__icon--info {
+  color: var(--primary);
+}
+
+.AlertDialog__title {
+  margin: 0;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+}
+
+.AlertDialog__message {
+  margin: 0;
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
+
+.AlertDialog__button {
+  padding: var(--spacing-md) var(--spacing-2xl);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+  min-width: 7.5rem;
+  margin-top: var(--spacing-md);
+  color: #ffffff;
+}
+
+.AlertDialog__button--success {
+  background-color: #28a745;
+}
+
+.AlertDialog__button--success:hover {
+  background-color: #218838;
+}
+
+.AlertDialog__button--error {
+  background-color: var(--error);
+}
+
+.AlertDialog__button--error:hover {
+  background-color: #c82333;
+}
+
+.AlertDialog__button--warning {
+  background-color: #ff9800;
+}
+
+.AlertDialog__button--warning:hover {
+  background-color: #f57c00;
+}
+
+.AlertDialog__button--info {
+  background-color: var(--primary);
+}
+
+.AlertDialog__button--info:hover {
+  background-color: var(--primary-hover);
+}
+
+.AlertDialog__button:active {
+  transform: scale(0.98);
+}
+
+.AlertDialog__button:focus-visible {
+  outline: 0.125rem solid var(--primary);
+  outline-offset: 0.125rem;
+}

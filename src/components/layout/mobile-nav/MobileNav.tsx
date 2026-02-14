@@ -1,16 +1,20 @@
 import "./MobileNav.css";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { useSession, signOut } from "@/lib/auth-client";
 import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import { signOut, useSession } from "@/lib/auth-client";
 
-export default () => {
+export default function MobileNav() {
   const navigate = useNavigate();
   const { data: session } = useSession();
   const [showMenu, setShowMenu] = useState(false);
 
   function toggleMobileMenu(): void {
     setShowMenu(!showMenu);
+  }
+
+  function closeMenu(): void {
+    setShowMenu(false);
   }
 
   const handleLogout = async (): Promise<void> => {
@@ -23,59 +27,74 @@ export default () => {
     <footer className="MobileNav">
       <div className="MobileNav__content">
         {showMenu && (
-          <nav className="MobileNav__menu">
-            {session && (
-              <div className="MobileNav__user-info">
-                <span className="MobileNav__user-email">{session.user.email}</span>
-              </div>
-            )}
-            <ul>
-              <li>
-                <Link to="/" onClick={() => setShowMenu(false)}>
-                  Home
-                </Link>
-              </li>
-              {session ? (
-                <>
-                  <li>
-                    <Link to="/reminders" onClick={() => setShowMenu(false)}>
-                      List of reminders
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/reminders/new" onClick={() => setShowMenu(false)}>
-                      Create new reminder
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/settings/modes" onClick={() => setShowMenu(false)}>
-                      Settings
-                    </Link>
-                  </li>
-                  <li>
-                    <button onClick={handleLogout} className="MobileNav__logout-btn">
-                      Logout
-                    </button>
-                  </li>
-                </>
-              ) : (
+          <>
+            <div className="MobileNav__menu-backdrop" onClick={closeMenu} />
+            <nav className="MobileNav__menu">
+              <ul>
                 <li>
-                  <Link to="/login" onClick={() => setShowMenu(false)}>
-                    Login
+                  <Link className="MobileNav__link" to="/" onClick={closeMenu}>
+                    Home
                   </Link>
                 </li>
-              )}
-            </ul>
-          </nav>
+                {session ? (
+                  <>
+                    <li>
+                      <Link
+                        className="MobileNav__link"
+                        to="/reminders"
+                        onClick={closeMenu}
+                      >
+                        Reminders
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="MobileNav__link"
+                        to="/reminders/new"
+                        onClick={closeMenu}
+                      >
+                        New Reminder
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="MobileNav__link"
+                        to="/settings"
+                        onClick={closeMenu}
+                      >
+                        Settings
+                      </Link>
+                    </li>
+                    <li>
+                      <button onClick={handleLogout} className="MobileNav__button">
+                        Logout
+                      </button>
+                    </li>
+                  </>
+                ) : (
+                  <li>
+                    <Link
+                      className="MobileNav__link"
+                      to="/login"
+                      onClick={closeMenu}
+                    >
+                      Login
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            </nav>
+          </>
         )}
 
         <button
           onClick={toggleMobileMenu}
           className="MobileNav__burger-menu-button"
+          aria-label={showMenu ? "Close menu" : "Open menu"}
         >
           {showMenu ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
     </footer>
   );
-};
+}

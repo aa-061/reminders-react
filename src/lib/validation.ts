@@ -87,3 +87,17 @@ export const modeFormSchema = z
   );
 
 export type ModeFormData = z.infer<typeof modeFormSchema>;
+
+// Alert form validation
+export const alertFormSchema = z.object({
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .max(100, "Name must be 100 characters or less"),
+  value: z
+    .number()
+    .min(1, "Value must be at least 1"),
+  unit: z.enum(["seconds", "minutes", "hours", "days", "weeks"]),
+});
+
+export type AlertFormData = z.infer<typeof alertFormSchema>;

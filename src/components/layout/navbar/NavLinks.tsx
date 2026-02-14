@@ -14,7 +14,7 @@ export default function NavLinks() {
       <Link to="/reminders" className="NavLinks__link">
         Reminders
       </Link>
-      <Link to="/settings/modes" className="NavLinks__link">
+      <Link to="/settings" className="NavLinks__link">
         Settings
       </Link>
     </nav>

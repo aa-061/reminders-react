@@ -1,0 +1,86 @@
+.AlertsList {
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+.AlertsList__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-2xl);
+  gap: var(--spacing-lg);
+}
+
+.AlertsList__title {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.AlertsList__subtitle {
+  font-size: var(--fs-md);
+  color: var(--secondary);
+  margin: 0;
+}
+
+.AlertsList__add-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  white-space: nowrap;
+}
+
+.AlertsList__grid {
+  display: grid;
+  gap: var(--spacing-lg);
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+}
+
+.AlertsList__empty {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border: 0.0625rem dashed light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-md);
+}
+
+.AlertsList__empty p {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--spacing-sm);
+}
+
+.AlertsList__empty-hint {
+  font-size: var(--fs-sm);
+  color: var(--secondary);
+}
+
+.AlertsList__loading,
+.AlertsList__error {
+  text-align: center;
+  padding: var(--spacing-2xl);
+}
+
+.AlertsList__error {
+  color: var(--error);
+}
+
+.AlertsList__error-message {
+  font-size: var(--fs-sm);
+  margin-top: var(--spacing-sm);
+}
+
+@media (max-width: 48rem) {
+  .AlertsList__header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .AlertsList__add-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .AlertsList__grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,84 @@
+.AlertFormDialog {
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0;
+  max-width: 32rem;
+  width: 90vw;
+  box-shadow: var(--shadow-lg);
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+}
+
+.AlertFormDialog__content {
+  padding: var(--spacing-xl);
+}
+
+.AlertFormDialog__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.AlertFormDialog__header h2 {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  margin: 0;
+}
+
+.AlertFormDialog__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  color: var(--secondary);
+  transition: color var(--transition-base);
+}
+
+.AlertFormDialog__close:hover {
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
+
+.AlertFormDialog__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.AlertFormDialog__time-input {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--spacing-md);
+}
+
+.AlertFormDialog__value-input {
+  padding: var(--spacing-md);
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-md);
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
+
+.AlertFormDialog__hint {
+  font-size: var(--fs-xs);
+  color: var(--secondary);
+  margin: 0;
+}
+
+.AlertFormDialog__error {
+  color: var(--error);
+  font-size: var(--fs-xs);
+}
+
+.AlertFormDialog__actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: flex-end;
+  margin-top: var(--spacing-lg);
+}
+
+@media (max-width: 40rem) {
+  .AlertFormDialog__time-input {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,72 @@
+.SettingsPage {
+  padding: var(--spacing-2xl);
+  min-height: calc(100vh - 4rem);
+}
+
+.SettingsPage__container {
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+.SettingsPage__title {
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.SettingsPage__subtitle {
+  font-size: var(--fs-lg);
+  color: var(--secondary);
+  margin: 0 0 var(--spacing-2xl) 0;
+}
+
+.SettingsPage__grid {
+  display: grid;
+  gap: var(--spacing-xl);
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
+
+.SettingsPage__card {
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border: 0.125rem solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.SettingsPage__card:hover {
+  border-color: var(--primary);
+  transform: translateY(-0.125rem);
+  box-shadow: var(--shadow-md);
+}
+
+.SettingsPage__card-icon {
+  color: var(--primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.SettingsPage__card-title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.SettingsPage__card-description {
+  font-size: var(--fs-md);
+  color: var(--secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+@media (max-width: 48rem) {
+  .SettingsPage {
+    padding: var(--spacing-lg);
+  }
+
+  .SettingsPage__grid {
+    grid-template-columns: 1fr;
+  }
+}
