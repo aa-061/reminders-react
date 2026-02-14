@@ -1,28 +1,23 @@
-import "./ReminderForm.css";
 import "./UpdateAlerts.css";
 import { useStore } from "@tanstack/react-store";
 import { useEffect, useState } from "react";
 import AlertForm from "@/components/alert-form/AlertForm";
 import { alertsStore, reminderFormStore } from "@/store";
 import { alertPresets } from "@/lib/validation";
-import { Trash2, Clock } from "lucide-react";
+import { Trash2, Check, Clock } from "lucide-react";
 
-// import ModeForm from "../alert-form/ModeForm";
-
-export default ({
+export default function UpdateAlerts({
   onDoneUpdatingAlerts,
 }: {
   onDoneUpdatingAlerts: (newChecked: number[]) => void;
-}) => {
+}) {
   const alerts = useStore(alertsStore);
   const reminderForm = useStore(reminderFormStore);
-  const [checkedAlerts, setCheckedAlerts] = useState<Record<number, boolean>>(
-    {},
-  );
+  const [checkedAlerts, setCheckedAlerts] = useState<Record<number, boolean>>({});
+  const [showAddForm, setShowAddForm] = useState(false);
 
   useEffect(() => {
     const newCheckedAlerts: Record<number, boolean> = {};
-
     alerts.forEach((alert) => {
       const isIncluded = reminderForm.alerts.includes(alert.id);
       if (isIncluded || checkedAlerts[alert.id]) {
@@ -34,38 +29,34 @@ export default ({
     setCheckedAlerts(newCheckedAlerts);
   }, [alerts]);
 
-  const addRemoveAlerts = (id: number) => {
-    const newCheckAlerts = { ...checkedAlerts };
-    newCheckAlerts[id] = !newCheckAlerts[id];
-    setCheckedAlerts(newCheckAlerts);
+  const toggleAlert = (id: number) => {
+    setCheckedAlerts((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  function handleDone() {
-    const listOfCheckedAlerts = [];
-    for (const key in checkedAlerts) {
-      if (checkedAlerts[key] === true) {
-        listOfCheckedAlerts.push(parseInt(key));
-      }
-    }
-    onDoneUpdatingAlerts(listOfCheckedAlerts);
+  const handleDone = () => {
+    const selectedIds = Object.entries(checkedAlerts)
+      .filter(([, checked]) => checked)
+      .map(([id]) => parseInt(id));
+    onDoneUpdatingAlerts(selectedIds);
+  };
 
-    const newCheckedAlerts: Record<number, boolean> = { ...checkedAlerts };
-    Object.keys(setCheckedAlerts).forEach(
-      (key) => (newCheckedAlerts[parseInt(key)] = false),
-    );
-  }
+  const handleDelete = (id: number) => {
+    const newAlerts = alerts.filter((a) => a.id !== id);
+    alertsStore.setState(newAlerts);
+    setCheckedAlerts((prev) => {
+      const newChecked = { ...prev };
+      delete newChecked[id];
+      return newChecked;
+    });
+  };
 
   const addPresetAlert = (preset: (typeof alertPresets)[0]) => {
-    // Check if this preset already exists in alerts store
     const exists = alerts.some((a) => a.ms === preset.ms && a.name === preset.name);
     if (!exists) {
-      // Add to alerts store with a unique ID
       const newId = Math.max(...alerts.map((a) => a.id), 0) + 1;
       alertsStore.setState([...alerts, { id: newId, name: preset.name, ms: preset.ms }]);
-      // Auto-check the new alert
       setCheckedAlerts((prev) => ({ ...prev, [newId]: true }));
     } else {
-      // If it exists, just check it
       const existingAlert = alerts.find((a) => a.ms === preset.ms && a.name === preset.name);
       if (existingAlert) {
         setCheckedAlerts((prev) => ({ ...prev, [existingAlert.id]: true }));
@@ -73,12 +64,21 @@ export default ({
     }
   };
 
+  const selectedCount = Object.values(checkedAlerts).filter(Boolean).length;
+
   return (
-    <div className="UpdateModes">
+    <div className="UpdateAlerts">
+      <div className="UpdateAlerts__header">
+        <h2>Select Alert Times</h2>
+        <p className="UpdateAlerts__subtitle">
+          {selectedCount} alert{selectedCount !== 1 ? "s" : ""} selected
+        </p>
+      </div>
+
       <div className="UpdateAlerts__presets">
-        <h3>
-          <Clock size={18} />
-          Quick Add Common Alerts
+        <h3 className="UpdateAlerts__presets-title">
+          <Clock size={16} />
+          Quick Add
         </h3>
         <div className="UpdateAlerts__preset-buttons">
           {alertPresets.map((preset) => (
@@ -93,42 +93,70 @@ export default ({
           ))}
         </div>
       </div>
-      <AlertForm />
-      <fieldset>
-        <legend>Available alerts</legend>
 
-        <div>
-          {Object.keys(checkedAlerts)
-            .map((id) => alerts.find((x) => x.id === parseInt(id)))
-            .filter((x) => x !== undefined)
-            .map((alert) => (
-              <div key={alert.id}>
-                <input
-                  type="checkbox"
-                  id={`alert-${alert.id}`}
-                  name={`alert-${alert.id}`}
-                  checked={checkedAlerts[alert.id]}
-                  onChange={() => addRemoveAlerts(alert.id)}
-                />
-                <label htmlFor={`alert-${alert.id}`}>
-                  {alert.name}
-                  <button
-                    onClick={() => {
-                      let newAlerts = [...alerts];
-                      newAlerts = newAlerts.filter((m) => m.id !== alert.id);
-                      alertsStore.setState(newAlerts);
-                    }}
-                  >
-                    <Trash2 size={18} />
-                  </button>
-                </label>
-              </div>
-            ))}
+      {alerts.length > 0 ? (
+        <div className="UpdateAlerts__list">
+          {alerts.map((alert) => (
+            <div
+              key={alert.id}
+              className={`UpdateAlerts__item ${checkedAlerts[alert.id] ? "UpdateAlerts__item--selected" : ""}`}
+            >
+              <button
+                type="button"
+                className="UpdateAlerts__item-main"
+                onClick={() => toggleAlert(alert.id)}
+              >
+                <div className="UpdateAlerts__item-check">
+                  {checkedAlerts[alert.id] && <Check size={16} />}
+                </div>
+                <span className="UpdateAlerts__item-name">{alert.name}</span>
+              </button>
+              <button
+                type="button"
+                className="UpdateAlerts__item-delete"
+                onClick={() => handleDelete(alert.id)}
+                aria-label="Delete alert"
+              >
+                <Trash2 size={16} />
+              </button>
+            </div>
+          ))}
         </div>
-      </fieldset>
-      <button type="button" onClick={handleDone}>
-        Done
-      </button>
+      ) : (
+        <div className="UpdateAlerts__empty">
+          <p>No alerts configured yet.</p>
+          <p className="UpdateAlerts__empty-hint">Use Quick Add above or add a custom alert below.</p>
+        </div>
+      )}
+
+      <div className="UpdateAlerts__add-section">
+        {showAddForm ? (
+          <div className="UpdateAlerts__add-form">
+            <AlertForm onSuccess={() => setShowAddForm(false)} />
+            <button
+              type="button"
+              className="btn btn--secondary btn--sm"
+              onClick={() => setShowAddForm(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            className="btn btn--outline"
+            onClick={() => setShowAddForm(true)}
+          >
+            + Add Custom Alert
+          </button>
+        )}
+      </div>
+
+      <div className="UpdateAlerts__footer">
+        <button type="button" className="btn" onClick={handleDone}>
+          Done
+        </button>
+      </div>
     </div>
   );
-};
+}

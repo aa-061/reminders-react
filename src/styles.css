@@ -81,8 +81,6 @@ body {
   color: light-dark(var(--foreground-light), var(--foreground-dark));
   transition: background-color var(--transition-slow);
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 20rem;
   min-height: 100vh;
 }
@@ -178,47 +176,106 @@ form .form-group:last-child {
   flex-direction: column;
 }
 
+/* ==================== */
+/* FORM STYLES          */
+/* ==================== */
+
 form label {
   margin-bottom: var(--spacing-sm);
   font-weight: var(--fw-medium);
+  font-size: var(--fs-sm);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
 }
 
 form input[type="text"],
 form input[type="email"],
 form input[type="password"],
+form input[type="number"],
 form input[type="datetime-local"],
-form textarea {
-  padding: var(--spacing-sm);
-  border: 1px solid var(--primary);
+form textarea,
+form select {
+  padding: var(--spacing-md);
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-sm);
   background-color: light-dark(var(--surface-light), var(--surface-dark));
   color: light-dark(var(--foreground-light), var(--foreground-dark));
-  transition: border-color var(--transition-base);
+  font-size: var(--fs-md);
+  font-family: inherit;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 form input:focus,
-form textarea:focus {
+form textarea:focus,
+form select:focus {
   outline: none;
   border-color: var(--primary);
+  box-shadow: 0 0 0 0.1875rem light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
 }
 
-.btn {
-  background: none;
-  border: none;
-  background-color: var(--primary);
-  padding: var(--spacing-md) var(--spacing-lg);
-  color: light-dark(var(--surface-light), var(--surface-dark));
-  text-transform: uppercase;
+form input:disabled,
+form textarea:disabled,
+form select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+form input::placeholder,
+form textarea::placeholder {
+  color: var(--secondary);
+}
+
+/* Error states */
+form input.input-error,
+form textarea.input-error,
+form select.input-error {
+  border-color: var(--error);
+}
+
+form input.input-error:focus,
+form textarea.input-error:focus,
+form select.input-error:focus {
+  box-shadow: 0 0 0 0.1875rem light-dark(var(--error-bg-light), var(--error-bg-dark));
+}
+
+.error-message {
+  display: block;
+  margin-top: var(--spacing-xs);
   font-size: var(--fs-xs);
-  font-weight: var(--fw-bold);
-  display: flex;
-  justify-content: center;
+  color: var(--error);
+}
+
+.required {
+  color: var(--error);
+  font-weight: var(--fw-semibold);
+}
+
+/* Form hints */
+.form-hint {
+  font-size: var(--fs-xs);
+  color: var(--secondary);
+  margin-top: var(--spacing-xs);
+}
+
+/* ==================== */
+/* BUTTON SYSTEM        */
+/* ==================== */
+
+/* Base button - use this class for all buttons */
+.btn {
+  display: inline-flex;
   align-items: center;
-  width: fit-content;
-  border-radius: var(--radius-md);
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
   text-decoration: none;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background-color var(--transition-base);
+  transition: all var(--transition-fast);
+  border: 0.0625rem solid transparent;
+  background-color: var(--primary);
+  color: light-dark(var(--surface-light), var(--surface-dark));
 }
 
 .btn:hover:not(:disabled) {
@@ -228,6 +285,134 @@ form textarea:focus {
 .btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.btn:focus-visible {
+  outline: 0.125rem solid var(--primary);
+  outline-offset: 0.125rem;
+}
+
+/* Button Variants */
+.btn--secondary {
+  background-color: transparent;
+  border-color: light-dark(var(--border-light), var(--border-dark));
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
+
+.btn--secondary:hover:not(:disabled) {
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  border-color: var(--primary);
+}
+
+.btn--outline {
+  background-color: transparent;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btn--outline:hover:not(:disabled) {
+  background-color: var(--primary);
+  color: light-dark(var(--surface-light), var(--surface-dark));
+}
+
+.btn--danger {
+  background-color: var(--error);
+  border-color: var(--error);
+  color: light-dark(var(--surface-light), var(--surface-dark));
+}
+
+.btn--danger:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+}
+
+/* Button Sizes */
+.btn--sm {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--fs-xs);
+}
+
+.btn--lg {
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: var(--fs-md);
+}
+
+.btn--full {
+  width: 100%;
+}
+
+/* Icon Button */
+.btn--icon {
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-sm);
+}
+
+.btn--icon-only {
+  padding: var(--spacing-sm);
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+/* Loading state */
+.btn--loading {
+  position: relative;
+  color: transparent;
+}
+
+.btn--loading::after {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 0.125rem solid transparent;
+  border-top-color: currentColor;
+  border-radius: var(--radius-full);
+  animation: btn-spin 0.6s linear infinite;
+}
+
+@keyframes btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Spinner animation class */
+.spinner {
+  animation: btn-spin 1s linear infinite;
+}
+
+/* ==================== */
+/* LINK STYLES          */
+/* ==================== */
+
+.link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: var(--fw-medium);
+  transition: color var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+.link--secondary {
+  color: var(--secondary);
+}
+
+.link--secondary:hover {
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
 }
 
 h1,
