@@ -1,9 +1,18 @@
 import "./Footer.css";
 
-export default () => {
+export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="Footer">
-      <h1>Footer component</h1>
+      <div className="Footer__content">
+        <p className="Footer__copyright">
+          &copy; {currentYear} Reminders App
+        </p>
+        <p className="Footer__tagline">
+          Never forget what matters
+        </p>
+      </div>
     </footer>
   );
-};
+}

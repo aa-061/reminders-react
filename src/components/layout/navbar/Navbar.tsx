@@ -1,11 +1,11 @@
 import "./Navbar.css";
 import { useEffect, useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, Link } from "@tanstack/react-router";
 import NavLinks from "@/components/layout/navbar/NavLinks";
 import { useSession, signOut } from "@/lib/auth-client";
-import { Calendar, Moon, Sun } from "lucide-react";
+import { Calendar, Moon, Sun, LogOut } from "lucide-react";
 
-export default () => {
+export default function Navbar() {
   const navigate = useNavigate();
   const { data: session } = useSession();
   const [theme, setTheme] = useState(() => {
@@ -34,21 +34,35 @@ export default () => {
 
   return (
     <header className="Navbar">
-      <div className="Navbar__logo-container"><Calendar size={24} /></div>
-      <NavLinks />
-      <div className="Navbar__nav-actions">
-        <button onClick={toggleTheme} className="Navbar__theme-toggle">
+      <div className="Navbar__left">
+        <Link to="/" className="Navbar__logo">
+          <Calendar size={24} />
+          <span className="Navbar__logo-text">Reminders</span>
+        </Link>
+        <NavLinks />
+      </div>
+      <div className="Navbar__right">
+        <button
+          onClick={toggleTheme}
+          className="Navbar__icon-btn"
+          aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+        >
           {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
         </button>
         {session && (
           <>
             <span className="Navbar__user-email">{session.user.email}</span>
-            <button onClick={handleLogout} className="Navbar__logout-btn">
-              Logout
+            <button
+              onClick={handleLogout}
+              className="Navbar__logout-btn"
+              aria-label="Logout"
+            >
+              <LogOut size={18} />
+              <span>Logout</span>
             </button>
           </>
         )}
       </div>
     </header>
   );
-};
+}
