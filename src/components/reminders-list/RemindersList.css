@@ -2,7 +2,21 @@
   width: 100%;
   max-width: 75rem;
   margin: 0 auto;
-  padding: var(--spacing-lg);
+}
+
+.RemindersList__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.RemindersList__title {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  margin: 0;
 }
 
 .RemindersList__grid {
@@ -18,8 +32,7 @@
   padding: var(--spacing-2xl);
   background-color: light-dark(var(--surface-light), var(--surface-dark));
   border-radius: var(--radius-md);
-  border: 0.0625rem solid
-    light-dark(var(--border-light), var(--border-dark));
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
 }
 
 .RemindersList__loading {
@@ -59,14 +72,15 @@
   margin: 0;
 }
 
+/* Responsive grid */
 @media (min-width: 48rem) {
   .RemindersList__grid {
-    grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
   }
 }
 
-@media (max-width: 48rem) {
-  .RemindersList {
-    padding: var(--spacing-md);
+@media (min-width: 80rem) {
+  .RemindersList__grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

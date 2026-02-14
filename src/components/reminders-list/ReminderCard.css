@@ -1,12 +1,12 @@
 .ReminderCard {
   background-color: light-dark(var(--surface-light), var(--surface-dark));
-  border: 0.0625rem solid
-    light-dark(var(--border-light), var(--border-dark));
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-md);
   padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
 }
 
 .ReminderCard:hover {
@@ -31,24 +31,26 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
   gap: var(--spacing-md);
 }
 
 .ReminderCard__title-section {
   flex: 1;
+  min-width: 0;
 }
 
 .ReminderCard__title {
   margin: 0 0 var(--spacing-sm) 0;
-  font-size: var(--fs-lg);
+  font-size: var(--fs-md);
   font-weight: var(--fw-semibold);
   color: light-dark(var(--foreground-light), var(--foreground-dark));
+  word-wrap: break-word;
 }
 
 .ReminderCard__badges {
   display: flex;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
   flex-wrap: wrap;
 }
 
@@ -61,60 +63,50 @@
 }
 
 .ReminderCard__badge--recurring {
-  background-color: light-dark(
-    var(--surface-alt-light),
-    var(--surface-alt-dark)
-  );
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
   color: var(--primary);
 }
 
-.ReminderCard__badge--inactive {
-  background-color: light-dark(
-    var(--surface-alt-light),
-    var(--surface-alt-dark)
-  );
-  color: var(--secondary);
-}
-
+.ReminderCard__badge--inactive,
 .ReminderCard__badge--past {
-  background-color: light-dark(
-    var(--surface-alt-light),
-    var(--surface-alt-dark)
-  );
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
   color: var(--secondary);
 }
 
 .ReminderCard__actions {
   display: flex;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
 }
 
 .ReminderCard__action-btn {
   background: none;
   border: none;
-  font-size: var(--fs-lg);
+  font-size: var(--fs-md);
   cursor: pointer;
   padding: var(--spacing-xs);
   border-radius: var(--radius-sm);
-  transition: transform var(--transition-fast);
+  transition: all var(--transition-fast);
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 2rem;
+  height: 2rem;
 }
 
 .ReminderCard__action-btn:hover {
-  transform: scale(1.1);
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
 }
 
 .ReminderCard__action-btn--delete:hover {
-  filter: brightness(1.2);
+  background-color: light-dark(var(--error-bg-light), var(--error-bg-dark));
 }
 
 .ReminderCard__info {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
   margin-bottom: var(--spacing-md);
 }
 
@@ -123,52 +115,49 @@
   display: flex;
   gap: var(--spacing-sm);
   font-size: var(--fs-sm);
+  flex-wrap: wrap;
 }
 
 .ReminderCard__label {
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-medium);
   color: var(--secondary);
 }
 
 .ReminderCard__modes,
 .ReminderCard__alerts {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
 }
 
 .ReminderCard__modes-list,
 .ReminderCard__alerts-list {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-sm);
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-xs);
 }
 
 .ReminderCard__mode,
 .ReminderCard__alert {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
   padding: var(--spacing-xs) var(--spacing-sm);
-  background-color: light-dark(
-    var(--surface-alt-light),
-    var(--surface-alt-dark)
-  );
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
   border-radius: var(--radius-sm);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
 }
 
 .ReminderCard__alert-more {
   padding: var(--spacing-xs) var(--spacing-sm);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   color: var(--secondary);
   font-style: italic;
 }
 
 .ReminderCard__description-section {
-  margin-top: var(--spacing-lg);
-  padding-top: var(--spacing-lg);
-  border-top: 0.0625rem solid
-    light-dark(var(--border-light), var(--border-dark));
+  margin-top: auto;
+  padding-top: var(--spacing-md);
+  border-top: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
 }
 
 .ReminderCard__expand-btn {
@@ -189,16 +178,14 @@
 .ReminderCard__description {
   margin-top: var(--spacing-md);
   padding: var(--spacing-md);
-  background-color: light-dark(
-    var(--surface-alt-light),
-    var(--surface-alt-dark)
-  );
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
   border-radius: var(--radius-sm);
   font-size: var(--fs-sm);
   line-height: 1.6;
   white-space: pre-wrap;
 }
 
+/* Delete confirmation overlay */
 .ReminderCard__delete-confirm {
   position: fixed;
   top: 50%;
@@ -210,7 +197,7 @@
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-lg);
   z-index: 1000;
-  min-width: 20rem;
+  min-width: min(20rem, 90vw);
 }
 
 .ReminderCard__delete-confirm::before {
@@ -239,45 +226,39 @@
 
 .ReminderCard__confirm-btn {
   padding: var(--spacing-sm) var(--spacing-lg);
-  border: 0.0625rem solid
-    light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-sm);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
-  color: light-dark(var(--foreground-light), var(--foreground-dark));
   font-size: var(--fs-sm);
   font-weight: var(--fw-medium);
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
-.ReminderCard__confirm-btn:hover {
-  background-color: light-dark(
-    var(--surface-alt-light),
-    var(--surface-alt-dark)
-  );
+.ReminderCard__confirm-btn:not(.ReminderCard__confirm-btn--danger) {
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
+
+.ReminderCard__confirm-btn:not(.ReminderCard__confirm-btn--danger):hover {
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
 }
 
 .ReminderCard__confirm-btn--danger {
   background-color: var(--error);
   color: light-dark(var(--surface-light), var(--surface-dark));
-  border-color: var(--error);
+  border: none;
 }
 
 .ReminderCard__confirm-btn--danger:hover {
   filter: brightness(1.1);
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 30rem) {
   .ReminderCard__header {
     flex-direction: column;
   }
 
   .ReminderCard__actions {
     align-self: flex-end;
-  }
-
-  .ReminderCard__delete-confirm {
-    min-width: auto;
-    max-width: 90%;
   }
 }

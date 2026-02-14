@@ -1,7 +1,5 @@
 .HomePage {
   width: 100%;
-  min-height: 100vh;
-  padding: var(--spacing-lg);
 }
 
 .HomePage__container {
@@ -16,14 +14,16 @@
   margin-bottom: var(--spacing-2xl);
 }
 
-@media (min-width: 768px) {
-  .HomePage {
-    padding: var(--spacing-xl);
+/* Desktop grid layout */
+@media (min-width: 64rem) {
+  .HomePage__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: var(--spacing-xl);
   }
-}
 
-@media (min-width: 1024px) {
-  .HomePage {
-    padding: var(--spacing-2xl);
+  .HomePage__container > :first-child {
+    grid-column: 1 / -1;
   }
 }
