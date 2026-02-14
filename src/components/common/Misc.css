@@ -1,78 +1,85 @@
+/* ==================== */
+/* SWITCH INPUT         */
+/* ==================== */
+
 .SwitchInput {
-  width: 100px;
-  height: 25px;
+  width: 6.25rem;
+  height: 1.5rem;
   position: relative;
-  .SwitchInput__checkbox {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100px;
-    height: 25px;
-    opacity: 0%;
-    margin: 0;
-    z-index: 99;
-    cursor: pointer;
-  }
-
-  .SwitchInput__toggles {
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    width: 100px;
-    height: 25px;
-    border-radius: 4px;
-    overflow: hidden;
-    font-size: 0.75rem;
-
-    .SwitchInput__toggle {
-      width: 50px;
-      color: white;
-      display: flex;
-      place-items: center;
-      place-content: center;
-      font-weight: bolder;
-      letter-spacing: 1.5px;
-
-      &.SwitchInput__off {
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-      }
-
-      &.SwitchInput__on {
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
-      }
-    }
-
-    .SwitchInput__off {
-      background-color: var(--primary);
-    }
-    .SwitchInput__on {
-      background-color: var(--secondary);
-    }
-
-    &.SwitchInput__checked .SwitchInput__off {
-      background-color: var(--secondary);
-    }
-    &.SwitchInput__checked .SwitchInput__on {
-      background-color: var(--primary);
-    }
-  }
 }
+
+.SwitchInput__checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.SwitchInput__toggles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  font-size: var(--fs-xs);
+  z-index: 1;
+}
+
+.SwitchInput__toggle {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.0625rem;
+  transition: background-color var(--transition-fast);
+}
+
+.SwitchInput__off {
+  background-color: var(--primary);
+  color: light-dark(var(--surface-light), var(--surface-dark));
+  border-top-left-radius: var(--radius-sm);
+  border-bottom-left-radius: var(--radius-sm);
+}
+
+.SwitchInput__on {
+  background-color: var(--secondary);
+  color: light-dark(var(--surface-light), var(--surface-dark));
+  border-top-right-radius: var(--radius-sm);
+  border-bottom-right-radius: var(--radius-sm);
+}
+
+.SwitchInput__checked .SwitchInput__off {
+  background-color: var(--secondary);
+}
+
+.SwitchInput__checked .SwitchInput__on {
+  background-color: var(--primary);
+}
+
+/* ==================== */
+/* TILE COMPONENT       */
+/* ==================== */
 
 .Tile {
   position: relative;
-  border: 1px solid var(--secondary);
-  padding: 0.8rem 1rem;
-  border-radius: 4px;
+  border: 0.0625rem solid var(--secondary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-sm);
+}
 
-  .Tile__checkbox {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+.Tile__checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

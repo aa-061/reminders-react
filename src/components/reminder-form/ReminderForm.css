@@ -1,99 +1,105 @@
 .ReminderForm {
-  h3 {
-    margin-bottom: var(--spacing-sm);
-  }
+  max-width: 40rem;
+  margin: 0 auto;
+}
 
-  p {
-    margin-top: var(--spacing-sm);
-    font-style: italic;
-    color: light-dark(var(--text-secondary-light), var(--text-secondary-dark));
-  }
+.ReminderForm__form {
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
 
-  .info-text {
-    font-size: var(--fs-sm);
-    color: light-dark(var(--text-secondary-light), var(--text-secondary-dark));
-  }
+.ReminderForm h3 {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  margin: 0 0 var(--spacing-sm) 0;
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
 
-  .required {
-    color: #ef4444;
-    font-weight: var(--fw-semibold);
-  }
+.ReminderForm p {
+  margin: var(--spacing-sm) 0 0 0;
+  font-size: var(--fs-sm);
+  color: var(--secondary);
+}
 
-  .error-message {
-    display: block;
-    margin-top: var(--spacing-xs);
-    font-size: var(--fs-sm);
-    color: #ef4444;
-  }
+.ReminderForm .info-text {
+  font-size: var(--fs-sm);
+  color: var(--secondary);
+  font-style: italic;
+}
 
-  .input-error {
-    border-color: #ef4444 !important;
-  }
+.ReminderForm .required {
+  color: var(--error);
+  font-weight: var(--fw-semibold);
+}
 
-  .input-error:focus {
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
-  }
+.ReminderForm .error-message {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: var(--fs-xs);
+  color: var(--error);
+}
 
-  .spinner {
-    animation: spin 1s linear infinite;
-  }
+.ReminderForm .input-error {
+  border-color: var(--error);
+}
 
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+.ReminderForm .input-error:focus {
+  box-shadow: 0 0 0 0.1875rem light-dark(var(--error-bg-light), var(--error-bg-dark));
+}
 
-  .btn-primary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-xs);
-    background-color: var(--primary);
-    color: #ffffff;
-    font-weight: var(--fw-semibold);
-    padding: var(--spacing-md) var(--spacing-lg);
-    border-radius: var(--radius-md);
-    border: none;
-    cursor: pointer;
-    transition: var(--transition-fast);
-  }
+.ReminderForm .spinner {
+  animation: spin 1s linear infinite;
+}
 
-  .btn-primary:hover:not(:disabled) {
-    opacity: 0.9;
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
-
-  .btn-primary:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  to {
+    transform: rotate(360deg);
   }
 }
 
-.AddModes {
+/* Modes and Alerts lists */
+.ReminderForm ul {
+  margin-top: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
-.UpdateModes {
+.ReminderForm ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
 }
 
-.AvailableModes {
+.ReminderForm ul li button {
+  padding: var(--spacing-xs);
+  background: none;
   border: none;
-  margin: 1rem 0 0 0;
-  padding: 0;
+  color: var(--secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  legend {
-    font-size: 1rem;
-    font-weight: bold;
-  }
+.ReminderForm ul li button:hover {
+  color: var(--error);
+  background-color: light-dark(var(--error-bg-light), var(--error-bg-dark));
+}
 
-  ul {
-    li {
-      /* border: 1px solid var(--secondary);
-      padding: 0.8rem 1rem;
-      border-radius: 4px;
-      margin-bottom: 0.5rem; */
-    }
+@media (max-width: 40rem) {
+  .ReminderForm__form {
+    padding: var(--spacing-lg);
   }
 }
