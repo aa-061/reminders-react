@@ -2,7 +2,6 @@ import "./UpdateModes.css";
 import { useStore } from "@tanstack/react-store";
 import {
   Ban,
-  ChartNoAxesColumn,
   Check,
   CheckIcon,
   Mail,
