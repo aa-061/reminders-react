@@ -52,9 +52,9 @@ export default function ModeFormDialog({
       onClose();
     } catch (error) {
       if (error instanceof Error && error.name === "ZodError") {
-        const zodError = error as ZodError;
+        const zodError = error as ZodError<any>;
         const fieldErrors: Record<string, string> = {};
-        zodError.errors.forEach((err) => {
+        zodError.issues.forEach((err) => {
           if (err.path.length > 0) {
             fieldErrors[err.path[0].toString()] = err.message;
           }

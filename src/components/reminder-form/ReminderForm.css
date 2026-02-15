@@ -1,6 +1,5 @@
 .ReminderForm {
-  max-width: 40rem;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .ReminderForm__form {
@@ -101,5 +100,11 @@
 @media (max-width: 40rem) {
   .ReminderForm__form {
     padding: var(--spacing-lg);
+  }
+}
+
+@media (min-width: 768px) {
+  .ReminderForm__form {
+    padding: var(--spacing-2xl);
   }
 }

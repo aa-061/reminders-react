@@ -50,10 +50,12 @@ export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
       reminderFormStore.setState({
         title: existingReminder.title,
         date: existingReminder.date,
-        reminders: existingReminder.reminders.map((r) =>
-          parseInt(r.id.toString()),
-        ),
-        alerts: existingReminder.alerts.map((a) => parseInt(a.id.toString())),
+        reminders: existingReminder.reminders
+          .filter((r) => r.id !== undefined && r.id !== null)
+          .map((r) => parseInt(r.id, 10)),
+        alerts: existingReminder.alerts
+          .filter((a) => a.id !== undefined && a.id !== null)
+          .map((a) => parseInt(a.id, 10)),
         is_recurring: existingReminder.is_recurring,
         recurrence: existingReminder.recurrence,
         start_date: existingReminder.start_date,
@@ -221,7 +223,7 @@ export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
 
     if (!validation.success) {
       const fieldErrors: Record<string, string> = {};
-      validation.error.errors.forEach((error) => {
+      validation.error.issues.forEach((error) => {
         if (error.path[0]) {
           fieldErrors[error.path[0].toString()] = error.message;
         }

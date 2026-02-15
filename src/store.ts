@@ -17,6 +17,7 @@ export const modeStore = new Store<IMode>({
   id: 0,
   mode: "email",
   address: "",
+  isDefault: false,
 });
 
 export const modesStore = new Store<IMode[]>([
@@ -24,6 +25,7 @@ export const modesStore = new Store<IMode[]>([
     id: 1,
     mode: "email",
     address: "aaa7c4@gmail.com",
+    isDefault: false,
   },
 ]);
 export const showAddNewModeFormStore = new Store<boolean>(false);

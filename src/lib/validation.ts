@@ -65,7 +65,7 @@ const phoneRegex = /^\+?[1-9]\d{1,14}$/;
 export const modeFormSchema = z
   .object({
     mode: z.enum(["email", "sms", "call"], {
-      errorMap: () => ({ message: "Please select a valid mode" }),
+      message: "Please select a valid mode",
     }),
     address: z.string().min(1, "Address is required"),
     isDefault: z.boolean().default(false),

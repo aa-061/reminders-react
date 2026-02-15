@@ -1,7 +1,21 @@
 .EditReminderPage {
-  padding: var(--spacing-xl);
-  max-width: 50rem;
+  padding: var(--spacing-lg);
+  max-width: 100%;
   margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .EditReminderPage {
+    padding: var(--spacing-xl);
+    max-width: 50rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .EditReminderPage {
+    padding: var(--spacing-2xl);
+    max-width: 56rem;
+  }
 }
 
 .EditReminderPage h1 {

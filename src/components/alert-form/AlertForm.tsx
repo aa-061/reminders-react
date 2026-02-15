@@ -4,7 +4,11 @@ import { alertStore, alertsStore } from "@/store";
 import type { TAlertField } from "@/types";
 import AlertOptions from "./AlertOptions";
 
-export default () => {
+interface AlertFormProps {
+  onSuccess?: () => void;
+}
+
+export default ({ onSuccess }: AlertFormProps = {}) => {
   const alerts = useStore(alertsStore);
   const alert = useStore(alertStore);
 
@@ -31,6 +35,10 @@ export default () => {
       name: "",
       ms: 0,
     });
+
+    if (onSuccess) {
+      onSuccess();
+    }
   }
 
   function updateAlertOptions(totalMs: number) {

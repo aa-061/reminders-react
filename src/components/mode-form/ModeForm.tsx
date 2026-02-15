@@ -4,7 +4,11 @@ import { modeStore, modesStore } from "@/store";
 import type { TModeField } from "@/types";
 import { ChevronDown } from "lucide-react";
 
-export default () => {
+interface ModeFormProps {
+  onSuccess?: () => void;
+}
+
+export default ({ onSuccess }: ModeFormProps = {}) => {
   const mode = useStore(modeStore);
   const modes = useStore(modesStore);
 
@@ -22,14 +26,19 @@ export default () => {
 
     const newModes = [...modes];
     const id = newModes.length === 0 ? 1 : newModes[newModes.length - 1].id + 1;
-    const newMode = { id, mode: mode.mode, address: mode.address };
+    const newMode = { id, mode: mode.mode, address: mode.address, isDefault: false };
     newModes.push(newMode);
     modesStore.setState(newModes);
     modeStore.setState({
       id: 0,
       mode: "email",
       address: "",
+      isDefault: false,
     });
+
+    if (onSuccess) {
+      onSuccess();
+    }
   }
 
   return (
