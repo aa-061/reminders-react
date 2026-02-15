@@ -7,7 +7,6 @@
 .NavLinks__link {
   padding: var(--spacing-sm) var(--spacing-md);
   text-decoration: none;
-  color: var(--secondary);
   font-size: var(--fs-sm);
   font-weight: var(--fw-medium);
   border-radius: var(--radius-sm);
@@ -16,10 +15,16 @@
 
 .NavLinks__link:hover {
   color: light-dark(var(--foreground-light), var(--foreground-dark));
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
 }
 
 .NavLinks__link--active {
   color: light-dark(var(--foreground-light), var(--foreground-dark));
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
 }

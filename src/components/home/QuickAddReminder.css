@@ -1,6 +1,5 @@
 .QuickAddReminder {
   margin-bottom: var(--spacing-2xl);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   border: 1px solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-md);
   padding: var(--spacing-xl);
@@ -42,7 +41,6 @@
   padding: var(--spacing-md);
   border: 1px solid var(--primary);
   border-radius: var(--radius-sm);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   color: light-dark(var(--foreground-light), var(--foreground-dark));
   font-size: var(--fs-md);
   transition: border-color var(--transition-base);
@@ -50,7 +48,6 @@
 
 .QuickAddReminder__input:focus {
   outline: none;
-  border-color: var(--primary);
   box-shadow: 0 0 0 0.125rem rgba(22, 31, 210, 0.1);
 }
 
@@ -60,14 +57,14 @@
 }
 
 .QuickAddReminder__input::placeholder {
-  color: var(--secondary);
 }
 
 .QuickAddReminder__error {
   color: var(--error);
   font-size: var(--fs-sm);
   background-color: light-dark(var(--error-bg-light), var(--error-bg-dark));
-  border: 1px solid light-dark(var(--error-border-light), var(--error-border-dark));
+  border: 1px solid
+    light-dark(var(--error-border-light), var(--error-border-dark));
   padding: var(--spacing-md);
   border-radius: var(--radius-sm);
 }
@@ -81,13 +78,11 @@
 
 .QuickAddReminder__full-form {
   font-size: var(--fs-sm);
-  color: var(--primary);
   text-decoration: none;
   transition: color var(--transition-base);
 }
 
 .QuickAddReminder__full-form:hover {
-  color: var(--primary-hover);
 }
 
 @media (min-width: 640px) {

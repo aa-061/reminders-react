@@ -1,7 +1,7 @@
 import "./UpcomingReminders.css";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface Contact {
   mode: string;
@@ -160,7 +160,9 @@ function ReminderItem({ reminder }: ReminderItemProps) {
       <div className="UpcomingReminders__item-content">
         <div className="UpcomingReminders__item-main">
           <h3 className="UpcomingReminders__item-title">{reminder.title}</h3>
-          <p className="UpcomingReminders__item-date">{formatDate(reminder.date)}</p>
+          <p className="UpcomingReminders__item-date">
+            {formatDate(reminder.date)}
+          </p>
         </div>
         <span className="UpcomingReminders__item-countdown">{countdown}</span>
       </div>
@@ -168,13 +170,13 @@ function ReminderItem({ reminder }: ReminderItemProps) {
         <Link
           to="/reminders/$id/edit"
           params={{ id: reminder.id.toString() }}
-          className="UpcomingReminders__action"
+          className="btn btn--secondary"
         >
           Edit
         </Link>
         <button
           onClick={handleDelete}
-          className="UpcomingReminders__action UpcomingReminders__action--danger"
+          className="btn btn--danger"
           disabled={deleteMutation.isPending}
         >
           {deleteMutation.isPending ? "Deleting..." : "Delete"}

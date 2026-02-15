@@ -3,7 +3,6 @@
 }
 
 .ReminderForm__form {
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
@@ -19,12 +18,10 @@
 .ReminderForm p {
   margin: var(--spacing-sm) 0 0 0;
   font-size: var(--fs-sm);
-  color: var(--secondary);
 }
 
 .ReminderForm .info-text {
   font-size: var(--fs-sm);
-  color: var(--secondary);
   font-style: italic;
 }
 
@@ -45,7 +42,8 @@
 }
 
 .ReminderForm .input-error:focus {
-  box-shadow: 0 0 0 0.1875rem light-dark(var(--error-bg-light), var(--error-bg-dark));
+  box-shadow: 0 0 0 0.1875rem
+    light-dark(var(--error-bg-light), var(--error-bg-dark));
 }
 
 .ReminderForm .spinner {
@@ -74,7 +72,10 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-sm) var(--spacing-md);
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
   border-radius: var(--radius-sm);
   font-size: var(--fs-sm);
 }
@@ -83,7 +84,6 @@
   padding: var(--spacing-xs);
   background: none;
   border: none;
-  color: var(--secondary);
   cursor: pointer;
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);

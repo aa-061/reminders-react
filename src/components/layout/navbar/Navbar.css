@@ -8,8 +8,8 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-md) var(--spacing-2xl);
-    background-color: light-dark(var(--surface-light), var(--surface-dark));
-    border-bottom: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+    border-bottom: 0.0625rem solid
+      light-dark(var(--border-light), var(--border-dark));
     position: sticky;
     top: 0;
     z-index: 40;
@@ -59,12 +59,14 @@
   }
 
   .Navbar__icon-btn:hover {
-    background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+    background-color: light-dark(
+      var(--surface-alt-light),
+      var(--surface-alt-dark)
+    );
   }
 
   .Navbar__user-email {
     font-size: var(--fs-sm);
-    color: var(--secondary);
     max-width: 12rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -87,7 +89,10 @@
   }
 
   .Navbar__logout-btn:hover {
-    background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+    background-color: light-dark(
+      var(--surface-alt-light),
+      var(--surface-alt-dark)
+    );
     border-color: var(--primary);
   }
 }

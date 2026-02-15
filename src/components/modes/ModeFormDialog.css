@@ -5,7 +5,6 @@
   max-width: 32rem;
   width: 90vw;
   box-shadow: var(--shadow-lg);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
 }
 
 .ModeFormDialog__content {
@@ -30,7 +29,6 @@
   border: none;
   cursor: pointer;
   padding: var(--spacing-sm);
-  color: var(--secondary);
   transition: color var(--transition-base);
 }
 
@@ -60,7 +58,6 @@
   border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-sm);
   font-size: var(--fs-md);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   color: light-dark(var(--foreground-light), var(--foreground-dark));
 }
 
@@ -75,7 +72,6 @@
   border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-sm);
   font-size: var(--fs-md);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   color: light-dark(var(--foreground-light), var(--foreground-dark));
   cursor: pointer;
   appearance: none;
@@ -87,7 +83,6 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  color: var(--secondary);
 }
 
 .ModeFormDialog__error {
@@ -113,36 +108,4 @@
   gap: var(--spacing-md);
   justify-content: flex-end;
   margin-top: var(--spacing-lg);
-}
-
-.btn {
-  background-color: var(--primary);
-  color: light-dark(var(--surface-light), var(--surface-dark));
-  border: none;
-  padding: var(--spacing-md) var(--spacing-xl);
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-semibold);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: background-color var(--transition-base);
-}
-
-.btn:hover {
-  background-color: var(--primary-hover);
-}
-
-.btn-secondary {
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
-  color: light-dark(var(--foreground-light), var(--foreground-dark));
-  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
-  padding: var(--spacing-md) var(--spacing-xl);
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-semibold);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all var(--transition-base);
-}
-
-.btn-secondary:hover {
-  border-color: var(--primary);
 }

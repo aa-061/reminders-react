@@ -7,7 +7,6 @@
   z-index: 50;
   padding-bottom: env(safe-area-inset-bottom);
   place-content: center;
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   width: 100%;
   box-sizing: border-box;
 }
@@ -26,7 +25,6 @@
   bottom: 5rem;
   left: var(--spacing-lg);
   right: var(--spacing-lg);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   box-shadow: var(--shadow-lg);
@@ -59,14 +57,16 @@
 .MobileNav__user-info {
   padding: var(--spacing-md);
   margin-bottom: var(--spacing-lg);
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
   border-radius: var(--radius-sm);
   text-align: center;
 }
 
 .MobileNav__user-email {
   font-size: var(--fs-sm);
-  color: var(--secondary);
 }
 
 .MobileNav nav ul {

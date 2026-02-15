@@ -44,7 +44,7 @@
 }
 
 .SwitchInput__off {
-  background-color: var(--primary);
+  background-color: light-dark(var(--background-dark), var(--background-light));
   color: light-dark(var(--surface-light), var(--surface-dark));
   border-top-left-radius: var(--radius-sm);
   border-bottom-left-radius: var(--radius-sm);
@@ -62,7 +62,7 @@
 }
 
 .SwitchInput__checked .SwitchInput__on {
-  background-color: var(--primary);
+  background-color: light-dark(var(--background-dark), var(--background-light));
 }
 
 /* ==================== */

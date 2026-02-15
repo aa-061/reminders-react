@@ -61,10 +61,13 @@ export default function QuickStats() {
 
   return (
     <div className="QuickStats">
-      <div className="QuickStats__grid">
-        <StatCard title="Total Active" value={activeReminders.length} />
-        <StatCard title="Due Today" value={dueToday} />
-        <StatCard title="Due This Week" value={dueThisWeek} />
+      <h2 className="QuickStats__title">Quick Stats</h2>
+      <div className="QuickStats__container">
+        <div className="QuickStats__grid">
+          <StatCard title="Total Active" value={activeReminders.length} />
+          <StatCard title="Due Today" value={dueToday} />
+          <StatCard title="Due This Week" value={dueThisWeek} />
+        </div>
       </div>
     </div>
   );

@@ -1,18 +1,19 @@
 .UpcomingReminders {
-  margin-bottom: var(--spacing-2xl);
+  /* margin-bottom: var(--spacing-2xl); */
 }
 
 .UpcomingReminders__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-lg);
+  /* margin-bottom: var(--spacing-lg); */
 }
 
 .UpcomingReminders__title {
   font-size: var(--fs-xl);
   font-weight: var(--fw-semibold);
   color: light-dark(var(--foreground-light), var(--foreground-dark));
+  margin-bottom: var(--spacing-md);
 }
 
 .UpcomingReminders__view-all {
@@ -34,7 +35,6 @@
 }
 
 .UpcomingReminders__item {
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   border: 1px solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-md);
   padding: var(--spacing-lg);
@@ -69,7 +69,6 @@
 
 .UpcomingReminders__item-date {
   font-size: var(--fs-sm);
-  color: var(--secondary);
 }
 
 .UpcomingReminders__item-countdown {
@@ -85,46 +84,13 @@
   align-items: center;
 }
 
-.UpcomingReminders__action {
-  font-size: var(--fs-xs);
-  font-weight: var(--fw-medium);
-  text-decoration: none;
-  color: var(--primary);
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color var(--transition-base);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  border-radius: var(--radius-sm);
-}
-
-.UpcomingReminders__action:hover {
-  color: var(--primary-hover);
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
-}
-
-.UpcomingReminders__action--danger {
-  color: var(--error);
-}
-
-.UpcomingReminders__action--danger:hover {
-  background-color: light-dark(var(--error-bg-light), var(--error-bg-dark));
-}
-
-.UpcomingReminders__action:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
 .UpcomingReminders__loading,
 .UpcomingReminders__empty {
   text-align: center;
   padding: var(--spacing-2xl);
-  color: var(--secondary);
 }
 
 .UpcomingReminders__empty {
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   border: 1px solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-md);
   display: flex;

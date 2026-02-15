@@ -8,8 +8,8 @@
     justify-content: center;
     align-items: center;
     padding: var(--spacing-lg) var(--spacing-2xl);
-    background-color: light-dark(var(--surface-light), var(--surface-dark));
-    border-top: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+    border-top: 0.0625rem solid
+      light-dark(var(--border-light), var(--border-dark));
   }
 
   .Footer__content {
@@ -21,13 +21,11 @@
 
   .Footer__copyright {
     font-size: var(--fs-sm);
-    color: var(--secondary);
     margin: 0;
   }
 
   .Footer__tagline {
     font-size: var(--fs-xs);
-    color: var(--secondary);
     opacity: 0.7;
     margin: 0;
   }

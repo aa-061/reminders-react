@@ -1,5 +1,4 @@
 .AlertCard {
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-md);
   padding: var(--spacing-lg);
@@ -27,7 +26,6 @@
 
 .AlertCard__time {
   font-size: var(--fs-sm);
-  color: var(--secondary);
   margin: 0;
 }
 
@@ -49,7 +47,10 @@
 }
 
 .AlertCard__action-btn:hover {
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
   border-color: var(--primary);
 }
 

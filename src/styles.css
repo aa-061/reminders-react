@@ -9,8 +9,8 @@
   /* Foreground & Background Colors */
   --foreground-light: #4d4d4d;
   --background-light: #ffffff;
-  --foreground-dark: #000000;
-  --background-dark: #1f2135;
+  --foreground-dark: #f5f5f5;
+  --background-dark: #000000;
 
   /* Surface Colors (for cards, navbars, etc.) */
   --surface-light: #ffffff;
@@ -113,14 +113,12 @@ select,
 select::picker(select) {
   appearance: base-select;
   border: 1px solid var(--primary);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   padding: var(--spacing-sm);
   border-radius: var(--radius-sm);
 }
 
 select option {
   padding: var(--spacing-xs);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
 }
 
 select option:hover {
@@ -142,6 +140,26 @@ select > button {
 
 select:open > button {
   outline: 0.125rem solid var(--primary);
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+input::placeholder {
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
+
+textarea {
+  resize: none;
+}
+
+a {
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+
+  &:hover {
+    color: light-dark(var(--foreground-light), var(--foreground-dark));
+  }
 }
 
 th,
@@ -197,19 +215,22 @@ form select {
   padding: var(--spacing-md);
   border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-sm);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   color: light-dark(var(--foreground-light), var(--foreground-dark));
+  background-color: light-dark(var(--background-light), var(--background-dark));
   font-size: var(--fs-md);
   font-family: inherit;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 form input:focus,
 form textarea:focus,
 form select:focus {
   outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 0.1875rem light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
+  /* border-color: var(--primary); */
+  box-shadow: 0 0 0 0.1875rem
+    light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.05));
 }
 
 form input:disabled,
@@ -221,7 +242,6 @@ form select:disabled {
 
 form input::placeholder,
 form textarea::placeholder {
-  color: var(--secondary);
 }
 
 /* Error states */
@@ -234,7 +254,8 @@ form select.input-error {
 form input.input-error:focus,
 form textarea.input-error:focus,
 form select.input-error:focus {
-  box-shadow: 0 0 0 0.1875rem light-dark(var(--error-bg-light), var(--error-bg-dark));
+  box-shadow: 0 0 0 0.1875rem
+    light-dark(var(--error-bg-light), var(--error-bg-dark));
 }
 
 .error-message {
@@ -252,7 +273,6 @@ form select.input-error:focus {
 /* Form hints */
 .form-hint {
   font-size: var(--fs-xs);
-  color: var(--secondary);
   margin-top: var(--spacing-xs);
 }
 
@@ -262,7 +282,9 @@ form select.input-error:focus {
 
 /* Base button - use this class for all buttons */
 .btn {
-  display: inline-flex;
+  display: flex;
+  flex-grow: 0;
+  width: fit-content;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-xs);
@@ -274,12 +296,19 @@ form select.input-error:focus {
   cursor: pointer;
   transition: all var(--transition-fast);
   border: 0.0625rem solid transparent;
-  background-color: var(--primary);
-  color: light-dark(var(--surface-light), var(--surface-dark));
+  background-color: light-dark(var(--background-dark), var(--background-light));
+  color: light-dark(var(--foreground-dark), var(--foreground-light));
+  font-size: 1rem;
 }
 
 .btn:hover:not(:disabled) {
-  background-color: var(--primary-hover);
+  /* background-color: var(--primary-hover); */
+  color: light-dark(var(--foreground-dark), var(--foreground-light));
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
 }
 
 .btn:disabled {
@@ -300,7 +329,10 @@ form select.input-error:focus {
 }
 
 .btn--secondary:hover:not(:disabled) {
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
   border-color: var(--primary);
 }
 
@@ -328,12 +360,15 @@ form select.input-error:focus {
 .btn--ghost {
   background-color: transparent;
   border-color: transparent;
-  color: var(--primary);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
   padding: var(--spacing-xs) var(--spacing-sm);
 }
 
 .btn--ghost:hover:not(:disabled) {
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
 }
 
 /* Button Sizes */
@@ -408,7 +443,6 @@ form select.input-error:focus {
 }
 
 .link--secondary {
-  color: var(--secondary);
 }
 
 .link--secondary:hover {

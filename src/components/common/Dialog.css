@@ -6,7 +6,6 @@
   max-height: 85vh;
   overflow: auto;
   box-shadow: var(--shadow-lg);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   color: light-dark(var(--foreground-light), var(--foreground-dark));
   z-index: 1000;
   position: fixed;
@@ -36,7 +35,8 @@
   align-items: center;
   margin-bottom: var(--spacing-xl);
   padding-bottom: var(--spacing-lg);
-  border-bottom: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-bottom: 0.0625rem solid
+    light-dark(var(--border-light), var(--border-dark));
 }
 
 .Dialog__header h2 {
@@ -60,7 +60,10 @@
 
 .Dialog__close:hover {
   color: light-dark(var(--foreground-light), var(--foreground-dark));
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
 }
 
 .Dialog__body {
@@ -72,7 +75,8 @@
   gap: var(--spacing-md);
   justify-content: flex-end;
   padding-top: var(--spacing-lg);
-  border-top: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-top: 0.0625rem solid
+    light-dark(var(--border-light), var(--border-dark));
 }
 
 /* Animations */

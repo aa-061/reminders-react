@@ -1,6 +1,4 @@
 .AlertsList {
-  max-width: 75rem;
-  margin: 0 auto;
 }
 
 .AlertsList__header {
@@ -19,7 +17,6 @@
 
 .AlertsList__subtitle {
   font-size: var(--fs-md);
-  color: var(--secondary);
   margin: 0;
 }
 
@@ -39,7 +36,6 @@
 .AlertsList__empty {
   text-align: center;
   padding: var(--spacing-2xl);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   border: 0.0625rem dashed light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-md);
 }
@@ -51,7 +47,6 @@
 
 .AlertsList__empty-hint {
   font-size: var(--fs-sm);
-  color: var(--secondary);
 }
 
 .AlertsList__loading,

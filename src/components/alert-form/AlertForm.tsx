@@ -1,5 +1,6 @@
 import "./AlertForm.css";
 import { useStore } from "@tanstack/react-store";
+import { Save } from "lucide-react";
 import { alertStore, alertsStore } from "@/store";
 import type { TAlertField } from "@/types";
 import AlertOptions from "./AlertOptions";
@@ -49,10 +50,7 @@ export default ({ onSuccess }: AlertFormProps = {}) => {
   }
 
   return (
-    <div
-      className="AlertForm"
-      style={{ border: "2px solid red", padding: "10px", margin: "10px" }}
-    >
+    <div className="AlertForm">
       <h3>Add a new alert</h3>
       <form onSubmit={handleForm} method="POST" className="AlertForm__form">
         <div className="form-group">
@@ -69,7 +67,9 @@ export default ({ onSuccess }: AlertFormProps = {}) => {
         <AlertOptions updateAlertOptions={updateAlertOptions} />
 
         <div className="form-group">
-          <button type="submit">Save</button>
+          <button type="submit" className="btn">
+            <Save /> Save
+          </button>
         </div>
       </form>
     </div>

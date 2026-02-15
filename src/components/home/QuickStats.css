@@ -1,15 +1,17 @@
 .QuickStats {
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
-  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
-  border-radius: var(--radius-md);
-  padding: var(--spacing-xl);
 }
 
 .QuickStats__title {
-  font-size: var(--fs-lg);
+  font-size: var(--fs-xl);
   font-weight: var(--fw-semibold);
-  margin: 0 0 var(--spacing-lg) 0;
   color: light-dark(var(--foreground-light), var(--foreground-dark));
+  margin-bottom: var(--spacing-md);
+}
+
+.QuickStats__container {
+  padding: var(--spacing-xl);
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-md);
 }
 
 .QuickStats__grid {
@@ -21,7 +23,10 @@
 .QuickStats__stat {
   text-align: center;
   padding: var(--spacing-md);
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
   border-radius: var(--radius-sm);
 }
 
@@ -34,13 +39,11 @@
 
 .QuickStats__stat-label {
   font-size: var(--fs-xs);
-  color: var(--secondary);
   text-transform: uppercase;
   letter-spacing: 0.0625rem;
 }
 
 .QuickStats__loading {
   text-align: center;
-  color: var(--secondary);
   padding: var(--spacing-xl);
 }

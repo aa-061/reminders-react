@@ -1,9 +1,19 @@
 import "./UpdateModes.css";
 import { useStore } from "@tanstack/react-store";
+import {
+  Ban,
+  ChartNoAxesColumn,
+  Check,
+  CheckIcon,
+  Mail,
+  MessageSquare,
+  Phone,
+  Plus,
+  Trash2,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import ModeForm from "@/components/mode-form/ModeForm";
 import { modesStore, reminderFormStore } from "@/store";
-import { Trash2, Check, Mail, MessageSquare, Phone } from "lucide-react";
 
 export default function UpdateModes({
   onDoneUpdatingModes,
@@ -93,7 +103,9 @@ export default function UpdateModes({
                 </div>
                 <div className="UpdateModes__item-info">
                   <span className="UpdateModes__item-type">{mode.mode}</span>
-                  <span className="UpdateModes__item-address">{mode.address}</span>
+                  <span className="UpdateModes__item-address">
+                    {mode.address}
+                  </span>
                 </div>
               </button>
               <button
@@ -110,7 +122,9 @@ export default function UpdateModes({
       ) : (
         <div className="UpdateModes__empty">
           <p>No notification modes configured yet.</p>
-          <p className="UpdateModes__empty-hint">Add a mode below to get started.</p>
+          <p className="UpdateModes__empty-hint">
+            Add a mode below to get started.
+          </p>
         </div>
       )}
 
@@ -120,26 +134,26 @@ export default function UpdateModes({
             <ModeForm onSuccess={() => setShowAddForm(false)} />
             <button
               type="button"
-              className="btn btn--secondary btn--sm"
+              className="btn btn--secondary"
               onClick={() => setShowAddForm(false)}
             >
-              Cancel
+              <Ban /> Cancel
             </button>
           </div>
         ) : (
           <button
             type="button"
-            className="btn btn--outline"
+            className="btn btn--secondary"
             onClick={() => setShowAddForm(true)}
           >
-            + Add New Mode
+            <Plus /> Add New Mode
           </button>
         )}
       </div>
 
       <div className="UpdateModes__footer">
         <button type="button" className="btn" onClick={handleDone}>
-          Done
+          <CheckIcon /> Done
         </button>
       </div>
     </div>

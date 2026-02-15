@@ -5,7 +5,6 @@
   max-width: 32rem;
   width: 90vw;
   box-shadow: var(--shadow-lg);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
 }
 
 .AlertFormDialog__content {
@@ -55,13 +54,11 @@
   border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-sm);
   font-size: var(--fs-md);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   color: light-dark(var(--foreground-light), var(--foreground-dark));
 }
 
 .AlertFormDialog__hint {
   font-size: var(--fs-xs);
-  color: var(--secondary);
   margin: 0;
 }
 

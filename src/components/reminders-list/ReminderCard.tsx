@@ -1,19 +1,19 @@
-import { useState } from "react";
+import "./ReminderCard.css";
 import { Link } from "@tanstack/react-router";
 import {
-  Edit2,
-  Pause,
-  Play,
-  Trash2,
-  Mail,
-  Smartphone,
   Bell,
   Calendar,
-  ChevronUp,
   ChevronDown,
+  ChevronUp,
+  Edit2,
+  Mail,
+  Pause,
+  Play,
+  Smartphone,
+  Trash2,
 } from "lucide-react";
+import { useState } from "react";
 import type { IReminder } from "@/types";
-import "./ReminderCard.css";
 
 interface ReminderCardProps {
   reminder: IReminder;
@@ -139,10 +139,18 @@ export default function ReminderCard({
         <div className="ReminderCard__modes-list">
           {reminder.reminders.map((mode, idx) => (
             <span key={`${mode.id}-${idx}`} className="ReminderCard__mode">
-              {mode.mode === "email" && <Mail size={18} className="ReminderCard__icon" />}
-              {mode.mode === "sms" && <Smartphone size={18} className="ReminderCard__icon" />}
-              {mode.mode === "push" && <Bell size={18} className="ReminderCard__icon" />}
-              {mode.mode === "ical" && <Calendar size={18} className="ReminderCard__icon" />}
+              {mode.mode === "email" && (
+                <Mail size={18} className="ReminderCard__icon" />
+              )}
+              {mode.mode === "sms" && (
+                <Smartphone size={18} className="ReminderCard__icon" />
+              )}
+              {mode.mode === "push" && (
+                <Bell size={18} className="ReminderCard__icon" />
+              )}
+              {mode.mode === "ical" && (
+                <Calendar size={18} className="ReminderCard__icon" />
+              )}
               <span>{mode.address}</span>
             </span>
           ))}
@@ -171,7 +179,7 @@ export default function ReminderCard({
         <div className="ReminderCard__description-section">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="ReminderCard__expand-btn"
+            className="btn btn--ghost"
           >
             <span className="ReminderCard__expand-text">
               {isExpanded ? "Hide details" : "Show details"}

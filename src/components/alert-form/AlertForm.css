@@ -1,2 +1,8 @@
 .RemindersList {
 }
+
+.ActionOptions__button-container {
+  margin-bottom: var(--spacing-xl);
+  display: flex;
+  justify-content: flex-end;
+}

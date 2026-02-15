@@ -1,7 +1,8 @@
+import "./index.css";
 import { Link, createFileRoute, redirect } from "@tanstack/react-router";
+import { Plus } from "lucide-react";
 import RemindersList from "@/components/reminders-list/RemindersList";
 import { authClient } from "@/lib/auth-client";
-import "./index.css";
 
 export const Route = createFileRoute("/reminders/")({
   beforeLoad: async ({ location }) => {
@@ -23,8 +24,8 @@ function RemindersPage() {
     <div className="RemindersPage">
       <div className="RemindersPage__header">
         <h1 className="RemindersPage__title">My Reminders</h1>
-        <Link to="/reminders/new" className="RemindersPage__add-btn">
-          + Add Reminder
+        <Link to="/reminders/new" className="btn">
+          <Plus /> Add Reminder
         </Link>
       </div>
       <RemindersList />

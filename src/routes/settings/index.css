@@ -4,8 +4,6 @@
 }
 
 .SettingsPage__container {
-  max-width: 75rem;
-  margin: 0 auto;
 }
 
 .SettingsPage__title {
@@ -16,7 +14,6 @@
 
 .SettingsPage__subtitle {
   font-size: var(--fs-lg);
-  color: var(--secondary);
   margin: 0 0 var(--spacing-2xl) 0;
 }
 
@@ -27,7 +24,6 @@
 }
 
 .SettingsPage__card {
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   border: 0.125rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-lg);
   padding: var(--spacing-2xl);
@@ -56,7 +52,6 @@
 
 .SettingsPage__card-description {
   font-size: var(--fs-md);
-  color: var(--secondary);
   margin: 0;
   line-height: 1.6;
 }

@@ -1,8 +1,11 @@
 import "./ReminderForm.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useStore } from "@tanstack/react-store";
 import { useNavigate } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useStore } from "@tanstack/react-store";
+import { Loader2, Trash2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { showToast } from "@/components/common/ToastContainer";
+import { createReminderSchema, reminderFormSchema } from "@/lib/validation";
 import {
   alertsStore,
   dialogStore,
@@ -14,13 +17,10 @@ import {
   type IReminder,
   type TCreateReminderField,
 } from "@/types";
-import { createReminderSchema, reminderFormSchema } from "@/lib/validation";
-import { showToast } from "@/components/common/ToastContainer";
 import { SwitchInput } from "../common/Misc";
 import RecurrenceConfig from "./RecurrenceConfig";
 import UpdateAlerts from "./UpdateAlerts";
 import UpdateModes from "./UpdateModes";
-import { Trash2, Loader2 } from "lucide-react";
 
 interface ReminderFormProps {
   editMode?: boolean;
@@ -318,6 +318,7 @@ export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
           <textarea
             id="reminder-description"
             value={reminderForm.description}
+            rows={5}
             onChange={(e) => handleChange(e, "description")}
             className={errors.description ? "input-error" : ""}
           ></textarea>
@@ -329,7 +330,11 @@ export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
           <h3>
             Reminder modes <span className="required">*</span>
           </h3>
-          <button className="btn" type="button" onClick={handleUpdateModes}>
+          <button
+            className="btn btn--secondary"
+            type="button"
+            onClick={handleUpdateModes}
+          >
             Update modes
           </button>
           {reminderForm.reminders.length <= 0 ? (
@@ -375,7 +380,11 @@ export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
           <h3>
             Alerts <span className="required">*</span>
           </h3>
-          <button className="btn" type="button" onClick={handleUpdateAlerts}>
+          <button
+            className="btn btn--secondary"
+            type="button"
+            onClick={handleUpdateAlerts}
+          >
             Update alerts
           </button>
           {reminderForm.alerts.length <= 0 ? (
@@ -419,7 +428,11 @@ export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
         </div>
 
         <div className="form-group">
-          <button className="btn btn-primary" type="submit" disabled={isPending}>
+          <button
+            className="btn btn-primary"
+            type="submit"
+            disabled={isPending}
+          >
             {isPending ? (
               <>
                 <Loader2 size={18} className="spinner" />

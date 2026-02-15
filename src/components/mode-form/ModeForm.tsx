@@ -1,8 +1,8 @@
 import "./ModeForm.css";
 import { useStore } from "@tanstack/react-store";
+import { ChevronDown, Save } from "lucide-react";
 import { modeStore, modesStore } from "@/store";
 import type { TModeField } from "@/types";
-import { ChevronDown } from "lucide-react";
 
 interface ModeFormProps {
   onSuccess?: () => void;
@@ -26,7 +26,12 @@ export default ({ onSuccess }: ModeFormProps = {}) => {
 
     const newModes = [...modes];
     const id = newModes.length === 0 ? 1 : newModes[newModes.length - 1].id + 1;
-    const newMode = { id, mode: mode.mode, address: mode.address, isDefault: false };
+    const newMode = {
+      id,
+      mode: mode.mode,
+      address: mode.address,
+      isDefault: false,
+    };
     newModes.push(newMode);
     modesStore.setState(newModes);
     modeStore.setState({
@@ -87,7 +92,7 @@ export default ({ onSuccess }: ModeFormProps = {}) => {
         </div>
         <div className="form-group">
           <button className="btn" type="submit">
-            Save
+            <Save /> Save
           </button>
         </div>
       </form>

@@ -1,5 +1,4 @@
 .ReminderCard {
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-md);
   padding: var(--spacing-lg);
@@ -44,7 +43,7 @@
   margin: 0 0 var(--spacing-sm) 0;
   font-size: var(--fs-md);
   font-weight: var(--fw-semibold);
-  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  /* color: light-dark(var(--foreground-light), var(--foreground-dark)); */
   word-wrap: break-word;
 }
 
@@ -63,14 +62,19 @@
 }
 
 .ReminderCard__badge--recurring {
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
   color: var(--primary);
 }
 
 .ReminderCard__badge--inactive,
 .ReminderCard__badge--past {
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
-  color: var(--secondary);
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
 }
 
 .ReminderCard__actions {
@@ -84,7 +88,6 @@
   border: none;
   font-size: var(--fs-md);
   cursor: pointer;
-  padding: var(--spacing-xs);
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
   text-decoration: none;
@@ -93,10 +96,25 @@
   justify-content: center;
   width: 2rem;
   height: 2rem;
+
+  &a {
+    padding: 0;
+  }
+}
+
+a.ReminderCard__action-btn {
+  padding: 0;
+}
+
+button.ReminderCard__action-btn {
+  padding: var(--spacing-xs);
 }
 
 .ReminderCard__action-btn:hover {
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
 }
 
 .ReminderCard__icon {
@@ -124,7 +142,6 @@
 
 .ReminderCard__label {
   font-weight: var(--fw-medium);
-  color: var(--secondary);
 }
 
 .ReminderCard__modes,
@@ -146,7 +163,10 @@
   align-items: center;
   gap: var(--spacing-xs);
   padding: var(--spacing-xs) var(--spacing-sm);
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
   border-radius: var(--radius-sm);
   font-size: var(--fs-xs);
 }
@@ -154,14 +174,14 @@
 .ReminderCard__alert-more {
   padding: var(--spacing-xs) var(--spacing-sm);
   font-size: var(--fs-xs);
-  color: var(--secondary);
   font-style: italic;
 }
 
 .ReminderCard__description-section {
   margin-top: auto;
   padding-top: var(--spacing-md);
-  border-top: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-top: 0.0625rem solid
+    light-dark(var(--border-light), var(--border-dark));
 }
 
 .ReminderCard__expand-btn {
@@ -189,7 +209,10 @@
 .ReminderCard__description {
   margin-top: var(--spacing-md);
   padding: var(--spacing-md);
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
   border-radius: var(--radius-sm);
   font-size: var(--fs-sm);
   line-height: 1.6;
@@ -202,13 +225,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
-  border: 0.125rem solid var(--error);
+  /* border: 0.125rem solid var(--error); */
   border-radius: var(--radius-md);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-lg);
   z-index: 1000;
   min-width: min(20rem, 90vw);
+  background-color: light-dark(var(--background-light), var(--background-dark));
 }
 
 .ReminderCard__delete-confirm::before {
@@ -218,7 +241,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--backdrop-opacity);
+  background-color: light-dark(var(--background-light), var(--background-dark));
   backdrop-filter: var(--backdrop-blur);
   z-index: -1;
 }
@@ -246,12 +269,14 @@
 
 .ReminderCard__confirm-btn:not(.ReminderCard__confirm-btn--danger) {
   border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   color: light-dark(var(--foreground-light), var(--foreground-dark));
 }
 
 .ReminderCard__confirm-btn:not(.ReminderCard__confirm-btn--danger):hover {
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
 }
 
 .ReminderCard__confirm-btn--danger {

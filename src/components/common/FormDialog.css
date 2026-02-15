@@ -6,7 +6,6 @@
   max-height: 90vh;
   overflow: auto;
   box-shadow: var(--shadow-lg);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   color: light-dark(var(--foreground-light), var(--foreground-dark));
   animation: Dialog__slideIn var(--transition-base) ease-out;
 }
@@ -28,7 +27,8 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-xl) var(--spacing-2xl);
-  border-bottom: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-bottom: 0.0625rem solid
+    light-dark(var(--border-light), var(--border-dark));
 }
 
 .FormDialog__title {
@@ -51,7 +51,10 @@
 }
 
 .FormDialog__close:hover:not(:disabled) {
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
 }
 
 .FormDialog__close:active:not(:disabled) {
@@ -79,8 +82,12 @@
   gap: var(--spacing-md);
   justify-content: flex-end;
   padding: var(--spacing-xl) var(--spacing-2xl);
-  border-top: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  border-top: 0.0625rem solid
+    light-dark(var(--border-light), var(--border-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
 }
 
 .FormDialog__button {
@@ -100,7 +107,6 @@
 }
 
 .FormDialog__button--cancel {
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   color: light-dark(var(--foreground-light), var(--foreground-dark));
   border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
 }

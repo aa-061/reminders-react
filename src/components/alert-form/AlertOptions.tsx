@@ -1,3 +1,5 @@
+import "./AlertForm.css";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default ({
@@ -91,13 +93,25 @@ export default ({
         </>
       ) : null}
 
-      <button
-        disabled={seconds > 0 || ms > 0}
-        type="button"
-        onClick={() => setShowMore((p) => !p)}
-      >
-        {showMore ? "Show less options" : "Show more options"}
-      </button>
+      <div className="ActionOptions__button-container">
+        <button
+          disabled={seconds > 0 || ms > 0}
+          className="btn btn--ghost"
+          type="button"
+          onClick={() => setShowMore((p) => !p)}
+        >
+          {showMore ? (
+            <>
+              <ChevronUp /> Show less options
+            </>
+          ) : (
+            <>
+              <ChevronDown />
+              Show more options
+            </>
+          )}
+        </button>
+      </div>
     </>
   );
 };

@@ -1,5 +1,4 @@
 .RecurrenceConfig {
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   border: 1px solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-md);
   padding: var(--spacing-lg);

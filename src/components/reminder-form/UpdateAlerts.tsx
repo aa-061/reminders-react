@@ -1,10 +1,10 @@
 import "./UpdateAlerts.css";
 import { useStore } from "@tanstack/react-store";
+import { Ban, Check, CheckIcon, Clock, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import AlertForm from "@/components/alert-form/AlertForm";
-import { alertsStore, reminderFormStore } from "@/store";
 import { alertPresets } from "@/lib/validation";
-import { Trash2, Check, Clock } from "lucide-react";
+import { alertsStore, reminderFormStore } from "@/store";
 
 export default function UpdateAlerts({
   onDoneUpdatingAlerts,
@@ -13,7 +13,9 @@ export default function UpdateAlerts({
 }) {
   const alerts = useStore(alertsStore);
   const reminderForm = useStore(reminderFormStore);
-  const [checkedAlerts, setCheckedAlerts] = useState<Record<number, boolean>>({});
+  const [checkedAlerts, setCheckedAlerts] = useState<Record<number, boolean>>(
+    {},
+  );
   const [showAddForm, setShowAddForm] = useState(false);
 
   useEffect(() => {
@@ -51,13 +53,20 @@ export default function UpdateAlerts({
   };
 
   const addPresetAlert = (preset: (typeof alertPresets)[0]) => {
-    const exists = alerts.some((a) => a.ms === preset.ms && a.name === preset.name);
+    const exists = alerts.some(
+      (a) => a.ms === preset.ms && a.name === preset.name,
+    );
     if (!exists) {
       const newId = Math.max(...alerts.map((a) => a.id), 0) + 1;
-      alertsStore.setState([...alerts, { id: newId, name: preset.name, ms: preset.ms }]);
+      alertsStore.setState([
+        ...alerts,
+        { id: newId, name: preset.name, ms: preset.ms },
+      ]);
       setCheckedAlerts((prev) => ({ ...prev, [newId]: true }));
     } else {
-      const existingAlert = alerts.find((a) => a.ms === preset.ms && a.name === preset.name);
+      const existingAlert = alerts.find(
+        (a) => a.ms === preset.ms && a.name === preset.name,
+      );
       if (existingAlert) {
         setCheckedAlerts((prev) => ({ ...prev, [existingAlert.id]: true }));
       }
@@ -125,7 +134,9 @@ export default function UpdateAlerts({
       ) : (
         <div className="UpdateAlerts__empty">
           <p>No alerts configured yet.</p>
-          <p className="UpdateAlerts__empty-hint">Use Quick Add above or add a custom alert below.</p>
+          <p className="UpdateAlerts__empty-hint">
+            Use Quick Add above or add a custom alert below.
+          </p>
         </div>
       )}
 
@@ -135,26 +146,26 @@ export default function UpdateAlerts({
             <AlertForm onSuccess={() => setShowAddForm(false)} />
             <button
               type="button"
-              className="btn btn--secondary btn--sm"
+              className="btn btn--secondary"
               onClick={() => setShowAddForm(false)}
             >
-              Cancel
+              <Ban /> Cancel
             </button>
           </div>
         ) : (
           <button
             type="button"
-            className="btn btn--outline"
+            className="btn btn--secondary"
             onClick={() => setShowAddForm(true)}
           >
-            + Add Custom Alert
+            <Plus /> Add Custom Alert
           </button>
         )}
       </div>
 
       <div className="UpdateAlerts__footer">
         <button type="button" className="btn" onClick={handleDone}>
-          Done
+          <CheckIcon /> Done
         </button>
       </div>
     </div>

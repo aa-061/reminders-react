@@ -4,7 +4,6 @@
   padding: 0;
   max-width: min(90vw, 28rem);
   box-shadow: var(--shadow-lg);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
   color: light-dark(var(--foreground-light), var(--foreground-dark));
   animation: Dialog__slideIn var(--transition-base) ease-out;
 }
@@ -75,7 +74,10 @@
 }
 
 .ConfirmDialog__button--cancel {
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
   color: light-dark(var(--foreground-light), var(--foreground-dark));
   border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
 }

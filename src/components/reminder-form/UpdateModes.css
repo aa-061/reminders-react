@@ -15,7 +15,6 @@
 
 .UpdateModes__subtitle {
   font-size: var(--fs-sm);
-  color: var(--secondary);
   margin: 0;
 }
 
@@ -29,7 +28,10 @@
 .UpdateModes__item {
   display: flex;
   align-items: center;
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
   border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -38,7 +40,6 @@
 
 .UpdateModes__item--selected {
   border-color: var(--primary);
-  background-color: light-dark(var(--surface-light), var(--surface-dark));
 }
 
 .UpdateModes__item-main {
@@ -68,11 +69,10 @@
 .UpdateModes__item--selected .UpdateModes__item-check {
   background-color: var(--primary);
   border-color: var(--primary);
-  color: light-dark(var(--surface-light), var(--surface-dark));
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
 }
 
 .UpdateModes__item-icon {
-  color: var(--secondary);
   display: flex;
   align-items: center;
 }
@@ -93,7 +93,6 @@
 
 .UpdateModes__item-address {
   font-size: var(--fs-xs);
-  color: var(--secondary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -103,7 +102,6 @@
   padding: var(--spacing-md);
   background: none;
   border: none;
-  color: var(--secondary);
   cursor: pointer;
   transition: color var(--transition-fast);
 }
@@ -115,14 +113,16 @@
 .UpdateModes__empty {
   text-align: center;
   padding: var(--spacing-2xl) var(--spacing-lg);
-  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  background-color: light-dark(
+    var(--surface-alt-light),
+    var(--surface-alt-dark)
+  );
   border-radius: var(--radius-md);
   margin-bottom: var(--spacing-xl);
 }
 
 .UpdateModes__empty p {
   margin: 0;
-  color: var(--secondary);
 }
 
 .UpdateModes__empty-hint {
@@ -133,7 +133,8 @@
 .UpdateModes__add-section {
   margin-bottom: var(--spacing-xl);
   padding-top: var(--spacing-lg);
-  border-top: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-top: 0.0625rem solid
+    light-dark(var(--border-light), var(--border-dark));
 }
 
 .UpdateModes__add-form {
@@ -146,5 +147,6 @@
   display: flex;
   justify-content: flex-end;
   padding-top: var(--spacing-lg);
-  border-top: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-top: 0.0625rem solid
+    light-dark(var(--border-light), var(--border-dark));
 }
