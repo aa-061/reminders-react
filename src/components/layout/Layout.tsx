@@ -1,6 +1,6 @@
 import "./Layout.css";
 import { useStore } from "@tanstack/react-store";
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useEffect } from "react";
 import ToastContainer from "@/components/common/ToastContainer";
 import Footer from "@/components/layout/footer/Footer";
 import MobileNav from "@/components/layout/mobile-nav/MobileNav";
