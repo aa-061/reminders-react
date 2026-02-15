@@ -82,3 +82,5 @@ export interface IAlertFormData {
   name: string;
   ms: number;
 }
+
+export type TTheme = "light" | "dark";

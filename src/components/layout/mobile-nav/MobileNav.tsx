@@ -2,6 +2,7 @@ import "./MobileNav.css";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { ThemeToggle } from "@/components/common/Misc";
 import { signOut, useSession } from "@/lib/auth-client";
 
 export default function MobileNav() {
@@ -25,6 +26,7 @@ export default function MobileNav() {
 
   return (
     <footer className="MobileNav">
+      <ThemeToggle />
       <div className="MobileNav__content">
         {showMenu && (
           <>
@@ -32,7 +34,11 @@ export default function MobileNav() {
             <nav className="MobileNav__menu">
               <ul>
                 <li>
-                  <Link className="MobileNav__link" to="/" onClick={closeMenu}>
+                  <Link
+                    className="MobileNav__link btn"
+                    to="/"
+                    onClick={closeMenu}
+                  >
                     Home
                   </Link>
                 </li>
@@ -40,7 +46,7 @@ export default function MobileNav() {
                   <>
                     <li>
                       <Link
-                        className="MobileNav__link"
+                        className="MobileNav__link btn"
                         to="/reminders"
                         onClick={closeMenu}
                       >
@@ -49,7 +55,7 @@ export default function MobileNav() {
                     </li>
                     <li>
                       <Link
-                        className="MobileNav__link"
+                        className="MobileNav__link btn"
                         to="/reminders/new"
                         onClick={closeMenu}
                       >
@@ -58,7 +64,7 @@ export default function MobileNav() {
                     </li>
                     <li>
                       <Link
-                        className="MobileNav__link"
+                        className="MobileNav__link btn"
                         to="/settings"
                         onClick={closeMenu}
                       >
@@ -66,7 +72,10 @@ export default function MobileNav() {
                       </Link>
                     </li>
                     <li>
-                      <button onClick={handleLogout} className="MobileNav__button">
+                      <button
+                        onClick={handleLogout}
+                        className="MobileNav__button btn"
+                      >
                         Logout
                       </button>
                     </li>
@@ -74,7 +83,7 @@ export default function MobileNav() {
                 ) : (
                   <li>
                     <Link
-                      className="MobileNav__link"
+                      className="MobileNav__link btn"
                       to="/login"
                       onClick={closeMenu}
                     >
@@ -89,7 +98,7 @@ export default function MobileNav() {
 
         <button
           onClick={toggleMobileMenu}
-          className="MobileNav__burger-menu-button"
+          className="MobileNav__burger-menu-button btn"
           aria-label={showMenu ? "Close menu" : "Open menu"}
         >
           {showMenu ? <X size={24} /> : <Menu size={24} />}

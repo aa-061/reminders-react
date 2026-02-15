@@ -1,11 +1,11 @@
 import { Store } from "@tanstack/store";
+import type { ToastType } from "@/components/common/Toast";
 import {
   type IAlert,
   type ICreateReminder,
   type IDialog,
   type IMode,
 } from "@/types";
-import type { ToastType } from "@/components/common/Toast";
 
 interface IToast {
   id: string;
@@ -64,3 +64,5 @@ export const alertsStore = new Store<IAlert[]>([
 ]);
 
 export const toastsStore = new Store<IToast[]>([]);
+
+export const themeStore = new Store<"light" | "dark">("light");

@@ -45,26 +45,6 @@
     gap: var(--spacing-lg);
   }
 
-  .Navbar__icon-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: var(--spacing-sm);
-    border-radius: var(--radius-sm);
-    color: light-dark(var(--foreground-light), var(--foreground-dark));
-    transition: background-color var(--transition-fast);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .Navbar__icon-btn:hover {
-    background-color: light-dark(
-      var(--surface-alt-light),
-      var(--surface-alt-dark)
-    );
-  }
-
   .Navbar__user-email {
     font-size: var(--fs-sm);
     max-width: 12rem;
