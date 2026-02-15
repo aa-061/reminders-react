@@ -27,7 +27,6 @@ export default function ReminderCard({
   onToggleActive,
 }: ReminderCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const reminderDate = new Date(reminder.date);
   const now = new Date();
@@ -58,8 +57,9 @@ export default function ReminderCard({
   };
 
   const handleDelete = () => {
-    onDelete(reminder.id);
-    setShowDeleteConfirm(false);
+    if (window.confirm("Are you sure you want to delete this reminder?")) {
+      onDelete(reminder.id);
+    }
   };
 
   const handleToggleActive = () => {
@@ -112,7 +112,7 @@ export default function ReminderCard({
             )}
           </button>
           <button
-            onClick={() => setShowDeleteConfirm(true)}
+            onClick={handleDelete}
             className="ReminderCard__action-btn ReminderCard__action-btn--delete"
             title="Delete"
           >
@@ -193,26 +193,6 @@ export default function ReminderCard({
           {isExpanded && (
             <p className="ReminderCard__description">{reminder.description}</p>
           )}
-        </div>
-      )}
-
-      {showDeleteConfirm && (
-        <div className="ReminderCard__delete-confirm">
-          <p>Are you sure you want to delete this reminder?</p>
-          <div className="ReminderCard__delete-actions">
-            <button
-              onClick={handleDelete}
-              className="ReminderCard__confirm-btn ReminderCard__confirm-btn--danger"
-            >
-              Delete
-            </button>
-            <button
-              onClick={() => setShowDeleteConfirm(false)}
-              className="ReminderCard__confirm-btn"
-            >
-              Cancel
-            </button>
-          </div>
         </div>
       )}
     </div>
