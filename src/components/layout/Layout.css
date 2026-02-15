@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   padding: var(--spacing-lg);
+  padding-bottom: 6rem; /* Space for mobile nav */
   width: 100%;
   box-sizing: border-box;
 }
@@ -18,11 +19,13 @@
 @media (min-width: 48rem) {
   .Layout main {
     padding: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl); /* Reset on desktop */
   }
 }
 
 @media (min-width: 64rem) {
   .Layout main {
     padding: var(--spacing-2xl);
+    padding-bottom: var(--spacing-2xl);
   }
 }

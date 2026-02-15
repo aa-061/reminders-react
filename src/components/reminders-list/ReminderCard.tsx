@@ -1,5 +1,17 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import {
+  Edit2,
+  Pause,
+  Play,
+  Trash2,
+  Mail,
+  Smartphone,
+  Bell,
+  Calendar,
+  ChevronUp,
+  ChevronDown,
+} from "lucide-react";
 import type { IReminder } from "@/types";
 import "./ReminderCard.css";
 
@@ -86,21 +98,25 @@ export default function ReminderCard({
             className="ReminderCard__action-btn ReminderCard__action-btn--edit"
             title="Edit"
           >
-            ✏️
+            <Edit2 size={20} className="ReminderCard__icon" />
           </Link>
           <button
             onClick={handleToggleActive}
             className="ReminderCard__action-btn ReminderCard__action-btn--toggle"
             title={reminder.is_active ? "Deactivate" : "Activate"}
           >
-            {reminder.is_active ? "⏸️" : "▶️"}
+            {reminder.is_active ? (
+              <Pause size={20} className="ReminderCard__icon" />
+            ) : (
+              <Play size={20} className="ReminderCard__icon" />
+            )}
           </button>
           <button
             onClick={() => setShowDeleteConfirm(true)}
             className="ReminderCard__action-btn ReminderCard__action-btn--delete"
             title="Delete"
           >
-            🗑️
+            <Trash2 size={20} className="ReminderCard__icon" />
           </button>
         </div>
       </div>
@@ -123,10 +139,10 @@ export default function ReminderCard({
         <div className="ReminderCard__modes-list">
           {reminder.reminders.map((mode, idx) => (
             <span key={`${mode.id}-${idx}`} className="ReminderCard__mode">
-              {mode.mode === "email" && "📧"}
-              {mode.mode === "sms" && "📱"}
-              {mode.mode === "push" && "🔔"}
-              {mode.mode === "ical" && "📅"}
+              {mode.mode === "email" && <Mail size={18} className="ReminderCard__icon" />}
+              {mode.mode === "sms" && <Smartphone size={18} className="ReminderCard__icon" />}
+              {mode.mode === "push" && <Bell size={18} className="ReminderCard__icon" />}
+              {mode.mode === "ical" && <Calendar size={18} className="ReminderCard__icon" />}
               <span>{mode.address}</span>
             </span>
           ))}
@@ -157,7 +173,14 @@ export default function ReminderCard({
             onClick={() => setIsExpanded(!isExpanded)}
             className="ReminderCard__expand-btn"
           >
-            {isExpanded ? "Hide details ▲" : "Show details ▼"}
+            <span className="ReminderCard__expand-text">
+              {isExpanded ? "Hide details" : "Show details"}
+            </span>
+            {isExpanded ? (
+              <ChevronUp size={18} className="ReminderCard__icon" />
+            ) : (
+              <ChevronDown size={18} className="ReminderCard__icon" />
+            )}
           </button>
           {isExpanded && (
             <p className="ReminderCard__description">{reminder.description}</p>

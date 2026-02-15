@@ -99,6 +99,10 @@
   background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
 }
 
+.ReminderCard__icon {
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
+
 .ReminderCard__action-btn--delete:hover {
   background-color: light-dark(var(--error-bg-light), var(--error-bg-dark));
 }
@@ -169,10 +173,17 @@
   font-weight: var(--fw-medium);
   padding: 0;
   transition: color var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
 }
 
 .ReminderCard__expand-btn:hover {
   color: var(--primary-hover);
+}
+
+.ReminderCard__expand-text {
+  display: inline;
 }
 
 .ReminderCard__description {
