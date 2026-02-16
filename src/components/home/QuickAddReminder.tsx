@@ -92,7 +92,7 @@ export default function QuickAddReminder() {
     }
 
     // Use the default mode or the first mode available
-    const defaultMode = modes.find((m) => m.is_default) || modes[0];
+    const defaultMode = modes.find((m) => m.isDefault) || modes[0];
 
     // Use the first alert
     const firstAlert = alerts[0];
