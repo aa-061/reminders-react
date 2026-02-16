@@ -1,7 +1,7 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-import { authClient } from "@/lib/auth-client";
-import AlertsList from "@/components/alerts/AlertsList";
 import "./index.css";
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import AlertsList from "@/components/alerts/AlertsList";
+import { authClient } from "@/lib/auth-client";
 
 export const Route = createFileRoute("/settings/alerts/")({
   beforeLoad: async ({ location }) => {

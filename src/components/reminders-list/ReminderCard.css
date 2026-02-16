@@ -97,7 +97,6 @@ button.ReminderCard__action-btn {
   color: light-dark(var(--foreground-light), var(--foreground-dark));
 }
 
-
 .ReminderCard__info {
   display: flex;
   flex-direction: column;
@@ -157,12 +156,6 @@ button.ReminderCard__action-btn {
     light-dark(var(--border-light), var(--border-dark));
 }
 
-.ReminderCard__expand-btn {
-  color: var(--primary);
-  padding: 0;
-  gap: var(--spacing-xs);
-}
-
 .ReminderCard__expand-text {
   display: inline;
 }
@@ -188,10 +181,6 @@ button.ReminderCard__action-btn {
 
   .ReminderCard__action-btn--delete:hover {
     background-color: light-dark(var(--error-bg-light), var(--error-bg-dark));
-  }
-
-  .ReminderCard__expand-btn:hover {
-    color: var(--primary-hover);
   }
 
   .ReminderCard__header {

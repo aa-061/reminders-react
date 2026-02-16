@@ -1,5 +1,5 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchModes, createMode, updateMode, deleteMode } from "@/api/modes";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { createMode, deleteMode, fetchModes, updateMode } from "@/api/modes";
 import type { IMode, IModeFormData } from "@/types";
 
 export function useModes() {

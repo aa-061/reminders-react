@@ -1,6 +1,6 @@
 import "./FormDialog.css";
-import { useEffect, useRef, type ReactNode } from "react";
 import { X } from "lucide-react";
+import { type ReactNode, useEffect, useRef } from "react";
 
 export interface FormDialogProps {
   isOpen: boolean;
@@ -85,7 +85,7 @@ export default function FormDialog({
           <button
             type="button"
             onClick={handleClose}
-            className="FormDialog__close btn--ghost btn--icon"
+            className="FormDialog__close btn btn--ghost btn--icon"
             aria-label="Close dialog"
             disabled={isSubmitting}
           >

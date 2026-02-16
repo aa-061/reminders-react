@@ -1,12 +1,12 @@
-import { useState, useMemo } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import "./RemindersList.css";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMemo, useState } from "react";
 import type { IReminder } from "@/types";
 import ReminderCard from "./ReminderCard";
 import RemindersFilter, {
   type FilterStatus,
   type SortOption,
 } from "./RemindersFilter";
-import "./RemindersList.css";
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -73,7 +73,11 @@ export default function RemindersList() {
   const [filterStatus, setFilterStatus] = useState<FilterStatus>("all");
   const [sortBy, setSortBy] = useState<SortOption>("date");
 
-  const { data: reminders, isPending, error } = useQuery({
+  const {
+    data: reminders,
+    isPending,
+    error,
+  } = useQuery({
     queryKey: ["reminders"],
     queryFn: fetchReminders,
   });

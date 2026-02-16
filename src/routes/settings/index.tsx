@@ -1,7 +1,7 @@
-import { createFileRoute, redirect, Link } from "@tanstack/react-router";
-import { authClient } from "@/lib/auth-client";
-import { Bell, MessageSquare } from "lucide-react";
 import "./index.css";
+import { Link, createFileRoute, redirect } from "@tanstack/react-router";
+import { Bell, MessageSquare } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 export const Route = createFileRoute("/settings/")({
   beforeLoad: async ({ location }) => {

@@ -1,6 +1,6 @@
 import "./AlertDialog.css";
+import { AlertTriangle, CheckCircle, Info, X, XCircle } from "lucide-react";
 import { useEffect, useRef } from "react";
-import { CheckCircle, XCircle, Info, AlertTriangle, X } from "lucide-react";
 
 export interface AlertDialogProps {
   isOpen: boolean;
@@ -56,7 +56,9 @@ export default function AlertDialog({
       case "error":
         return <XCircle className="AlertDialog__icon--error" size={32} />;
       case "warning":
-        return <AlertTriangle className="AlertDialog__icon--warning" size={32} />;
+        return (
+          <AlertTriangle className="AlertDialog__icon--warning" size={32} />
+        );
       case "info":
         return <Info className="AlertDialog__icon--info" size={32} />;
     }
@@ -76,7 +78,7 @@ export default function AlertDialog({
         <button
           type="button"
           onClick={handleClose}
-          className="AlertDialog__close btn--ghost btn--icon"
+          className="AlertDialog__close btn btn--ghost btn--icon"
           aria-label="Close dialog"
         >
           <X size={20} />

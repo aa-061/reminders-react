@@ -103,37 +103,8 @@ select::picker-icon {
   display: none;
 }
 
-select {
-  selectedcontent {
-    width: 100%;
-  }
-}
-
-select,
-select::picker(select) {
-  appearance: base-select;
-  border: 1px solid var(--primary);
-  padding: var(--spacing-sm);
-  border-radius: var(--radius-sm);
-}
-
 select option {
   padding: var(--spacing-xs);
-}
-
-select > button {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  width: 100%;
-
-  .chevron {
-    color: var(--secondary);
-  }
-}
-
-select:open > button {
-  outline: 0.125rem solid var(--primary);
 }
 
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
@@ -331,6 +302,10 @@ form select.input-error:focus {
   background-color: var(--error);
   border-color: var(--error);
   color: light-dark(var(--surface-light), var(--surface-dark));
+
+  &.btn--icon {
+    color: var(--error);
+  }
 }
 
 .btn--danger:hover:not(:disabled) {

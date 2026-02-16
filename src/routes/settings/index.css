@@ -34,7 +34,7 @@
 }
 
 .SettingsPage__card:hover {
-  border-color: var(--primary);
+  border-color: light-dark(var(--border-dark), var(--border-light));
   transform: translateY(-0.125rem);
   box-shadow: var(--shadow-md);
 }

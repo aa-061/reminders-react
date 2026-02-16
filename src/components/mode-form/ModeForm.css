@@ -3,3 +3,29 @@
     margin-bottom: 0.5rem;
   }
 }
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding: var(--spacing-md);
+  padding-right: 2.5rem;
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-md);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  background-color: light-dark(var(--background-light), var(--background-dark));
+  cursor: pointer;
+  appearance: none;
+}
+
+.select-wrapper .select-icon {
+  position: absolute;
+  right: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}

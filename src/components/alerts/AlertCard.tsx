@@ -1,7 +1,7 @@
 import "./AlertCard.css";
 import { Clock } from "lucide-react";
-import { formatTimeFromMs } from "@/utils/time";
 import type { IAlert } from "@/types";
+import { formatTimeFromMs } from "@/utils/time";
 
 interface AlertCardProps {
   alert: IAlert;

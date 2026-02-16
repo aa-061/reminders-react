@@ -1,7 +1,7 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-import { authClient } from "@/lib/auth-client";
-import ModesList from "@/components/modes/ModesList";
 import "./index.css";
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import ModesList from "@/components/modes/ModesList";
+import { authClient } from "@/lib/auth-client";
 
 export const Route = createFileRoute("/settings/modes/")({
   beforeLoad: async ({ location }) => {

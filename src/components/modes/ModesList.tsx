@@ -1,13 +1,14 @@
 import "./ModesList.css";
-import { useState } from "react";
 import { Plus } from "lucide-react";
+import { useState } from "react";
 import { useModes } from "@/hooks/useModes";
+import type { IMode, IModeFormData } from "@/types";
 import ModeCard from "./ModeCard";
 import ModeFormDialog from "./ModeFormDialog";
-import type { IMode, IModeFormData } from "@/types";
 
 export default function ModesList() {
-  const { modes, isPending, error, createMode, updateMode, deleteMode } = useModes();
+  const { modes, isPending, error, createMode, updateMode, deleteMode } =
+    useModes();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingMode, setEditingMode] = useState<IMode | null>(null);
 
@@ -67,7 +68,11 @@ export default function ModesList() {
             Manage how you receive reminder notifications
           </p>
         </div>
-        <button onClick={handleOpenCreate} className="btn ModesList__add-btn" type="button">
+        <button
+          onClick={handleOpenCreate}
+          className="btn ModesList__add-btn"
+          type="button"
+        >
           <Plus size={20} />
           Add Mode
         </button>

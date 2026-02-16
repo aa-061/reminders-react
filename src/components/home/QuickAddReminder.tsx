@@ -1,9 +1,9 @@
 import "./QuickAddReminder.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { useModes } from "@/hooks/useModes";
+import { useState } from "react";
 import { useAlerts } from "@/hooks/useAlerts";
+import { useModes } from "@/hooks/useModes";
 
 interface QuickReminderData {
   title: string;
@@ -125,7 +125,9 @@ export default function QuickAddReminder() {
               onChange={(e) => setTitle(e.target.value)}
               placeholder="What do you need to remember?"
               className="QuickAddReminder__input"
-              disabled={createMutation.isPending || modesLoading || alertsLoading}
+              disabled={
+                createMutation.isPending || modesLoading || alertsLoading
+              }
             />
           </div>
           <div className="QuickAddReminder__field">
@@ -138,7 +140,9 @@ export default function QuickAddReminder() {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className="QuickAddReminder__input"
-              disabled={createMutation.isPending || modesLoading || alertsLoading}
+              disabled={
+                createMutation.isPending || modesLoading || alertsLoading
+              }
             />
           </div>
         </div>

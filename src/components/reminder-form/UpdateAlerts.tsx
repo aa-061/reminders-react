@@ -3,8 +3,9 @@ import { useStore } from "@tanstack/react-store";
 import { Ban, Check, CheckIcon, Clock, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import AlertForm from "@/components/alert-form/AlertForm";
+import DialogContent from "@/components/common/DialogContent";
 import { alertPresets } from "@/lib/validation";
-import { alertsStore, reminderFormStore } from "@/store";
+import { alertsStore, dialogStore, reminderFormStore } from "@/store";
 
 export default function UpdateAlerts({
   onDoneUpdatingAlerts,
@@ -13,6 +14,7 @@ export default function UpdateAlerts({
 }) {
   const alerts = useStore(alertsStore);
   const reminderForm = useStore(reminderFormStore);
+  const dialog = useStore(dialogStore);
   const [checkedAlerts, setCheckedAlerts] = useState<Record<number, boolean>>(
     {},
   );
@@ -40,6 +42,10 @@ export default function UpdateAlerts({
       .filter(([, checked]) => checked)
       .map(([id]) => parseInt(id));
     onDoneUpdatingAlerts(selectedIds);
+  };
+
+  const handleClose = () => {
+    dialogStore.setState({ ...dialog, children: null, isOpen: false });
   };
 
   const handleDelete = (id: number) => {
@@ -76,14 +82,16 @@ export default function UpdateAlerts({
   const selectedCount = Object.values(checkedAlerts).filter(Boolean).length;
 
   return (
-    <div className="UpdateAlerts">
-      <div className="UpdateAlerts__header">
-        <h2>Select Alert Times</h2>
-        <p className="UpdateAlerts__subtitle">
-          {selectedCount} alert{selectedCount !== 1 ? "s" : ""} selected
-        </p>
-      </div>
-
+    <DialogContent
+      title="Select Alert Times"
+      subtitle={`${selectedCount} alert${selectedCount !== 1 ? "s" : ""} selected`}
+      onClose={handleClose}
+      footer={
+        <button type="button" className="btn" onClick={handleDone}>
+          <CheckIcon /> Done
+        </button>
+      }
+    >
       <div className="UpdateAlerts__presets">
         <h3 className="UpdateAlerts__presets-title">
           <Clock size={16} />
@@ -162,12 +170,6 @@ export default function UpdateAlerts({
           </button>
         )}
       </div>
-
-      <div className="UpdateAlerts__footer">
-        <button type="button" className="btn" onClick={handleDone}>
-          <CheckIcon /> Done
-        </button>
-      </div>
-    </div>
+    </DialogContent>
   );
 }

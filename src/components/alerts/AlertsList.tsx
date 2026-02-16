@@ -1,13 +1,14 @@
 import "./AlertsList.css";
-import { useState } from "react";
 import { Plus } from "lucide-react";
+import { useState } from "react";
 import { useAlerts } from "@/hooks/useAlerts";
+import type { IAlert } from "@/types";
 import AlertCard from "./AlertCard";
 import AlertFormDialog from "./AlertFormDialog";
-import type { IAlert } from "@/types";
 
 export default function AlertsList() {
-  const { alerts, isPending, error, createAlert, updateAlert, deleteAlert } = useAlerts();
+  const { alerts, isPending, error, createAlert, updateAlert, deleteAlert } =
+    useAlerts();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingAlert, setEditingAlert] = useState<IAlert | null>(null);
 
@@ -63,7 +64,11 @@ export default function AlertsList() {
             Configure when you want to receive reminder notifications
           </p>
         </div>
-        <button onClick={handleOpenCreate} className="btn AlertsList__add-btn" type="button">
+        <button
+          onClick={handleOpenCreate}
+          className="btn AlertsList__add-btn"
+          type="button"
+        >
           <Plus size={20} />
           Add Alert
         </button>

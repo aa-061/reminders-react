@@ -1,9 +1,9 @@
-import "./ReminderForm.css";
 import "./AvailableModes.css";
+import "./ReminderForm.css";
+import { Bell, Mail, MessageSquare, Phone, Trash2 } from "lucide-react";
 import { modesStore } from "@/store";
 import type { IMode } from "@/types";
 import Tile from "../common/Tile";
-import { Trash2, Mail, MessageSquare, Phone, Bell } from "lucide-react";
 
 const getModeIcon = (mode: string) => {
   const lowerMode = mode.toLowerCase();
@@ -39,11 +39,18 @@ export default ({
               checked={checkedModes[mode.id]}
               onChange={() => addRemoveModes(mode.id)}
             >
-              <label htmlFor={`mode-${mode.id}`} className="AvailableModes__label">
-                <span className="AvailableModes__icon">{getModeIcon(mode.mode)}</span>
+              <label
+                htmlFor={`mode-${mode.id}`}
+                className="AvailableModes__label"
+              >
+                <span className="AvailableModes__icon">
+                  {getModeIcon(mode.mode)}
+                </span>
                 <span className="AvailableModes__info">
                   <span className="AvailableModes__mode">{mode.mode}</span>
-                  <span className="AvailableModes__address">{mode.address}</span>
+                  <span className="AvailableModes__address">
+                    {mode.address}
+                  </span>
                 </span>
                 <button
                   className="AvailableModes__delete"

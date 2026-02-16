@@ -1,6 +1,6 @@
-import { useSession } from "@/lib/auth-client";
 import { useNavigate } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode, useEffect } from "react";
+import { useSession } from "@/lib/auth-client";
 
 interface AuthGuardProps {
   children: ReactNode;

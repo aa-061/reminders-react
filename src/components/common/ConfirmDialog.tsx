@@ -1,6 +1,6 @@
 import "./ConfirmDialog.css";
+import { AlertCircle, AlertTriangle, Info } from "lucide-react";
 import { useEffect, useRef } from "react";
-import { AlertTriangle, Info, AlertCircle } from "lucide-react";
 
 export interface ConfirmDialogProps {
   isOpen: boolean;
@@ -61,9 +61,13 @@ export default function ConfirmDialog({
   const getIcon = () => {
     switch (variant) {
       case "danger":
-        return <AlertCircle className="ConfirmDialog__icon--danger" size={24} />;
+        return (
+          <AlertCircle className="ConfirmDialog__icon--danger" size={24} />
+        );
       case "warning":
-        return <AlertTriangle className="ConfirmDialog__icon--warning" size={24} />;
+        return (
+          <AlertTriangle className="ConfirmDialog__icon--warning" size={24} />
+        );
       case "info":
         return <Info className="ConfirmDialog__icon--info" size={24} />;
     }

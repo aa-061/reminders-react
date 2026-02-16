@@ -1,6 +1,6 @@
 import "./Toast.css";
+import { CheckCircle2, Info, X, XCircle } from "lucide-react";
 import { useEffect } from "react";
-import { CheckCircle2, XCircle, Info, X } from "lucide-react";
 
 export type ToastType = "success" | "error" | "info";
 

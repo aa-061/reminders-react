@@ -11,8 +11,9 @@ import {
   Trash2,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import DialogContent from "@/components/common/DialogContent";
 import ModeForm from "@/components/mode-form/ModeForm";
-import { modesStore, reminderFormStore } from "@/store";
+import { dialogStore, modesStore, reminderFormStore } from "@/store";
 
 export default function UpdateModes({
   onDoneUpdatingModes,
@@ -21,6 +22,7 @@ export default function UpdateModes({
 }) {
   const modes = useStore(modesStore);
   const reminderForm = useStore(reminderFormStore);
+  const dialog = useStore(dialogStore);
   const [checkedModes, setCheckedModes] = useState<Record<number, boolean>>({});
   const [showAddForm, setShowAddForm] = useState(false);
 
@@ -46,6 +48,10 @@ export default function UpdateModes({
       .filter(([, checked]) => checked)
       .map(([id]) => parseInt(id));
     onDoneUpdatingModes(selectedIds);
+  };
+
+  const handleClose = () => {
+    dialogStore.setState({ ...dialog, children: null, isOpen: false });
   };
 
   const handleDelete = (id: number) => {
@@ -74,14 +80,16 @@ export default function UpdateModes({
   const selectedCount = Object.values(checkedModes).filter(Boolean).length;
 
   return (
-    <div className="UpdateModes">
-      <div className="UpdateModes__header">
-        <h2>Select Notification Modes</h2>
-        <p className="UpdateModes__subtitle">
-          {selectedCount} mode{selectedCount !== 1 ? "s" : ""} selected
-        </p>
-      </div>
-
+    <DialogContent
+      title="Select Notification Modes"
+      subtitle={`${selectedCount} mode${selectedCount !== 1 ? "s" : ""} selected`}
+      onClose={handleClose}
+      footer={
+        <button type="button" className="btn" onClick={handleDone}>
+          <CheckIcon /> Done
+        </button>
+      }
+    >
       {modes.length > 0 ? (
         <div className="UpdateModes__list">
           {modes.map((mode) => (
@@ -149,12 +157,6 @@ export default function UpdateModes({
           </button>
         )}
       </div>
-
-      <div className="UpdateModes__footer">
-        <button type="button" className="btn" onClick={handleDone}>
-          <CheckIcon /> Done
-        </button>
-      </div>
-    </div>
+    </DialogContent>
   );
 }

@@ -1,8 +1,8 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
-import { authClient } from "@/lib/auth-client";
-import { useReminder } from "@/hooks/useReminder";
-import ReminderForm from "@/components/reminder-form/ReminderForm";
 import "./edit.css";
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import ReminderForm from "@/components/reminder-form/ReminderForm";
+import { useReminder } from "@/hooks/useReminder";
+import { authClient } from "@/lib/auth-client";
 
 export const Route = createFileRoute("/reminders/$id/edit/")({
   beforeLoad: async ({ location }) => {

@@ -1,10 +1,11 @@
 import "./AlertFormDialog.css";
-import { useState, useEffect, useRef } from "react";
-import { X, ChevronDown } from "lucide-react";
-import { alertFormSchema } from "@/lib/validation";
-import { timeToMs, msToTimeUnit, MIN_ALERT_MS } from "@/utils/time";
-import type { IAlert } from "@/types";
+import { ChevronDown } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import type { ZodError } from "zod";
+import DialogContent from "@/components/common/DialogContent";
+import { alertFormSchema } from "@/lib/validation";
+import type { IAlert } from "@/types";
+import { MIN_ALERT_MS, msToTimeUnit, timeToMs } from "@/utils/time";
 
 interface AlertFormDialogProps {
   alert: IAlert | null;
@@ -104,79 +105,85 @@ export default function AlertFormDialog({
   };
 
   return (
-    <dialog ref={dialogRef} className="AlertFormDialog" onClick={handleBackdropClick}>
-      <div className="AlertFormDialog__content" onClick={(e) => e.stopPropagation()}>
-        <div className="AlertFormDialog__header">
-          <h2>{alert ? "Edit Alert" : "Add New Alert"}</h2>
-          <button onClick={handleClose} className="AlertFormDialog__close btn--ghost btn--icon" type="button">
-            <X size={20} />
-          </button>
-        </div>
-
-        <form onSubmit={handleSubmit} className="AlertFormDialog__form">
-          <div className="form-group">
-            <label htmlFor="alert-name">Alert Name</label>
-            <input
-              id="alert-name"
-              type="text"
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              placeholder="e.g., 15 minutes before"
-            />
-            {errors.name && (
-              <span className="AlertFormDialog__error">{errors.name}</span>
-            )}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="alert-value">Time Before Reminder</label>
-            <div className="AlertFormDialog__time-input">
+    <dialog
+      ref={dialogRef}
+      className="AlertFormDialog"
+      onClick={handleBackdropClick}
+    >
+      <div onClick={(e) => e.stopPropagation()}>
+        <DialogContent
+          title={alert ? "Edit Alert" : "Add New Alert"}
+          onClose={handleClose}
+        >
+          <form onSubmit={handleSubmit} className="AlertFormDialog__form">
+            <div className="form-group">
+              <label htmlFor="alert-name">Alert Name</label>
               <input
-                id="alert-value"
-                type="number"
-                min="1"
-                value={formData.value}
+                id="alert-name"
+                type="text"
+                value={formData.name}
                 onChange={(e) =>
-                  setFormData({ ...formData, value: Number(e.target.value) })
+                  setFormData({ ...formData, name: e.target.value })
                 }
-                className="AlertFormDialog__value-input"
+                placeholder="e.g., 15 minutes before"
               />
-              <div className="select-wrapper">
-                <select
-                  value={formData.unit}
-                  onChange={(e) =>
-                    setFormData({ ...formData, unit: e.target.value })
-                  }
-                >
-                  <option value="seconds">Seconds</option>
-                  <option value="minutes">Minutes</option>
-                  <option value="hours">Hours</option>
-                  <option value="days">Days</option>
-                  <option value="weeks">Weeks</option>
-                </select>
-                <ChevronDown size={20} className="select-icon" />
-              </div>
+              {errors.name && (
+                <span className="AlertFormDialog__error">{errors.name}</span>
+              )}
             </div>
-            {errors.value && (
-              <span className="AlertFormDialog__error">{errors.value}</span>
-            )}
-            {errors.unit && (
-              <span className="AlertFormDialog__error">{errors.unit}</span>
-            )}
-            <p className="AlertFormDialog__hint">Minimum: 3 seconds</p>
-          </div>
 
-          <div className="AlertFormDialog__actions">
-            <button type="button" onClick={handleClose} className="btn btn--secondary">
-              Cancel
-            </button>
-            <button type="submit" className="btn">
-              {alert ? "Update" : "Create"}
-            </button>
-          </div>
-        </form>
+            <div className="form-group">
+              <label htmlFor="alert-value">Time Before Reminder</label>
+              <div className="AlertFormDialog__time-input">
+                <input
+                  id="alert-value"
+                  type="number"
+                  min="1"
+                  value={formData.value}
+                  onChange={(e) =>
+                    setFormData({ ...formData, value: Number(e.target.value) })
+                  }
+                  className="AlertFormDialog__value-input"
+                />
+                <div className="select-wrapper">
+                  <select
+                    value={formData.unit}
+                    onChange={(e) =>
+                      setFormData({ ...formData, unit: e.target.value })
+                    }
+                  >
+                    <option value="seconds">Seconds</option>
+                    <option value="minutes">Minutes</option>
+                    <option value="hours">Hours</option>
+                    <option value="days">Days</option>
+                    <option value="weeks">Weeks</option>
+                  </select>
+                  <ChevronDown size={20} className="select-icon" />
+                </div>
+              </div>
+              {errors.value && (
+                <span className="AlertFormDialog__error">{errors.value}</span>
+              )}
+              {errors.unit && (
+                <span className="AlertFormDialog__error">{errors.unit}</span>
+              )}
+              <p className="AlertFormDialog__hint">Minimum: 3 seconds</p>
+            </div>
+
+            <div className="AlertFormDialog__actions">
+              <button
+                type="button"
+                onClick={handleClose}
+                className="btn btn--secondary"
+              >
+                Cancel
+              </button>
+              <button type="submit" className="btn">
+                {alert ? "Update" : "Create"}
+              </button>
+            </div>
+          </form>
+        </DialogContent>
       </div>
     </dialog>
   );

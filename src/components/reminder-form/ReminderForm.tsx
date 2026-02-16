@@ -289,7 +289,9 @@ export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
           <input
             id="reminder-date"
             type="datetime-local"
-            value={reminderForm.date ? isoToLocalDatetime(reminderForm.date) : ""}
+            value={
+              reminderForm.date ? isoToLocalDatetime(reminderForm.date) : ""
+            }
             onChange={(e) => handleChange(e, "date", "date")}
             className={errors.date ? "input-error" : ""}
           />
@@ -412,7 +414,7 @@ export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
                       <li key={alert.id}>
                         {alert.name}
                         <button
-                          className="btn"
+                          className="btn btn--danger btn--icon"
                           type="button"
                           onClick={() => {
                             reminderFormStore.setState((prevState) => {

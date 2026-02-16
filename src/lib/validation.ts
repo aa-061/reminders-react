@@ -94,9 +94,7 @@ export const alertFormSchema = z.object({
     .string()
     .min(1, "Name is required")
     .max(100, "Name must be 100 characters or less"),
-  value: z
-    .number()
-    .min(1, "Value must be at least 1"),
+  value: z.number().min(1, "Value must be at least 1"),
   unit: z.enum(["seconds", "minutes", "hours", "days", "weeks"]),
 });
 

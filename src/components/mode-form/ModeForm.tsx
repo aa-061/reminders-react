@@ -52,33 +52,19 @@ export default ({ onSuccess }: ModeFormProps = {}) => {
       <form onSubmit={handleForm} method="POST" className="ModeForm__form">
         <div className="form-group">
           <label htmlFor="reminder-mode">Mode</label>
-          <select
-            onChange={(e) => handleChange(e, "mode")}
-            value={mode.mode}
-            name="reminder_mode"
-            className="custom-select"
-          >
-            <button>
-              {/* @ts-ignore */}
-              <selectedcontent></selectedcontent>
-              <ChevronDown size={20} className="chevron" />
-            </button>
-            <option value="email">
-              <div className="option-content">
-                <span>Email</span>
-              </div>
-            </option>
-            <option value="sms">
-              <div className="option-content">
-                <span>Text</span>
-              </div>
-            </option>
-            <option value="call">
-              <div className="option-content">
-                <span>Call</span>
-              </div>
-            </option>
-          </select>
+          <div className="select-wrapper">
+            <select
+              id="reminder-mode"
+              onChange={(e) => handleChange(e, "mode")}
+              value={mode.mode}
+              name="reminder_mode"
+            >
+              <option value="email">Email</option>
+              <option value="sms">SMS</option>
+              <option value="call">Call</option>
+            </select>
+            <ChevronDown size={20} className="select-icon" />
+          </div>
         </div>
         <div className="form-group">
           <label htmlFor="reminder-address">Address</label>

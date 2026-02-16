@@ -1,9 +1,10 @@
 import "./ModeFormDialog.css";
-import { useState, useEffect, useRef } from "react";
-import { X, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import type { ZodError } from "zod";
+import DialogContent from "@/components/common/DialogContent";
 import { modeFormSchema } from "@/lib/validation";
 import type { IMode, IModeFormData } from "@/types";
-import type { ZodError } from "zod";
 
 interface ModeFormDialogProps {
   mode: IMode | null;
@@ -89,83 +90,89 @@ export default function ModeFormDialog({
   };
 
   return (
-    <dialog ref={dialogRef} className="ModeFormDialog" onClick={handleBackdropClick}>
-      <div className="ModeFormDialog__content" onClick={(e) => e.stopPropagation()}>
-        <div className="ModeFormDialog__header">
-          <h2>{mode ? "Edit Mode" : "Add New Mode"}</h2>
-          <button onClick={handleClose} className="ModeFormDialog__close btn--ghost btn--icon" type="button">
-            <X size={20} />
-          </button>
-        </div>
-
-        <form onSubmit={handleSubmit} className="ModeFormDialog__form">
-          <div className="form-group">
-            <label htmlFor="mode-type">Mode Type</label>
-            <div className="select-wrapper">
-              <select
-                id="mode-type"
-                value={formData.mode}
-                onChange={(e) =>
-                  setFormData({ ...formData, mode: e.target.value })
-                }
-              >
-                <option value="email">Email</option>
-                <option value="sms">SMS</option>
-                <option value="call">Call</option>
-              </select>
-              <ChevronDown size={20} className="select-icon" />
+    <dialog
+      ref={dialogRef}
+      className="ModeFormDialog"
+      onClick={handleBackdropClick}
+    >
+      <div onClick={(e) => e.stopPropagation()}>
+        <DialogContent
+          title={mode ? "Edit Mode" : "Add New Mode"}
+          onClose={handleClose}
+        >
+          <form onSubmit={handleSubmit} className="ModeFormDialog__form">
+            <div className="form-group">
+              <label htmlFor="mode-type">Mode Type</label>
+              <div className="select-wrapper">
+                <select
+                  id="mode-type"
+                  value={formData.mode}
+                  onChange={(e) =>
+                    setFormData({ ...formData, mode: e.target.value })
+                  }
+                >
+                  <option value="email">Email</option>
+                  <option value="sms">SMS</option>
+                  <option value="call">Call</option>
+                </select>
+                <ChevronDown size={20} className="select-icon" />
+              </div>
+              {errors.mode && (
+                <span className="ModeFormDialog__error">{errors.mode}</span>
+              )}
             </div>
-            {errors.mode && (
-              <span className="ModeFormDialog__error">{errors.mode}</span>
-            )}
-          </div>
 
-          <div className="form-group">
-            <label htmlFor="mode-address">
-              {formData.mode === "email"
-                ? "Email Address"
-                : "Phone Number (E.164 format)"}
-            </label>
-            <input
-              id="mode-address"
-              type="text"
-              value={formData.address}
-              onChange={(e) =>
-                setFormData({ ...formData, address: e.target.value })
-              }
-              placeholder={
-                formData.mode === "email"
-                  ? "example@email.com"
-                  : "+1234567890"
-              }
-            />
-            {errors.address && (
-              <span className="ModeFormDialog__error">{errors.address}</span>
-            )}
-          </div>
-
-          <div className="form-group">
-            <label className="ModeFormDialog__checkbox-label">
+            <div className="form-group">
+              <label htmlFor="mode-address">
+                {formData.mode === "email"
+                  ? "Email Address"
+                  : "Phone Number (E.164 format)"}
+              </label>
               <input
-                type="checkbox"
-                checked={formData.isDefault}
+                id="mode-address"
+                type="text"
+                value={formData.address}
                 onChange={(e) =>
-                  setFormData({ ...formData, isDefault: e.target.checked })
+                  setFormData({ ...formData, address: e.target.value })
+                }
+                placeholder={
+                  formData.mode === "email"
+                    ? "example@email.com"
+                    : "+1234567890"
                 }
               />
-              Set as default mode
-            </label>
-          </div>
+              {errors.address && (
+                <span className="ModeFormDialog__error">{errors.address}</span>
+              )}
+            </div>
 
-          <div className="ModeFormDialog__actions">
-            <button type="button" onClick={handleClose} className="btn btn--secondary">
-              Cancel
-            </button>
-            <button type="submit" className="btn">
-              {mode ? "Update" : "Create"}
-            </button>
-          </div>
-        </form>
+            <div className="form-group">
+              <label className="ModeFormDialog__checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={formData.isDefault}
+                  onChange={(e) =>
+                    setFormData({ ...formData, isDefault: e.target.checked })
+                  }
+                />
+                Set as default mode
+              </label>
+            </div>
+
+            <div className="ModeFormDialog__actions">
+              <button
+                type="button"
+                onClick={handleClose}
+                className="btn btn--secondary"
+              >
+                Cancel
+              </button>
+              <button type="submit" className="btn">
+                {mode ? "Update" : "Create"}
+              </button>
+            </div>
+          </form>
+        </DialogContent>
       </div>
     </dialog>
   );
