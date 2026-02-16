@@ -28,6 +28,7 @@
 
 .ReminderCard__header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: var(--spacing-md);
@@ -81,6 +82,7 @@
   display: flex;
   gap: var(--spacing-xs);
   flex-shrink: 0;
+  align-self: flex-end;
 }
 
 .ReminderCard__action-btn {
@@ -219,12 +221,12 @@ button.ReminderCard__action-btn {
   white-space: pre-wrap;
 }
 
-@media (max-width: 30rem) {
+@media (min-width: 640px) {
   .ReminderCard__header {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .ReminderCard__actions {
-    align-self: flex-end;
+    align-self: auto;
   }
 }

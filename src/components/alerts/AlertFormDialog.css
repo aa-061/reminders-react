@@ -45,7 +45,7 @@
 
 .AlertFormDialog__time-input {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr;
   gap: var(--spacing-md);
 }
 
@@ -74,8 +74,8 @@
   margin-top: var(--spacing-lg);
 }
 
-@media (max-width: 40rem) {
+@media (min-width: 640px) {
   .AlertFormDialog__time-input {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 2fr;
   }
 }

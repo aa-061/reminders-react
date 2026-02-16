@@ -3,8 +3,9 @@
 
 .ModesList__header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: stretch;
   margin-bottom: var(--spacing-2xl);
   gap: var(--spacing-lg);
 }
@@ -25,12 +26,14 @@
   align-items: center;
   gap: var(--spacing-sm);
   white-space: nowrap;
+  width: 100%;
+  justify-content: center;
 }
 
 .ModesList__grid {
   display: grid;
   gap: var(--spacing-lg);
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-template-columns: 1fr;
 }
 
 .ModesList__empty {
@@ -64,18 +67,18 @@
   margin-top: var(--spacing-sm);
 }
 
-@media (max-width: 48rem) {
+@media (min-width: 640px) {
   .ModesList__header {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: flex-start;
   }
 
   .ModesList__add-btn {
-    width: 100%;
-    justify-content: center;
+    width: auto;
+    justify-content: flex-start;
   }
 
   .ModesList__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   }
 }

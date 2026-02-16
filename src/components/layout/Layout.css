@@ -18,14 +18,14 @@
   margin: 0 auto;
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) {
   .Layout main {
     padding: var(--spacing-xl);
     padding-bottom: var(--spacing-xl); /* Reset on desktop */
   }
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 1024px) {
   .Layout main {
     padding: var(--spacing-2xl);
     padding-bottom: var(--spacing-2xl);

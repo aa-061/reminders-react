@@ -7,9 +7,10 @@
 
 .RemindersFilter__top {
   display: flex;
+  flex-direction: column;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-lg);
-  align-items: center;
+  align-items: stretch;
 }
 
 .RemindersFilter__search {
@@ -52,8 +53,9 @@
 
 .RemindersFilter__controls {
   display: flex;
+  flex-direction: column;
   gap: var(--spacing-xl);
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
 }
 
@@ -61,6 +63,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  justify-content: space-between;
 }
 
 .RemindersFilter__label {
@@ -85,28 +88,29 @@
 }
 
 .RemindersFilter__count {
-  margin-left: auto;
+  margin-left: 0;
   font-size: var(--fs-sm);
   white-space: nowrap;
+  text-align: center;
 }
 
-@media (max-width: 40rem) {
+@media (min-width: 640px) {
   .RemindersFilter__top {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: center;
   }
 
   .RemindersFilter__controls {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: center;
   }
 
   .RemindersFilter__group {
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
   .RemindersFilter__count {
-    margin-left: 0;
-    text-align: center;
+    margin-left: auto;
+    text-align: left;
   }
 }

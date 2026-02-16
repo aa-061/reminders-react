@@ -35,7 +35,7 @@ export default function MobileNav() {
               <ul>
                 <li>
                   <Link
-                    className="MobileNav__link btn"
+                    className="MobileNav__link btn btn--secondary"
                     to="/"
                     onClick={closeMenu}
                   >
@@ -46,7 +46,7 @@ export default function MobileNav() {
                   <>
                     <li>
                       <Link
-                        className="MobileNav__link btn"
+                        className="MobileNav__link btn btn--secondary"
                         to="/reminders"
                         onClick={closeMenu}
                       >
@@ -55,7 +55,7 @@ export default function MobileNav() {
                     </li>
                     <li>
                       <Link
-                        className="MobileNav__link btn"
+                        className="MobileNav__link btn btn--secondary"
                         to="/reminders/new"
                         onClick={closeMenu}
                       >
@@ -64,7 +64,7 @@ export default function MobileNav() {
                     </li>
                     <li>
                       <Link
-                        className="MobileNav__link btn"
+                        className="MobileNav__link btn btn--secondary"
                         to="/settings"
                         onClick={closeMenu}
                       >
@@ -74,7 +74,7 @@ export default function MobileNav() {
                     <li>
                       <button
                         onClick={handleLogout}
-                        className="MobileNav__button btn"
+                        className="MobileNav__button btn btn--secondary"
                       >
                         Logout
                       </button>
@@ -83,7 +83,7 @@ export default function MobileNav() {
                 ) : (
                   <li>
                     <Link
-                      className="MobileNav__link btn"
+                      className="MobileNav__link btn btn--secondary"
                       to="/login"
                       onClick={closeMenu}
                     >
@@ -98,7 +98,7 @@ export default function MobileNav() {
 
         <button
           onClick={toggleMobileMenu}
-          className="MobileNav__burger-menu-button btn"
+          className="MobileNav__burger-menu-button btn btn--secondary"
           aria-label={showMenu ? "Close menu" : "Open menu"}
         >
           {showMenu ? <X size={24} /> : <Menu size={24} />}

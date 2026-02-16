@@ -1,10 +1,10 @@
 .SettingsAlertsPage {
-  padding: var(--spacing-2xl);
+  padding: var(--spacing-lg);
   min-height: calc(100vh - 4rem);
 }
 
-@media (max-width: 48rem) {
+@media (min-width: 640px) {
   .SettingsAlertsPage {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-2xl);
   }
 }

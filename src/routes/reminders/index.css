@@ -5,8 +5,10 @@
 
 .RemindersPage__header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
+  gap: var(--spacing-md);
   border-bottom: 0.0625rem solid
     light-dark(var(--border-light), var(--border-dark));
   margin-bottom: var(--spacing-xl);
@@ -20,10 +22,10 @@
   color: light-dark(var(--foreground-light), var(--foreground-dark));
 }
 
-@media (max-width: 40rem) {
+@media (min-width: 640px) {
   .RemindersPage__header {
-    flex-direction: column;
-    gap: var(--spacing-md);
-    align-items: stretch;
+    flex-direction: row;
+    gap: 0;
+    align-items: center;
   }
 }

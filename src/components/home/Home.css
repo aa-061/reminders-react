@@ -13,7 +13,7 @@
 }
 
 /* Desktop grid layout */
-@media (min-width: 64rem) {
+@media (min-width: 1024px) {
   .HomePage__container {
     display: grid;
     grid-template-columns: 1fr 1fr;

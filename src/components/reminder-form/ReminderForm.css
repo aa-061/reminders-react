@@ -5,7 +5,7 @@
 .ReminderForm__form {
   border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-lg);
 }
 
 .ReminderForm h3 {
@@ -97,9 +97,9 @@
   background-color: light-dark(var(--error-bg-light), var(--error-bg-dark));
 }
 
-@media (max-width: 40rem) {
+@media (min-width: 640px) {
   .ReminderForm__form {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
   }
 }
 

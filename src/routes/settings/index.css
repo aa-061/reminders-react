@@ -1,5 +1,5 @@
 .SettingsPage {
-  padding: var(--spacing-2xl);
+  padding: var(--spacing-lg);
   min-height: calc(100vh - 4rem);
 }
 
@@ -20,7 +20,7 @@
 .SettingsPage__grid {
   display: grid;
   gap: var(--spacing-xl);
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: 1fr;
 }
 
 .SettingsPage__card {
@@ -56,12 +56,12 @@
   line-height: 1.6;
 }
 
-@media (max-width: 48rem) {
+@media (min-width: 640px) {
   .SettingsPage {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-2xl);
   }
 
   .SettingsPage__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   }
 }

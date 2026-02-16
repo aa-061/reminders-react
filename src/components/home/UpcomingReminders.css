@@ -48,10 +48,11 @@
 
 .UpcomingReminders__item-content {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: var(--spacing-md);
-  gap: var(--spacing-lg);
+  gap: var(--spacing-sm);
 }
 
 .UpcomingReminders__item-main {
@@ -76,12 +77,14 @@
   font-weight: var(--fw-medium);
   color: var(--primary);
   white-space: nowrap;
+  align-self: flex-start;
 }
 
 .UpcomingReminders__item-actions {
   display: flex;
   gap: var(--spacing-md);
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .UpcomingReminders__loading,
@@ -104,17 +107,17 @@
   margin: 0;
 }
 
-@media (max-width: 640px) {
+@media (min-width: 640px) {
   .UpcomingReminders__item-content {
-    flex-direction: column;
-    gap: var(--spacing-sm);
+    flex-direction: row;
+    gap: var(--spacing-lg);
   }
 
   .UpcomingReminders__item-countdown {
-    align-self: flex-start;
+    align-self: auto;
   }
 
   .UpcomingReminders__item-actions {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 }

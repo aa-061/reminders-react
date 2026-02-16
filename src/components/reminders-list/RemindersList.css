@@ -66,13 +66,13 @@
 }
 
 /* Responsive grid */
-@media (min-width: 48rem) {
+@media (min-width: 768px) {
   .RemindersList__grid {
     grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
   }
 }
 
-@media (min-width: 80rem) {
+@media (min-width: 1280px) {
   .RemindersList__grid {
     grid-template-columns: repeat(3, 1fr);
   }
