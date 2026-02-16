@@ -95,14 +95,14 @@ export default function ReminderCard({
           <Link
             to="/reminders/$id/edit"
             params={{ id: reminder.id.toString() }}
-            className="ReminderCard__action-btn ReminderCard__action-btn--edit"
+            className="ReminderCard__action-btn btn--ghost btn--icon"
             title="Edit"
           >
             <Edit2 size={20} className="ReminderCard__icon" />
           </Link>
           <button
             onClick={handleToggleActive}
-            className="ReminderCard__action-btn ReminderCard__action-btn--toggle"
+            className="ReminderCard__action-btn btn--ghost btn--icon"
             title={reminder.is_active ? "Deactivate" : "Activate"}
           >
             {reminder.is_active ? (
@@ -113,7 +113,7 @@ export default function ReminderCard({
           </button>
           <button
             onClick={handleDelete}
-            className="ReminderCard__action-btn ReminderCard__action-btn--delete"
+            className="ReminderCard__action-btn ReminderCard__action-btn--delete btn--ghost btn--icon"
             title="Delete"
           >
             <Trash2 size={20} className="ReminderCard__icon" />
@@ -179,7 +179,7 @@ export default function ReminderCard({
         <div className="ReminderCard__description-section">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="btn btn--ghost"
+            className="ReminderCard__expand-btn btn--ghost"
           >
             <span className="ReminderCard__expand-text">
               {isExpanded ? "Hide details" : "Show details"}

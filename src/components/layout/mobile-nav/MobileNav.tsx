@@ -98,7 +98,7 @@ export default function MobileNav() {
 
         <button
           onClick={toggleMobileMenu}
-          className="MobileNav__burger-menu-button btn btn--secondary"
+          className="MobileNav__burger-menu-button btn"
           aria-label={showMenu ? "Close menu" : "Open menu"}
         >
           {showMenu ? <X size={24} /> : <Menu size={24} />}

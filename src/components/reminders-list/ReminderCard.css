@@ -8,11 +8,6 @@
   flex-direction: column;
 }
 
-.ReminderCard:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-0.125rem);
-}
-
 .ReminderCard--past {
   opacity: 0.7;
 }
@@ -86,22 +81,8 @@
 }
 
 .ReminderCard__action-btn {
-  background: none;
-  border: none;
-  font-size: var(--fs-md);
-  cursor: pointer;
-  border-radius: var(--radius-sm);
-  transition: all var(--transition-fast);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 2rem;
   height: 2rem;
-
-  &a {
-    padding: 0;
-  }
 }
 
 a.ReminderCard__action-btn {
@@ -112,20 +93,10 @@ button.ReminderCard__action-btn {
   padding: var(--spacing-xs);
 }
 
-.ReminderCard__action-btn:hover {
-  background-color: light-dark(
-    var(--surface-alt-light),
-    var(--surface-alt-dark)
-  );
-}
-
 .ReminderCard__icon {
   color: light-dark(var(--foreground-light), var(--foreground-dark));
 }
 
-.ReminderCard__action-btn--delete:hover {
-  background-color: light-dark(var(--error-bg-light), var(--error-bg-dark));
-}
 
 .ReminderCard__info {
   display: flex;
@@ -187,21 +158,9 @@ button.ReminderCard__action-btn {
 }
 
 .ReminderCard__expand-btn {
-  background: none;
-  border: none;
   color: var(--primary);
-  cursor: pointer;
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-medium);
   padding: 0;
-  transition: color var(--transition-fast);
-  display: flex;
-  align-items: center;
   gap: var(--spacing-xs);
-}
-
-.ReminderCard__expand-btn:hover {
-  color: var(--primary-hover);
 }
 
 .ReminderCard__expand-text {
@@ -222,6 +181,19 @@ button.ReminderCard__action-btn {
 }
 
 @media (min-width: 640px) {
+  .ReminderCard:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-0.125rem);
+  }
+
+  .ReminderCard__action-btn--delete:hover {
+    background-color: light-dark(var(--error-bg-light), var(--error-bg-dark));
+  }
+
+  .ReminderCard__expand-btn:hover {
+    color: var(--primary-hover);
+  }
+
   .ReminderCard__header {
     flex-direction: row;
   }

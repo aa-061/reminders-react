@@ -85,7 +85,7 @@ export default function FormDialog({
           <button
             type="button"
             onClick={handleClose}
-            className="FormDialog__close"
+            className="FormDialog__close btn--ghost btn--icon"
             aria-label="Close dialog"
             disabled={isSubmitting}
           >
@@ -101,14 +101,14 @@ export default function FormDialog({
               <button
                 type="button"
                 onClick={handleClose}
-                className="FormDialog__button FormDialog__button--cancel"
+                className="FormDialog__button btn btn--secondary"
                 disabled={isSubmitting}
               >
                 {cancelText}
               </button>
               <button
                 type="submit"
-                className="FormDialog__button FormDialog__button--submit"
+                className="FormDialog__button btn"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Submitting..." : submitText}

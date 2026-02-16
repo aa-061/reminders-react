@@ -121,12 +121,6 @@ select option {
   padding: var(--spacing-xs);
 }
 
-select option:hover {
-  background-color: var(--secondary);
-  color: light-dark(var(--surface-light), var(--surface-dark));
-  cursor: pointer;
-}
-
 select > button {
   display: flex;
   align-items: center;
@@ -156,10 +150,6 @@ textarea {
 
 a {
   color: light-dark(var(--foreground-light), var(--foreground-dark));
-
-  &:hover {
-    color: light-dark(var(--foreground-light), var(--foreground-dark));
-  }
 }
 
 th,
@@ -301,16 +291,6 @@ form select.input-error:focus {
   font-size: 1rem;
 }
 
-.btn:hover:not(:disabled) {
-  /* background-color: var(--primary-hover); */
-  color: light-dark(var(--foreground-dark), var(--foreground-light));
-  color: light-dark(var(--foreground-light), var(--foreground-dark));
-  background-color: light-dark(
-    var(--surface-alt-light),
-    var(--surface-alt-dark)
-  );
-}
-
 .btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -437,16 +417,7 @@ form select.input-error:focus {
   transition: color var(--transition-fast);
 }
 
-.link:hover {
-  color: var(--primary-hover);
-  text-decoration: underline;
-}
-
 .link--secondary {
-}
-
-.link--secondary:hover {
-  color: light-dark(var(--foreground-light), var(--foreground-dark));
 }
 
 h1,
@@ -498,6 +469,34 @@ p {
 }
 
 @media (min-width: 640px) {
+  select option:hover {
+    background-color: var(--secondary);
+    color: light-dark(var(--surface-light), var(--surface-dark));
+    cursor: pointer;
+  }
+
+  .btn:hover:not(:disabled) {
+    /* background-color: var(--primary-hover); */
+    color: light-dark(var(--foreground-dark), var(--foreground-light));
+    color: light-dark(var(--foreground-light), var(--foreground-dark));
+    background-color: light-dark(
+      var(--surface-alt-light),
+      var(--surface-alt-dark)
+    );
+  }
+
+  a:hover {
+    color: light-dark(var(--foreground-light), var(--foreground-dark));
+  }
+
+  .link:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+  }
+
+  .link--secondary:hover {
+    color: light-dark(var(--foreground-light), var(--foreground-dark));
+  }
 }
 @media (min-width: 768px) {
 }

@@ -1,10 +1,16 @@
 .AlertFormDialog {
-  border: none;
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-lg);
   padding: 0;
   max-width: 32rem;
   width: 90vw;
   box-shadow: var(--shadow-lg);
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+}
+
+.AlertFormDialog::backdrop {
+  background-color: var(--backdrop-opacity);
+  backdrop-filter: var(--backdrop-blur);
 }
 
 .AlertFormDialog__content {
@@ -24,18 +30,6 @@
   margin: 0;
 }
 
-.AlertFormDialog__close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: var(--spacing-sm);
-  color: var(--secondary);
-  transition: color var(--transition-base);
-}
-
-.AlertFormDialog__close:hover {
-  color: light-dark(var(--foreground-light), var(--foreground-dark));
-}
 
 .AlertFormDialog__form {
   display: flex;

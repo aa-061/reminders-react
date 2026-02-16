@@ -54,12 +54,6 @@
   transition: all var(--transition-fast);
 }
 
-.UpdateAlerts__preset-btn:hover {
-  background-color: var(--primary);
-  color: var(--foreground-dark);
-  border-color: var(--primary);
-}
-
 .UpdateAlerts__list {
   display: flex;
   flex-direction: column;
@@ -127,10 +121,6 @@
   transition: color var(--transition-fast);
 }
 
-.UpdateAlerts__item-delete:hover {
-  color: var(--error);
-}
-
 .UpdateAlerts__empty {
   text-align: center;
   padding: var(--spacing-2xl) var(--spacing-lg);
@@ -170,4 +160,16 @@
   padding-top: var(--spacing-lg);
   border-top: 0.0625rem solid
     light-dark(var(--border-light), var(--border-dark));
+}
+
+@media (min-width: 640px) {
+  .UpdateAlerts__preset-btn:hover {
+    background-color: var(--primary);
+    color: var(--foreground-dark);
+    border-color: var(--primary);
+  }
+
+  .UpdateAlerts__item-delete:hover {
+    color: var(--error);
+  }
 }

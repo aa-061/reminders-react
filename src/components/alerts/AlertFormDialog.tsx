@@ -1,5 +1,5 @@
 import "./AlertFormDialog.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { X, ChevronDown } from "lucide-react";
 import { alertFormSchema } from "@/lib/validation";
 import { timeToMs, msToTimeUnit, MIN_ALERT_MS } from "@/utils/time";
@@ -25,12 +25,24 @@ export default function AlertFormDialog({
   onClose,
   onSave,
 }: AlertFormDialogProps) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const [formData, setFormData] = useState<FormState>({
     name: "",
     value: 5,
     unit: "minutes",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (isOpen) {
+      dialog.showModal();
+    } else {
+      dialog.close();
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (alert) {
@@ -79,14 +91,24 @@ export default function AlertFormDialog({
     }
   };
 
-  if (!isOpen) return null;
+  const handleClose = () => {
+    dialogRef.current?.close();
+    onClose();
+  };
+
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    const dialog = dialogRef.current;
+    if (dialog && e.target === dialog) {
+      handleClose();
+    }
+  };
 
   return (
-    <dialog open={isOpen} className="AlertFormDialog">
-      <div className="AlertFormDialog__content">
+    <dialog ref={dialogRef} className="AlertFormDialog" onClick={handleBackdropClick}>
+      <div className="AlertFormDialog__content" onClick={(e) => e.stopPropagation()}>
         <div className="AlertFormDialog__header">
           <h2>{alert ? "Edit Alert" : "Add New Alert"}</h2>
-          <button onClick={onClose} className="AlertFormDialog__close" type="button">
+          <button onClick={handleClose} className="AlertFormDialog__close btn--ghost btn--icon" type="button">
             <X size={20} />
           </button>
         </div>
@@ -147,7 +169,7 @@ export default function AlertFormDialog({
           </div>
 
           <div className="AlertFormDialog__actions">
-            <button type="button" onClick={onClose} className="btn-secondary">
+            <button type="button" onClick={handleClose} className="btn btn--secondary">
               Cancel
             </button>
             <button type="submit" className="btn">

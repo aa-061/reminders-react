@@ -1,8 +1,8 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
-import { signIn, useSession } from "@/lib/auth-client";
-import { z } from "zod";
 import "./Login.css";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { z } from "zod";
+import { signIn, useSession } from "@/lib/auth-client";
 
 type LoginSearch = {
   redirect?: string;
@@ -115,7 +115,9 @@ function LoginPage() {
               disabled={isLoading}
               autoComplete="email"
             />
-            {emailError && <span className="LoginPage__field-error">{emailError}</span>}
+            {emailError && (
+              <span className="LoginPage__field-error">{emailError}</span>
+            )}
           </div>
 
           <div className="form-group">
@@ -134,7 +136,7 @@ function LoginPage() {
             />
           </div>
 
-          <button className="LoginPage__btn-primary" type="submit" disabled={isLoading}>
+          <button className="btn" type="submit" disabled={isLoading}>
             {isLoading ? "Signing in..." : "Login"}
           </button>
         </form>

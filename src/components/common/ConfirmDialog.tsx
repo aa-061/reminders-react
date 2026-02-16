@@ -95,7 +95,7 @@ export default function ConfirmDialog({
           <button
             type="button"
             onClick={handleCancel}
-            className="ConfirmDialog__button ConfirmDialog__button--cancel"
+            className="ConfirmDialog__button btn btn--secondary"
             autoFocus
           >
             {cancelText}
@@ -103,7 +103,7 @@ export default function ConfirmDialog({
           <button
             type="button"
             onClick={handleConfirm}
-            className={`ConfirmDialog__button ConfirmDialog__button--confirm ConfirmDialog__button--${variant}`}
+            className={`ConfirmDialog__button btn ${variant === "danger" ? "btn--danger" : variant === "warning" ? "ConfirmDialog__button--warning" : ""}`}
           >
             {confirmText}
           </button>

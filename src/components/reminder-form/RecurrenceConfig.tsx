@@ -2,6 +2,15 @@ import "./RecurrenceConfig.css";
 import { recurrenceFrequencies } from "@/lib/validation";
 import type { ICreateReminder } from "@/types";
 
+// Helper function to convert ISO string to local date format (YYYY-MM-DD)
+function isoToLocalDate(isoString: string): string {
+  const date = new Date(isoString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 interface RecurrenceConfigProps {
   isRecurring: boolean;
   recurrence: string | null | undefined;
@@ -59,9 +68,7 @@ export default function RecurrenceConfig({
         <input
           id="start-date"
           type="date"
-          value={
-            startDate ? new Date(startDate).toISOString().slice(0, 10) : ""
-          }
+          value={startDate ? isoToLocalDate(startDate) : ""}
           onChange={(e) =>
             onRecurrenceChange(
               "start_date",
@@ -76,7 +83,7 @@ export default function RecurrenceConfig({
         <input
           id="end-date"
           type="date"
-          value={endDate ? new Date(endDate).toISOString().slice(0, 10) : ""}
+          value={endDate ? isoToLocalDate(endDate) : ""}
           onChange={(e) =>
             onRecurrenceChange(
               "end_date",

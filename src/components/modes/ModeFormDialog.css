@@ -1,10 +1,16 @@
 .ModeFormDialog {
-  border: none;
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
   border-radius: var(--radius-lg);
   padding: 0;
   max-width: 32rem;
   width: 90vw;
   box-shadow: var(--shadow-lg);
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+}
+
+.ModeFormDialog::backdrop {
+  background-color: var(--backdrop-opacity);
+  backdrop-filter: var(--backdrop-blur);
 }
 
 .ModeFormDialog__content {
@@ -24,17 +30,6 @@
   margin: 0;
 }
 
-.ModeFormDialog__close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: var(--spacing-sm);
-  transition: color var(--transition-base);
-}
-
-.ModeFormDialog__close:hover {
-  color: light-dark(var(--foreground-light), var(--foreground-dark));
-}
 
 .ModeFormDialog__form {
   display: flex;

@@ -22,6 +22,17 @@ import RecurrenceConfig from "./RecurrenceConfig";
 import UpdateAlerts from "./UpdateAlerts";
 import UpdateModes from "./UpdateModes";
 
+// Helper function to convert ISO string to local datetime-local format
+function isoToLocalDatetime(isoString: string): string {
+  const date = new Date(isoString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+}
+
 interface ReminderFormProps {
   editMode?: boolean;
   existingReminder?: IReminder;
@@ -278,7 +289,7 @@ export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
           <input
             id="reminder-date"
             type="datetime-local"
-            value={reminderForm.date ? reminderForm.date.slice(0, 16) : ""}
+            value={reminderForm.date ? isoToLocalDatetime(reminderForm.date) : ""}
             onChange={(e) => handleChange(e, "date", "date")}
             className={errors.date ? "input-error" : ""}
           />

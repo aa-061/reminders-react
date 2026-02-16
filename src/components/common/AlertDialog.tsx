@@ -76,7 +76,7 @@ export default function AlertDialog({
         <button
           type="button"
           onClick={handleClose}
-          className="AlertDialog__close"
+          className="AlertDialog__close btn--ghost btn--icon"
           aria-label="Close dialog"
         >
           <X size={20} />
@@ -95,7 +95,7 @@ export default function AlertDialog({
         <button
           type="button"
           onClick={handleClose}
-          className={`AlertDialog__button AlertDialog__button--${variant}`}
+          className={`AlertDialog__button btn ${variant === "error" ? "btn--danger" : variant === "success" ? "AlertDialog__button--success" : variant === "warning" ? "AlertDialog__button--warning" : ""}`}
           autoFocus
         >
           {closeText}

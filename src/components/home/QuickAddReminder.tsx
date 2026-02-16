@@ -2,11 +2,13 @@ import "./QuickAddReminder.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { useModes } from "@/hooks/useModes";
+import { useAlerts } from "@/hooks/useAlerts";
 
 interface QuickReminderData {
   title: string;
   date: string;
-  reminders: { id: string; mode: string; address: string }[];
+  reminders: { mode: string; address: string }[];
   alerts: { id: string; time: number }[];
   is_recurring: boolean;
   description: string;
@@ -17,6 +19,8 @@ export default function QuickAddReminder() {
   const [date, setDate] = useState("");
   const [error, setError] = useState("");
   const queryClient = useQueryClient();
+  const { modes, isPending: modesLoading } = useModes();
+  const { alerts, isPending: alertsLoading } = useAlerts();
   const url = import.meta.env.VITE_SERVER_URL;
 
   if (!url) {
@@ -65,17 +69,39 @@ export default function QuickAddReminder() {
       return;
     }
 
+    // Check if user has configured at least one mode
+    if (modes.length === 0) {
+      setError(
+        "Please configure at least one notification mode in Settings before creating reminders",
+      );
+      return;
+    }
+
+    // Check if user has configured at least one alert
+    if (alerts.length === 0) {
+      setError(
+        "Please configure at least one alert in Settings before creating reminders",
+      );
+      return;
+    }
+
     const reminderDate = new Date(date);
     if (reminderDate <= new Date()) {
       setError("Date must be in the future");
       return;
     }
 
+    // Use the default mode or the first mode available
+    const defaultMode = modes.find((m) => m.is_default) || modes[0];
+
+    // Use the first alert
+    const firstAlert = alerts[0];
+
     const newReminder: QuickReminderData = {
       title: title.trim(),
       date: reminderDate.toISOString(),
-      reminders: [],
-      alerts: [],
+      reminders: [{ mode: defaultMode.mode, address: defaultMode.address }],
+      alerts: [{ id: firstAlert.id.toString(), time: firstAlert.ms }],
       is_recurring: false,
       description: "",
     };
@@ -99,7 +125,7 @@ export default function QuickAddReminder() {
               onChange={(e) => setTitle(e.target.value)}
               placeholder="What do you need to remember?"
               className="QuickAddReminder__input"
-              disabled={createMutation.isPending}
+              disabled={createMutation.isPending || modesLoading || alertsLoading}
             />
           </div>
           <div className="QuickAddReminder__field">
@@ -112,7 +138,7 @@ export default function QuickAddReminder() {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className="QuickAddReminder__input"
-              disabled={createMutation.isPending}
+              disabled={createMutation.isPending || modesLoading || alertsLoading}
             />
           </div>
         </div>
@@ -121,9 +147,13 @@ export default function QuickAddReminder() {
           <button
             type="submit"
             className="btn"
-            disabled={createMutation.isPending}
+            disabled={createMutation.isPending || modesLoading || alertsLoading}
           >
-            {createMutation.isPending ? "Adding..." : "Add Reminder"}
+            {modesLoading || alertsLoading
+              ? "Loading..."
+              : createMutation.isPending
+                ? "Adding..."
+                : "Add Reminder"}
           </button>
           <Link to="/reminders/new" className="QuickAddReminder__full-form">
             Need more options? Use full form →

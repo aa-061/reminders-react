@@ -1,5 +1,5 @@
 import "./ModeFormDialog.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { X, ChevronDown } from "lucide-react";
 import { modeFormSchema } from "@/lib/validation";
 import type { IMode, IModeFormData } from "@/types";
@@ -18,12 +18,24 @@ export default function ModeFormDialog({
   onClose,
   onSave,
 }: ModeFormDialogProps) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const [formData, setFormData] = useState<IModeFormData>({
     mode: "email",
     address: "",
     isDefault: false,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (isOpen) {
+      dialog.showModal();
+    } else {
+      dialog.close();
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (mode) {
@@ -64,14 +76,24 @@ export default function ModeFormDialog({
     }
   };
 
-  if (!isOpen) return null;
+  const handleClose = () => {
+    dialogRef.current?.close();
+    onClose();
+  };
+
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    const dialog = dialogRef.current;
+    if (dialog && e.target === dialog) {
+      handleClose();
+    }
+  };
 
   return (
-    <dialog open={isOpen} className="ModeFormDialog">
-      <div className="ModeFormDialog__content">
+    <dialog ref={dialogRef} className="ModeFormDialog" onClick={handleBackdropClick}>
+      <div className="ModeFormDialog__content" onClick={(e) => e.stopPropagation()}>
         <div className="ModeFormDialog__header">
           <h2>{mode ? "Edit Mode" : "Add New Mode"}</h2>
-          <button onClick={onClose} className="ModeFormDialog__close" type="button">
+          <button onClick={handleClose} className="ModeFormDialog__close btn--ghost btn--icon" type="button">
             <X size={20} />
           </button>
         </div>
@@ -136,7 +158,7 @@ export default function ModeFormDialog({
           </div>
 
           <div className="ModeFormDialog__actions">
-            <button type="button" onClick={onClose} className="btn-secondary">
+            <button type="button" onClick={handleClose} className="btn btn--secondary">
               Cancel
             </button>
             <button type="submit" className="btn">

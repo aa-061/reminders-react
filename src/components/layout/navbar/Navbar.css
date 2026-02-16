@@ -30,10 +30,6 @@
     transition: opacity var(--transition-fast);
   }
 
-  .Navbar__logo:hover {
-    opacity: 0.8;
-  }
-
   .Navbar__logo-text {
     font-size: var(--fs-lg);
     font-weight: var(--fw-bold);
@@ -66,6 +62,10 @@
     font-size: var(--fs-sm);
     font-weight: var(--fw-medium);
     transition: all var(--transition-fast);
+  }
+
+  .Navbar__logo:hover {
+    opacity: 0.8;
   }
 
   .Navbar__logout-btn:hover {

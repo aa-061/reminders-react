@@ -1,20 +1,19 @@
 .EditReminderPage {
   padding: var(--spacing-lg);
   max-width: 100%;
-  margin: 0 auto;
 }
 
 @media (min-width: 768px) {
   .EditReminderPage {
     padding: var(--spacing-xl);
-    max-width: 50rem;
+    max-width: 100%;
   }
 }
 
 @media (min-width: 1024px) {
   .EditReminderPage {
     padding: var(--spacing-2xl);
-    max-width: 56rem;
+    max-width: 100%;
   }
 }
 

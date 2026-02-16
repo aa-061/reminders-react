@@ -106,10 +106,6 @@
   transition: color var(--transition-fast);
 }
 
-.UpdateModes__item-delete:hover {
-  color: var(--error);
-}
-
 .UpdateModes__empty {
   text-align: center;
   padding: var(--spacing-2xl) var(--spacing-lg);
@@ -149,4 +145,10 @@
   padding-top: var(--spacing-lg);
   border-top: 0.0625rem solid
     light-dark(var(--border-light), var(--border-dark));
+}
+
+@media (min-width: 640px) {
+  .UpdateModes__item-delete:hover {
+    color: var(--error);
+  }
 }

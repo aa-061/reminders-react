@@ -29,6 +29,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
+
+  button {
+    width: 100%;
+  }
 }
 
 .LoginPage__form .form-group {
@@ -83,33 +87,18 @@
   margin-bottom: var(--spacing-lg);
 }
 
-.LoginPage__btn-primary {
-  width: 100%;
-  padding: var(--spacing-md);
-  background-color: var(--primary);
-  color: light-dark(var(--surface-light), var(--surface-dark));
-  border: none;
-  border-radius: var(--radius-sm);
-  font-size: var(--fs-md);
-  font-weight: var(--fw-semibold);
-  cursor: pointer;
-  transition: background-color var(--transition-base);
-  text-transform: none;
-}
-
-.LoginPage__btn-primary:hover:not(:disabled) {
-  background-color: var(--primary-hover);
-}
-
-.LoginPage__btn-primary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
 .LoginPage__loading {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 70vh;
   font-size: var(--fs-lg);
+}
+
+@media (min-width: 640px) {
+  .LoginPage__form {
+    button {
+      width: fit-content;
+    }
+  }
 }

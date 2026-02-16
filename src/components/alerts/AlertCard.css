@@ -10,7 +10,7 @@
 }
 
 .AlertCard__icon {
-  color: var(--primary);
+  color: light-dark(var(--primary), var(--foreground-dark));
   flex-shrink: 0;
 }
 

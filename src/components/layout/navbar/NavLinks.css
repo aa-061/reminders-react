@@ -13,7 +13,7 @@
   transition: all var(--transition-fast);
 }
 
-.NavLinks__link:hover {
+.NavLinks__link--active {
   color: light-dark(var(--foreground-light), var(--foreground-dark));
   background-color: light-dark(
     var(--surface-alt-light),
@@ -21,10 +21,12 @@
   );
 }
 
-.NavLinks__link--active {
-  color: light-dark(var(--foreground-light), var(--foreground-dark));
-  background-color: light-dark(
-    var(--surface-alt-light),
-    var(--surface-alt-dark)
-  );
+@media (min-width: 768px) {
+  .NavLinks__link:hover {
+    color: light-dark(var(--foreground-light), var(--foreground-dark));
+    background-color: light-dark(
+      var(--surface-alt-light),
+      var(--surface-alt-dark)
+    );
+  }
 }
