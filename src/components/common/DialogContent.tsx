@@ -22,7 +22,8 @@ export default function DialogContent({
   return (
     <div
       className={`DialogContent ${className}`}
-      onClick={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
+      onTouchStart={(e) => e.stopPropagation()}
     >
       {(title || onClose) && (
         <div className="DialogContent__header">

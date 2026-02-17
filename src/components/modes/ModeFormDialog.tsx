@@ -82,7 +82,7 @@ export default function ModeFormDialog({
     onClose();
   };
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement> | React.TouchEvent<HTMLDialogElement>) => {
     const dialog = dialogRef.current;
     if (dialog && e.target === dialog) {
       handleClose();
@@ -94,6 +94,7 @@ export default function ModeFormDialog({
       ref={dialogRef}
       className="ModeFormDialog"
       onClick={handleBackdropClick}
+      onTouchEnd={handleBackdropClick}
     >
       <DialogContent
         title={mode ? "Edit Mode" : "Add New Mode"}

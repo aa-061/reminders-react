@@ -101,7 +101,7 @@ export default function AlertFormDialog({
     onClose();
   };
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement> | React.TouchEvent<HTMLDialogElement>) => {
     const dialog = dialogRef.current;
     if (dialog && e.target === dialog) {
       handleClose();
@@ -113,6 +113,7 @@ export default function AlertFormDialog({
       ref={dialogRef}
       className="AlertFormDialog"
       onClick={handleBackdropClick}
+      onTouchEnd={handleBackdropClick}
     >
       <DialogContent
         title={alert ? "Edit Alert" : "Add New Alert"}
