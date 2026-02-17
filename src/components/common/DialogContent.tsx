@@ -20,7 +20,10 @@ export default function DialogContent({
   className = "",
 }: DialogContentProps) {
   return (
-    <div className={`DialogContent ${className}`}>
+    <div
+      className={`DialogContent ${className}`}
+      onClick={(e) => e.stopPropagation()}
+    >
       {(title || onClose) && (
         <div className="DialogContent__header">
           <div className="DialogContent__header-text">

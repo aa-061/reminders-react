@@ -34,6 +34,7 @@
   border: none;
   cursor: pointer;
   text-align: left;
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
 }
 
 .UpdateModes__item-check {

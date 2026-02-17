@@ -8,6 +8,7 @@ import {
   MessageSquare,
   Phone,
   Plus,
+  Send,
   Trash2,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -72,6 +73,8 @@ export default function UpdateModes({
         return <MessageSquare size={18} />;
       case "call":
         return <Phone size={18} />;
+      case "telegram":
+        return <Send size={18} />;
       default:
         return <Mail size={18} />;
     }

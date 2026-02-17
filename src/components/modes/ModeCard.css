@@ -75,19 +75,18 @@
   cursor: pointer;
   transition: all var(--transition-base);
   color: light-dark(var(--foreground-light), var(--foreground-dark));
+  /* Better touch targets on mobile */
+  min-height: 2.75rem;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-@media (min-width: 640px) {
-  .ModeCard {
-    flex-direction: row;
-    align-items: center;
-  }
+.ModeCard__action-btn:active {
+  transform: scale(0.98);
+  opacity: 0.8;
+}
 
-  .ModeCard__actions {
-    width: auto;
-    justify-content: flex-start;
-  }
-
+@media (hover: hover) {
   .ModeCard__action-btn:hover {
     background-color: light-dark(
       var(--surface-alt-light),
@@ -100,5 +99,17 @@
     background-color: var(--error);
     border-color: var(--error);
     color: light-dark(var(--surface-light), var(--surface-dark));
+  }
+}
+
+@media (min-width: 640px) {
+  .ModeCard {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .ModeCard__actions {
+    width: auto;
+    justify-content: flex-start;
   }
 }

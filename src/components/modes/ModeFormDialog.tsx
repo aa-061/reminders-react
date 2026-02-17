@@ -95,12 +95,11 @@ export default function ModeFormDialog({
       className="ModeFormDialog"
       onClick={handleBackdropClick}
     >
-      <div onClick={(e) => e.stopPropagation()}>
-        <DialogContent
-          title={mode ? "Edit Mode" : "Add New Mode"}
-          onClose={handleClose}
-        >
-          <form onSubmit={handleSubmit} className="ModeFormDialog__form">
+      <DialogContent
+        title={mode ? "Edit Mode" : "Add New Mode"}
+        onClose={handleClose}
+      >
+        <form onSubmit={handleSubmit} className="ModeFormDialog__form">
             <div className="form-group">
               <label htmlFor="mode-type">Mode Type</label>
               <div className="select-wrapper">
@@ -173,7 +172,6 @@ export default function ModeFormDialog({
             </div>
           </form>
         </DialogContent>
-      </div>
     </dialog>
   );
 }

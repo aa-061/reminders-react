@@ -11,13 +11,14 @@ interface AlertFormDialogProps {
   alert: IAlert | null;
   isOpen: boolean;
   onClose: () => void;
-  onSave: (data: { name: string; ms: number }) => void;
+  onSave: (data: { name: string; ms: number; isDefault: boolean }) => void;
 }
 
 interface FormState {
   name: string;
   value: number;
   unit: string;
+  isDefault: boolean;
 }
 
 export default function AlertFormDialog({
@@ -31,6 +32,7 @@ export default function AlertFormDialog({
     name: "",
     value: 5,
     unit: "minutes",
+    isDefault: false,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -52,12 +54,14 @@ export default function AlertFormDialog({
         name: alert.name,
         value,
         unit,
+        isDefault: alert.isDefault,
       });
     } else {
       setFormData({
         name: "",
         value: 5,
         unit: "minutes",
+        isDefault: false,
       });
     }
     setErrors({});
@@ -76,7 +80,7 @@ export default function AlertFormDialog({
         return;
       }
 
-      onSave({ name: validated.name, ms });
+      onSave({ name: validated.name, ms, isDefault: formData.isDefault });
       onClose();
     } catch (error) {
       if (error instanceof Error && error.name === "ZodError") {
@@ -110,12 +114,11 @@ export default function AlertFormDialog({
       className="AlertFormDialog"
       onClick={handleBackdropClick}
     >
-      <div onClick={(e) => e.stopPropagation()}>
-        <DialogContent
-          title={alert ? "Edit Alert" : "Add New Alert"}
-          onClose={handleClose}
-        >
-          <form onSubmit={handleSubmit} className="AlertFormDialog__form">
+      <DialogContent
+        title={alert ? "Edit Alert" : "Add New Alert"}
+        onClose={handleClose}
+      >
+        <form onSubmit={handleSubmit} className="AlertFormDialog__form">
             <div className="form-group">
               <label htmlFor="alert-name">Alert Name</label>
               <input
@@ -170,6 +173,19 @@ export default function AlertFormDialog({
               <p className="AlertFormDialog__hint">Minimum: 3 seconds</p>
             </div>
 
+            <div className="form-group">
+              <label className="AlertFormDialog__checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={formData.isDefault}
+                  onChange={(e) =>
+                    setFormData({ ...formData, isDefault: e.target.checked })
+                  }
+                />
+                Set as default alert
+              </label>
+            </div>
+
             <div className="AlertFormDialog__actions">
               <button
                 type="button"
@@ -184,7 +200,6 @@ export default function AlertFormDialog({
             </div>
           </form>
         </DialogContent>
-      </div>
     </dialog>
   );
 }

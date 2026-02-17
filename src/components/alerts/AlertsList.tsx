@@ -22,7 +22,7 @@ export default function AlertsList() {
     setIsDialogOpen(true);
   };
 
-  const handleSave = (data: { name: string; ms: number }) => {
+  const handleSave = (data: { name: string; ms: number; isDefault: boolean }) => {
     if (editingAlert) {
       updateAlert({ id: editingAlert.id, data });
     } else {
@@ -34,6 +34,10 @@ export default function AlertsList() {
     if (confirm("Are you sure you want to delete this alert?")) {
       deleteAlert(id);
     }
+  };
+
+  const handleToggleDefault = (id: number, isDefault: boolean) => {
+    updateAlert({ id, data: { isDefault } });
   };
 
   if (isPending) {
@@ -89,6 +93,7 @@ export default function AlertsList() {
               alert={alert}
               onEdit={handleOpenEdit}
               onDelete={handleDelete}
+              onToggleDefault={handleToggleDefault}
             />
           ))}
         </div>

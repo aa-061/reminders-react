@@ -9,6 +9,11 @@
   transition: border-color var(--transition-base);
 }
 
+.AlertCard--default {
+  border-color: var(--primary);
+  border-width: 0.125rem;
+}
+
 .AlertCard__icon {
   color: light-dark(var(--primary), var(--foreground-dark));
   flex-shrink: 0;
@@ -19,10 +24,29 @@
   min-width: 0;
 }
 
+.AlertCard__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
 .AlertCard__title {
   font-size: var(--fs-md);
   font-weight: var(--fw-semibold);
-  margin: 0 0 var(--spacing-xs) 0;
+  margin: 0;
+}
+
+.AlertCard__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--primary);
+  color: light-dark(var(--surface-light), var(--surface-dark));
+  padding: 0.125rem var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
 }
 
 .AlertCard__time {
@@ -47,20 +71,31 @@
   cursor: pointer;
   transition: all var(--transition-base);
   color: light-dark(var(--foreground-light), var(--foreground-dark));
+  /* Better touch targets on mobile */
+  min-height: 2.75rem;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.AlertCard__action-btn:hover {
-  background-color: light-dark(
-    var(--surface-alt-light),
-    var(--surface-alt-dark)
-  );
-  border-color: var(--primary);
+.AlertCard__action-btn:active {
+  transform: scale(0.98);
+  opacity: 0.8;
 }
 
-.AlertCard__action-btn--danger:hover {
-  background-color: var(--error);
-  border-color: var(--error);
-  color: light-dark(var(--surface-light), var(--surface-dark));
+@media (hover: hover) {
+  .AlertCard__action-btn:hover {
+    background-color: light-dark(
+      var(--surface-alt-light),
+      var(--surface-alt-dark)
+    );
+    border-color: var(--primary);
+  }
+
+  .AlertCard__action-btn--danger:hover {
+    background-color: var(--error);
+    border-color: var(--error);
+    color: light-dark(var(--surface-light), var(--surface-dark));
+  }
 }
 
 @media (min-width: 640px) {

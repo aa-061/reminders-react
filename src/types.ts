@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
 
+export type ModeType = "email" | "sms" | "call" | "push" | "ical" | "telegram";
+
 export interface IMode {
   id: number;
-  mode: string;
+  mode: ModeType;
   address: string;
   isDefault: boolean;
 }
@@ -10,7 +12,7 @@ export interface IMode {
 export type TModeField = keyof IMode;
 
 export interface IModeFormData {
-  mode: string;
+  mode: ModeType;
   address: string;
   isDefault: boolean;
 }
@@ -74,6 +76,7 @@ export interface IAlert {
   id: number;
   name: string;
   ms: number;
+  isDefault: boolean;
 }
 
 export type TAlertField = keyof IAlert;
@@ -81,6 +84,7 @@ export type TAlertField = keyof IAlert;
 export interface IAlertFormData {
   name: string;
   ms: number;
+  isDefault: boolean;
 }
 
 export type TTheme = "light" | "dark";
