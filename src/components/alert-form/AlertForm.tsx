@@ -1,17 +1,39 @@
 import "./AlertForm.css";
 import { useStore } from "@tanstack/react-store";
 import { Save } from "lucide-react";
-import { alertStore, alertsStore } from "@/store";
+import { alertStore } from "@/store";
 import type { TAlertField } from "@/types";
 import AlertOptions from "./AlertOptions";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createAlert } from "@/api/alerts";
+import { useState } from "react";
 
 interface AlertFormProps {
   onSuccess?: () => void;
 }
 
 export default ({ onSuccess }: AlertFormProps = {}) => {
-  const alerts = useStore(alertsStore);
+  const queryClient = useQueryClient();
   const alert = useStore(alertStore);
+  const [error, setError] = useState("");
+
+  const mutation = useMutation({
+    mutationFn: createAlert,
+    onSuccess: () => {
+      alertStore.setState({
+        id: 0,
+        name: "",
+        ms: 0,
+        isDefault: false,
+      });
+      setError("");
+      queryClient.invalidateQueries({ queryKey: ["alerts"] });
+      onSuccess?.();
+    },
+    onError: (err) => {
+      setError(err instanceof Error ? err.message : "Failed to create alert");
+    },
+  });
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -24,23 +46,19 @@ export default ({ onSuccess }: AlertFormProps = {}) => {
 
   function handleForm(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
+    setError("");
 
-    const newAlerts = [...alerts];
-    const id =
-      newAlerts.length === 0 ? 1 : newAlerts[newAlerts.length - 1].id + 1;
-    const newAlert = { id, name: alert.name, ms: alert.ms, isDefault: false };
-    newAlerts.push(newAlert);
-    alertsStore.setState(newAlerts);
-    alertStore.setState({
-      id: 0,
-      name: "",
-      ms: 0,
-      isDefault: false,
-    });
-
-    if (onSuccess) {
-      onSuccess();
+    if (!alert.name.trim()) {
+      setError("Please enter an alert name");
+      return;
     }
+
+    if (alert.ms <= 0) {
+      setError("Please configure alert time");
+      return;
+    }
+
+    mutation.mutate({ name: alert.name.trim(), ms: alert.ms, isDefault: false });
   }
 
   function updateAlertOptions(totalMs: number) {
@@ -67,9 +85,11 @@ export default ({ onSuccess }: AlertFormProps = {}) => {
 
         <AlertOptions updateAlertOptions={updateAlertOptions} />
 
+        {error && <p className="error-message">{error}</p>}
+
         <div className="form-group">
-          <button type="submit" className="btn">
-            <Save /> Save
+          <button type="submit" className="btn" disabled={mutation.isPending}>
+            <Save /> {mutation.isPending ? "Saving..." : "Save"}
           </button>
         </div>
       </form>

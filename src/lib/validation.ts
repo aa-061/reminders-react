@@ -62,9 +62,12 @@ export const recurrenceFrequencies = [
 // Phone validation using E.164 international format
 const phoneRegex = /^\+?[1-9]\d{1,14}$/;
 
+// Telegram chat ID validation (numeric, can be negative for groups)
+const telegramChatIdRegex = /^-?\d+$/;
+
 export const modeFormSchema = z
   .object({
-    mode: z.enum(["email", "sms", "call"], {
+    mode: z.enum(["email", "sms", "call", "telegram"], {
       message: "Please select a valid mode",
     }),
     address: z.string().min(1, "Address is required"),
@@ -77,6 +80,9 @@ export const modeFormSchema = z
       }
       if (data.mode === "sms" || data.mode === "call") {
         return phoneRegex.test(data.address);
+      }
+      if (data.mode === "telegram") {
+        return telegramChatIdRegex.test(data.address);
       }
       return true;
     },

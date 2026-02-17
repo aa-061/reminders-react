@@ -1,7 +1,5 @@
 import "./ModeForm.css";
 import { useState } from "react";
-import { useStore } from "@tanstack/react-store";
-import { modesStore } from "@/store";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { createMode } from "@/api/modes";
 import type { ModeType } from "@/types";
@@ -25,7 +23,6 @@ async function fetchTelegramInfo(): Promise<TelegramInfo> {
 
 export default function ModeForm({ onSuccess }: { onSuccess?: () => void }) {
   const queryClient = useQueryClient();
-  const modes = useStore(modesStore);
   const [modeType, setModeType] = useState<ModeType>("email");
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
@@ -39,8 +36,7 @@ export default function ModeForm({ onSuccess }: { onSuccess?: () => void }) {
 
   const mutation = useMutation({
     mutationFn: createMode,
-    onSuccess: (newMode) => {
-      modesStore.setState([...modes, newMode]);
+    onSuccess: () => {
       setAddress("");
       setError("");
       queryClient.invalidateQueries({ queryKey: ["modes"] });
@@ -56,7 +52,11 @@ export default function ModeForm({ onSuccess }: { onSuccess?: () => void }) {
     setError("");
 
     if (!address.trim()) {
-      setError("Please enter an address");
+      if (modeType === "telegram") {
+        setError("Please enter telegram chat id");
+      } else {
+        setError("Please enter an address");
+      }
       return;
     }
 
@@ -82,7 +82,7 @@ export default function ModeForm({ onSuccess }: { onSuccess?: () => void }) {
       case "email":
         return "your@email.com";
       case "telegram":
-        return "123456789";
+        return "";
       case "sms":
         return "+1234567890";
       default:

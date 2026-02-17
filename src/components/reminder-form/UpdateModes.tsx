@@ -14,14 +14,15 @@ import {
 import { useEffect, useState } from "react";
 import DialogContent from "@/components/common/DialogContent";
 import ModeForm from "@/components/mode-form/ModeForm";
-import { dialogStore, modesStore, reminderFormStore } from "@/store";
+import { dialogStore, reminderFormStore } from "@/store";
+import { useModes } from "@/hooks/useModes";
 
 export default function UpdateModes({
   onDoneUpdatingModes,
 }: {
   onDoneUpdatingModes: (newChecked: number[]) => void;
 }) {
-  const modes = useStore(modesStore);
+  const { modes, deleteMode } = useModes();
   const reminderForm = useStore(reminderFormStore);
   const dialog = useStore(dialogStore);
   const [checkedModes, setCheckedModes] = useState<Record<number, boolean>>({});
@@ -56,8 +57,7 @@ export default function UpdateModes({
   };
 
   const handleDelete = (id: number) => {
-    const newModes = modes.filter((m) => m.id !== id);
-    modesStore.setState(newModes);
+    deleteMode(id);
     setCheckedModes((prev) => {
       const newChecked = { ...prev };
       delete newChecked[id];

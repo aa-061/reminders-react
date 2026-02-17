@@ -5,14 +5,15 @@ import { useEffect, useState } from "react";
 import AlertForm from "@/components/alert-form/AlertForm";
 import DialogContent from "@/components/common/DialogContent";
 import { alertPresets } from "@/lib/validation";
-import { alertsStore, dialogStore, reminderFormStore } from "@/store";
+import { dialogStore, reminderFormStore } from "@/store";
+import { useAlerts } from "@/hooks/useAlerts";
 
 export default function UpdateAlerts({
   onDoneUpdatingAlerts,
 }: {
   onDoneUpdatingAlerts: (newChecked: number[]) => void;
 }) {
-  const alerts = useStore(alertsStore);
+  const { alerts, deleteAlert, createAlert } = useAlerts();
   const reminderForm = useStore(reminderFormStore);
   const dialog = useStore(dialogStore);
   const [checkedAlerts, setCheckedAlerts] = useState<Record<number, boolean>>(
@@ -49,8 +50,7 @@ export default function UpdateAlerts({
   };
 
   const handleDelete = (id: number) => {
-    const newAlerts = alerts.filter((a) => a.id !== id);
-    alertsStore.setState(newAlerts);
+    deleteAlert(id);
     setCheckedAlerts((prev) => {
       const newChecked = { ...prev };
       delete newChecked[id];
@@ -63,12 +63,7 @@ export default function UpdateAlerts({
       (a) => a.ms === preset.ms && a.name === preset.name,
     );
     if (!exists) {
-      const newId = Math.max(...alerts.map((a) => a.id), 0) + 1;
-      alertsStore.setState([
-        ...alerts,
-        { id: newId, name: preset.name, ms: preset.ms, isDefault: false },
-      ]);
-      setCheckedAlerts((prev) => ({ ...prev, [newId]: true }));
+      createAlert({ name: preset.name, ms: preset.ms, isDefault: false });
     } else {
       const existingAlert = alerts.find(
         (a) => a.ms === preset.ms && a.name === preset.name,

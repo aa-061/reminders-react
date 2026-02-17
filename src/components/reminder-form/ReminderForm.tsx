@@ -7,9 +7,7 @@ import { useEffect, useState } from "react";
 import { showToast } from "@/components/common/ToastContainer";
 import { createReminderSchema, reminderFormSchema } from "@/lib/validation";
 import {
-  alertsStore,
   dialogStore,
-  modesStore,
   reminderFormStore,
 } from "@/store";
 import {
@@ -21,6 +19,8 @@ import { SwitchInput } from "../common/Misc";
 import RecurrenceConfig from "./RecurrenceConfig";
 import UpdateAlerts from "./UpdateAlerts";
 import UpdateModes from "./UpdateModes";
+import { useModes } from "@/hooks/useModes";
+import { useAlerts } from "@/hooks/useAlerts";
 
 // Helper function to convert ISO string to local datetime-local format
 function isoToLocalDatetime(isoString: string): string {
@@ -43,8 +43,8 @@ export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
   const navigate = useNavigate();
   const reminderForm = useStore(reminderFormStore);
   const dialog = useStore(dialogStore);
-  const modes = useStore(modesStore);
-  const alerts = useStore(alertsStore);
+  const { modes } = useModes();
+  const { alerts } = useAlerts();
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
