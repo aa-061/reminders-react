@@ -1,6 +1,8 @@
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import Layout from "@/components/layout/Layout";
+import PWAInstallPrompt from "@/components/pwa/PWAInstallPrompt";
+import PWAUpdatePrompt from "@/components/pwa/PWAUpdatePrompt";
 
 function NotFound() {
   return (
@@ -23,6 +25,8 @@ export const Route = createRootRoute({
       <Layout>
         <Outlet />
       </Layout>
+      <PWAUpdatePrompt />
+      <PWAInstallPrompt />
       {process.env.NODE_ENV === "development" && (
         <ReactQueryDevtools
           initialIsOpen={false}

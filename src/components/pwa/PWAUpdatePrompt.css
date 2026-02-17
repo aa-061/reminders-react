@@ -1,0 +1,72 @@
+.PWAUpdatePrompt {
+  position: fixed;
+  top: var(--spacing-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  animation: PWAUpdatePrompt__slideDown 0.3s ease-out;
+}
+
+@keyframes PWAUpdatePrompt__slideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.PWAUpdatePrompt__content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--primary);
+  color: light-dark(var(--surface-light), var(--surface-dark));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.PWAUpdatePrompt__icon {
+  display: flex;
+  align-items: center;
+  animation: PWAUpdatePrompt__spin 2s linear infinite;
+}
+
+@keyframes PWAUpdatePrompt__spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.PWAUpdatePrompt__text p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
+.PWAUpdatePrompt__actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.PWAUpdatePrompt__actions .btn {
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  color: var(--primary);
+  border-color: transparent;
+}
+
+.PWAUpdatePrompt__actions .btn:hover {
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+}
+
+.PWAUpdatePrompt__actions .btn--secondary {
+  background-color: transparent;
+  color: light-dark(var(--surface-light), var(--surface-dark));
+  border-color: light-dark(var(--surface-light), var(--surface-dark));
+}

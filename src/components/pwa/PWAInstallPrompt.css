@@ -1,0 +1,131 @@
+.PWAInstallPrompt {
+  position: fixed;
+  bottom: 6rem; /* Above mobile nav */
+  left: var(--spacing-lg);
+  right: var(--spacing-lg);
+  z-index: 100;
+  animation: PWAInstallPrompt__slideUp 0.3s ease-out;
+}
+
+@media (min-width: 48rem) {
+  .PWAInstallPrompt {
+    bottom: var(--spacing-xl);
+    left: auto;
+    right: var(--spacing-xl);
+    max-width: 24rem;
+  }
+}
+
+@keyframes PWAInstallPrompt__slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.PWAInstallPrompt__content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.PWAInstallPrompt--ios .PWAInstallPrompt__content {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.PWAInstallPrompt__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--primary);
+  color: light-dark(var(--surface-light), var(--surface-dark));
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.PWAInstallPrompt__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.PWAInstallPrompt__text h3 {
+  margin: 0 0 var(--spacing-xs) 0;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
+
+.PWAInstallPrompt__text p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--secondary);
+}
+
+.PWAInstallPrompt__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.PWAInstallPrompt__dismiss {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  color: var(--secondary);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.PWAInstallPrompt__dismiss:hover {
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+}
+
+.PWAInstallPrompt__dismiss--top {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+}
+
+.PWAInstallPrompt__ios-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  border-radius: var(--radius-md);
+  width: 100%;
+}
+
+.PWAInstallPrompt__ios-step {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  font-size: var(--fs-sm);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
+
+.PWAInstallPrompt__ios-step svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}

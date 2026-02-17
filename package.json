@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "sort-imports": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "sync": "GIT_SSH_COMMAND=\"ssh -i ~/.ssh/github061\" git push -u github061 main"
+    "sync": "GIT_SSH_COMMAND=\"ssh -i ~/.ssh/github061\" git push -u github061 main",
+    "generate-pwa-icons": "pwa-assets-generator --preset minimal-2023 public/icon.svg"
   },
   "dependencies": {
     "@tanstack/react-devtools": "^0.7.0",
@@ -21,6 +22,8 @@
     "lucide-react": "^0.563.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "vite-plugin-pwa": "^1.2.0",
+    "workbox-window": "^7.4.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
@@ -33,6 +36,7 @@
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "@vite-pwa/assets-generator": "^1.0.2",
     "@vitejs/plugin-react": "^5.0.4",
     "jsdom": "^27.0.0",
     "playwright": "^1.58.2",
