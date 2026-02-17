@@ -107,7 +107,7 @@ export default function ModeFormDialog({
                   id="mode-type"
                   value={formData.mode}
                   onChange={(e) =>
-                    setFormData({ ...formData, mode: e.target.value })
+                    setFormData({ ...formData, mode: e.target.value as any })
                   }
                 >
                   <option value="email">Email</option>

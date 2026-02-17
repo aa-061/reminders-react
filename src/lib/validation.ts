@@ -43,12 +43,12 @@ export const createReminderSchema = reminderFormSchema.refine(
 
 // Alert preset configuration (for better UX)
 export const alertPresets = [
-  { id: -1, name: "5 minutes before", ms: 5 * 60 * 1000 },
-  { id: -2, name: "15 minutes before", ms: 15 * 60 * 1000 },
-  { id: -3, name: "30 minutes before", ms: 30 * 60 * 1000 },
-  { id: -4, name: "1 hour before", ms: 60 * 60 * 1000 },
-  { id: -5, name: "1 day before", ms: 24 * 60 * 60 * 1000 },
-  { id: -6, name: "1 week before", ms: 7 * 24 * 60 * 60 * 1000 },
+  { id: -1, name: "5 minutes before", ms: 5 * 60 * 1000, isDefault: false },
+  { id: -2, name: "15 minutes before", ms: 15 * 60 * 1000, isDefault: false },
+  { id: -3, name: "30 minutes before", ms: 30 * 60 * 1000, isDefault: false },
+  { id: -4, name: "1 hour before", ms: 60 * 60 * 1000, isDefault: false },
+  { id: -5, name: "1 day before", ms: 24 * 60 * 60 * 1000, isDefault: false },
+  { id: -6, name: "1 week before", ms: 7 * 24 * 60 * 60 * 1000, isDefault: false },
 ];
 
 // Recurrence frequency options

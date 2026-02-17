@@ -66,7 +66,7 @@ export default function UpdateAlerts({
       const newId = Math.max(...alerts.map((a) => a.id), 0) + 1;
       alertsStore.setState([
         ...alerts,
-        { id: newId, name: preset.name, ms: preset.ms },
+        { id: newId, name: preset.name, ms: preset.ms, isDefault: false },
       ]);
       setCheckedAlerts((prev) => ({ ...prev, [newId]: true }));
     } else {

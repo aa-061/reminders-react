@@ -1,7 +1,7 @@
 import "./ModeForm.css";
 import { useState } from "react";
 import { useStore } from "@tanstack/react-store";
-import { modesStore, modeStore } from "@/store";
+import { modesStore } from "@/store";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { createMode } from "@/api/modes";
 import type { ModeType } from "@/types";
@@ -74,7 +74,7 @@ export default function ModeForm({ onSuccess }: { onSuccess?: () => void }) {
       }
     }
 
-    mutation.mutate({ mode: modeType, address: address.trim() });
+    mutation.mutate({ mode: modeType, address: address.trim(), isDefault: false });
   };
 
   const getPlaceholder = () => {

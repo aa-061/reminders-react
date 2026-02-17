@@ -53,6 +53,7 @@ export const alertStore = new Store<IAlert>({
   id: 0,
   name: "",
   ms: 0,
+  isDefault: false,
 });
 
 export const alertsStore = new Store<IAlert[]>([
@@ -60,6 +61,7 @@ export const alertsStore = new Store<IAlert[]>([
     id: 1,
     name: "1 second",
     ms: 1000,
+    isDefault: false,
   },
 ]);
 

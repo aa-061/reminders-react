@@ -28,13 +28,14 @@ export default ({ onSuccess }: AlertFormProps = {}) => {
     const newAlerts = [...alerts];
     const id =
       newAlerts.length === 0 ? 1 : newAlerts[newAlerts.length - 1].id + 1;
-    const newAlert = { id, name: alert.name, ms: alert.ms };
+    const newAlert = { id, name: alert.name, ms: alert.ms, isDefault: false };
     newAlerts.push(newAlert);
     alertsStore.setState(newAlerts);
     alertStore.setState({
       id: 0,
       name: "",
       ms: 0,
+      isDefault: false,
     });
 
     if (onSuccess) {
