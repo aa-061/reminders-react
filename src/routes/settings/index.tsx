@@ -1,6 +1,6 @@
 import "./index.css";
 import { Link, createFileRoute, redirect } from "@tanstack/react-router";
-import { Bell, MessageSquare } from "lucide-react";
+import { Bell, MessageSquare, Puzzle } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 
 export const Route = createFileRoute("/settings/")({
@@ -45,6 +45,16 @@ function SettingsPage() {
             <h2 className="SettingsPage__card-title">Alert Presets</h2>
             <p className="SettingsPage__card-description">
               Set when you want to be notified before reminders
+            </p>
+          </Link>
+
+          <Link to="/settings/integrations" className="SettingsPage__card">
+            <div className="SettingsPage__card-icon">
+              <Puzzle size={32} />
+            </div>
+            <h2 className="SettingsPage__card-title">Integrations</h2>
+            <p className="SettingsPage__card-description">
+              Connect third-party services like Google Calendar
             </p>
           </Link>
         </div>

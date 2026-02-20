@@ -1,0 +1,79 @@
+.GoogleCalendarSettings {
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
+
+.GoogleCalendarSettings--loading,
+.GoogleCalendarSettings--unconfigured {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  opacity: 0.7;
+}
+
+.GoogleCalendarSettings--loading .spinner {
+  color: var(--primary);
+}
+
+.GoogleCalendarSettings__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.GoogleCalendarSettings__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: #4285f4;
+  color: white;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.GoogleCalendarSettings__content h3 {
+  margin: 0 0 var(--spacing-xs) 0;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
+
+.GoogleCalendarSettings__content p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--secondary);
+}
+
+.GoogleCalendarSettings__status {
+  margin-bottom: var(--spacing-lg);
+}
+
+.GoogleCalendarSettings__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
+.GoogleCalendarSettings__badge--connected {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.GoogleCalendarSettings__badge--disconnected {
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  color: var(--secondary);
+}
+
+.GoogleCalendarSettings__actions {
+  display: flex;
+  gap: var(--spacing-md);
+}

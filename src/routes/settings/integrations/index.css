@@ -1,0 +1,30 @@
+.SettingsIntegrationsPage {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+}
+
+.SettingsIntegrationsPage__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.SettingsIntegrationsPage__title {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  margin: 0;
+}
+
+.SettingsIntegrationsPage__subtitle {
+  font-size: var(--fs-md);
+  color: var(--secondary);
+  margin: 0;
+}
+
+.SettingsIntegrationsPage__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}

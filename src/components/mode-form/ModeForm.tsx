@@ -72,6 +72,13 @@ export default function ModeForm({ onSuccess }: { onSuccess?: () => void }) {
         setError("Please enter a valid Telegram Chat ID (numbers only)");
         return;
       }
+    } else if (modeType === "sms") {
+      // Validate E.164 format
+      const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+      if (!phoneRegex.test(address.trim().replace(/[\s\-\(\)]/g, ""))) {
+        setError("Please enter a valid phone number in international format");
+        return;
+      }
     }
 
     mutation.mutate({ mode: modeType, address: address.trim(), isDefault: false });
@@ -84,7 +91,7 @@ export default function ModeForm({ onSuccess }: { onSuccess?: () => void }) {
       case "telegram":
         return "";
       case "sms":
-        return "+1234567890";
+        return "+1 (555) 123-4567";
       default:
         return "Enter address";
     }
@@ -119,7 +126,7 @@ export default function ModeForm({ onSuccess }: { onSuccess?: () => void }) {
           >
             <option value="email">Email</option>
             <option value="telegram">Telegram</option>
-            <option value="sms">SMS (Coming Soon)</option>
+            <option value="sms">SMS Text Message</option>
           </select>
         </div>
 
@@ -164,6 +171,22 @@ export default function ModeForm({ onSuccess }: { onSuccess?: () => void }) {
       {modeType === "telegram" && !telegramInfo?.configured && (
         <div className="ModeForm__telegram-warning">
           <p>Telegram notifications are not configured on this server.</p>
+        </div>
+      )}
+
+      {/* SMS Instructions */}
+      {modeType === "sms" && (
+        <div className="ModeForm__sms-info">
+          <div className="ModeForm__info-box">
+            <p>Enter your phone number in international format (E.164):</p>
+            <ul>
+              <li>USA: +1 followed by 10 digits</li>
+              <li>Include country code with + prefix</li>
+            </ul>
+            <div className="ModeForm__warning">
+              <strong>Trial Account:</strong> Twilio trial requires phone verification.
+            </div>
+          </div>
         </div>
       )}
 

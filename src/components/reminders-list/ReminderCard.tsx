@@ -27,6 +27,7 @@ export default function ReminderCard({
   onToggleActive,
 }: ReminderCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
 
   const reminderDate = new Date(reminder.date);
   const now = new Date();
@@ -66,6 +67,35 @@ export default function ReminderCard({
     onToggleActive(reminder.id, !reminder.is_active);
   };
 
+  const handleSyncToCalendar = async () => {
+    setIsSyncing(true);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/api/google/sync/${reminder.id}`,
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Open Google Calendar event
+        window.open(data.htmlLink, "_blank");
+      } else if (data.requiresReauth) {
+        // Redirect to settings to reconnect
+        window.location.href = "/settings/integrations?google_reauth=true";
+      } else {
+        console.error("Failed to sync:", data.error);
+      }
+    } catch (error) {
+      console.error("Failed to sync to calendar:", error);
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
   return (
     <div
       className={`ReminderCard ${isPast ? "ReminderCard--past" : ""} ${isUpcoming ? "ReminderCard--upcoming" : ""} ${!reminder.is_active ? "ReminderCard--inactive" : ""}`}
@@ -100,6 +130,14 @@ export default function ReminderCard({
           >
             <Edit2 size={20} className="ReminderCard__icon" />
           </Link>
+          <button
+            onClick={handleSyncToCalendar}
+            className="ReminderCard__action-btn btn btn--ghost btn--icon"
+            title="Sync to Google Calendar"
+            disabled={isSyncing}
+          >
+            <Calendar size={20} className="ReminderCard__icon" />
+          </button>
           <button
             onClick={handleToggleActive}
             className="ReminderCard__action-btn btn btn--ghost btn--icon"
