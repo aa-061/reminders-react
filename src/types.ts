@@ -62,6 +62,7 @@ export interface IReminder {
   end_date: string | null;
   last_alert_time: string | null;
   is_active?: boolean;
+  image_url?: string | null;
 }
 
 export type TCreateReminderField = keyof ICreateReminder;

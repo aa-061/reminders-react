@@ -1,8 +1,9 @@
 .PWAInstallPrompt {
   position: fixed;
-  bottom: 6rem; /* Above mobile nav */
-  left: var(--spacing-lg);
-  right: var(--spacing-lg);
+  /* Above mobile nav + safe area */
+  bottom: calc(6rem + env(safe-area-inset-bottom, 0));
+  left: calc(var(--spacing-lg) + env(safe-area-inset-left, 0));
+  right: calc(var(--spacing-lg) + env(safe-area-inset-right, 0));
   z-index: 100;
   animation: PWAInstallPrompt__slideUp 0.3s ease-out;
 }

@@ -94,6 +94,48 @@
   text-align: center;
 }
 
+.RemindersFilter__sort-direction {
+  flex-shrink: 0;
+}
+
+.RemindersFilter__selection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  border-top: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+}
+
+.RemindersFilter__selection-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.RemindersFilter__selection-count {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--secondary);
+}
+
+.RemindersFilter__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  border-top: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+}
+
+.RemindersFilter__pagination-info {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
 @media (min-width: 640px) {
   .RemindersFilter__top {
     flex-direction: row;

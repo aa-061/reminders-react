@@ -1,0 +1,36 @@
+.StatCard {
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.StatCard__title {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--secondary);
+  margin: 0;
+}
+
+.StatCard__value {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+  margin: 0;
+}
+
+.StatCard__trend {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
+.StatCard__trend--positive {
+  color: #22c55e;
+}
+
+.StatCard__trend--negative {
+  color: var(--error);
+}

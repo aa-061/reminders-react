@@ -83,6 +83,10 @@ body {
   margin: 0;
   min-width: 20rem;
   min-height: 100vh;
+  /* PWA: Prevent overscroll bounce on iOS */
+  overscroll-behavior: none;
+  /* PWA: Ensure touch actions work properly */
+  -webkit-tap-highlight-color: transparent;
 }
 
 [data-theme="dark"] {
@@ -441,6 +445,66 @@ p {
   to {
     opacity: 0;
   }
+}
+
+/* ==================== */
+/* ACCESSIBILITY        */
+/* ==================== */
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 0.125rem solid var(--primary);
+  outline-offset: 0.125rem;
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  top: -3rem;
+  left: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--primary);
+  color: white;
+  z-index: 1000;
+  border-radius: var(--radius-md);
+  transition: top var(--transition-fast);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: var(--spacing-lg);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border-light: #000000;
+    --border-dark: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 @media (min-width: 640px) {

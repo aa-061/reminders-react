@@ -5,16 +5,20 @@
   left: 0;
   right: 0;
   z-index: 50;
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
   place-content: center;
   width: 100%;
   box-sizing: border-box;
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border-top: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
 
   .ThemeToggle {
     height: fit-content;
     position: absolute;
-    left: 7px;
-    bottom: 7px;
+    left: calc(var(--spacing-md) + env(safe-area-inset-left, 0));
+    bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom, 0));
     z-index: 100;
   }
 }
@@ -23,16 +27,19 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-md);
   place-items: center;
   box-sizing: border-box;
 }
 
 .MobileNav__menu {
   position: fixed;
-  bottom: 5rem;
+  /* Position menu above the nav bar with safe area consideration */
+  bottom: calc(5rem + env(safe-area-inset-bottom, 0));
   left: var(--spacing-lg);
   right: var(--spacing-lg);
+  max-height: calc(100vh - 8rem - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0));
+  overflow-y: auto;
   background-color: light-dark(var(--surface-light), var(--surface-dark));
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);

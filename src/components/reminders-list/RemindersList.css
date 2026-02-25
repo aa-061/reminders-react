@@ -1,4 +1,23 @@
 .RemindersList {
+  /* Allow pull-to-refresh to work properly */
+  min-height: 100%;
+}
+
+/* Pull-to-refresh indicator */
+.RemindersList__pull-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-sm);
+  height: 0;
+  overflow: hidden;
+  transition: height var(--transition-fast);
+  color: var(--secondary);
+  font-size: var(--fs-sm);
+}
+
+.RemindersList__pull-indicator--active {
+  min-height: 3rem;
 }
 
 .RemindersList__header {

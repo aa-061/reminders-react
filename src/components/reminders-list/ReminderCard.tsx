@@ -5,29 +5,66 @@ import {
   Calendar,
   ChevronDown,
   ChevronUp,
+  Copy,
   Edit2,
   Mail,
+  MoreVertical,
   Pause,
   Play,
+  Share2,
   Smartphone,
   Trash2,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, type TouchEvent } from "react";
 import type { IReminder } from "@/types";
 
 interface ReminderCardProps {
   reminder: IReminder;
   onDelete: (id: number) => void;
   onToggleActive: (id: number, isActive: boolean) => void;
+  isSelected: boolean;
+  onToggleSelect: (id: number) => void;
 }
 
 export default function ReminderCard({
   reminder,
   onDelete,
   onToggleActive,
+  isSelected,
+  onToggleSelect,
 }: ReminderCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [showQuickActions, setShowQuickActions] = useState(false);
+
+  // Swipe-to-delete state
+  const [swipeOffset, setSwipeOffset] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
+  const touchStartX = useRef(0);
+  const SWIPE_THRESHOLD = 100;
+
+  const handleTouchStart = (e: TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    setIsSwiping(true);
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    if (!isSwiping) return;
+    const diff = touchStartX.current - e.touches[0].clientX;
+    if (diff > 0) {
+      setSwipeOffset(Math.min(diff, 120));
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (swipeOffset > SWIPE_THRESHOLD) {
+      if (window.confirm("Delete this reminder?")) {
+        onDelete(reminder.id);
+      }
+    }
+    setSwipeOffset(0);
+    setIsSwiping(false);
+  };
 
   const reminderDate = new Date(reminder.date);
   const now = new Date();
@@ -96,12 +133,58 @@ export default function ReminderCard({
     }
   };
 
+  const handleCheckboxChange = () => {
+    onToggleSelect(reminder.id);
+  };
+
+  const handleCopyTitle = async () => {
+    await navigator.clipboard.writeText(reminder.title);
+    setShowQuickActions(false);
+  };
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: reminder.title,
+          text: `Reminder: ${reminder.title} - ${formatDate(reminder.date)}`,
+        });
+      } catch {
+        // User cancelled or share failed
+      }
+    } else {
+      // Fallback: copy to clipboard
+      await navigator.clipboard.writeText(
+        `Reminder: ${reminder.title} - ${formatDate(reminder.date)}`
+      );
+    }
+    setShowQuickActions(false);
+  };
+
   return (
-    <div
-      className={`ReminderCard ${isPast ? "ReminderCard--past" : ""} ${isUpcoming ? "ReminderCard--upcoming" : ""} ${!reminder.is_active ? "ReminderCard--inactive" : ""}`}
-    >
-      <div className="ReminderCard__header">
+    <div className="ReminderCard__wrapper">
+      <div className="ReminderCard__swipe-action">
+        <Trash2 size={24} />
+      </div>
+      <div
+        className={`ReminderCard ${isPast ? "ReminderCard--past" : ""} ${isUpcoming ? "ReminderCard--upcoming" : ""} ${!reminder.is_active ? "ReminderCard--inactive" : ""} ${isSelected ? "ReminderCard--selected" : ""} ${isSwiping ? "ReminderCard--swiping" : ""}`}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        style={{ transform: `translateX(-${swipeOffset}px)` }}
+      >
+        <div className="ReminderCard__header">
         <div className="ReminderCard__title-section">
+          <label className="ReminderCard__checkbox-wrapper">
+            <input
+              type="checkbox"
+              checked={isSelected}
+              onChange={handleCheckboxChange}
+              className="ReminderCard__checkbox"
+              aria-label={`Select ${reminder.title}`}
+            />
+            <span className="ReminderCard__checkbox-custom"></span>
+          </label>
           <h3 className="ReminderCard__title">{reminder.title}</h3>
           <div className="ReminderCard__badges">
             {reminder.is_recurring && (
@@ -156,8 +239,43 @@ export default function ReminderCard({
           >
             <Trash2 size={20} className="ReminderCard__icon" />
           </button>
+
+          {/* Quick actions dropdown */}
+          <div className="ReminderCard__quick-actions">
+            <button
+              onClick={() => setShowQuickActions(!showQuickActions)}
+              className="ReminderCard__action-btn btn btn--ghost btn--icon"
+              aria-label="More actions"
+            >
+              <MoreVertical size={20} className="ReminderCard__icon" />
+            </button>
+            {showQuickActions && (
+              <div className="ReminderCard__dropdown">
+                <button onClick={handleCopyTitle}>
+                  <Copy size={16} /> Copy title
+                </button>
+                <button onClick={handleShare}>
+                  <Share2 size={16} /> Share
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
+      {/* Thumbnail preview */}
+      {reminder.image_url && (
+        <div className="ReminderCard__thumbnail">
+          <img
+            src={reminder.image_url}
+            alt=""
+            loading="lazy"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = "none";
+            }}
+          />
+        </div>
+      )}
 
       <div className="ReminderCard__info">
         <div className="ReminderCard__date">
@@ -233,6 +351,7 @@ export default function ReminderCard({
           )}
         </div>
       )}
+      </div>
     </div>
   );
 }

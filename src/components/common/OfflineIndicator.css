@@ -1,0 +1,25 @@
+.OfflineIndicator {
+  position: fixed;
+  top: env(safe-area-inset-top, 0);
+  left: 0;
+  right: 0;
+  background-color: var(--error);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  font-size: var(--fs-sm);
+  z-index: 1000;
+  animation: OfflineIndicator__slideIn var(--transition-fast) ease-out;
+}
+
+@keyframes OfflineIndicator__slideIn {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

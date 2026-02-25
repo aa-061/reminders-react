@@ -13,7 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SettingsIndexRouteImport } from './routes/settings/index'
 import { Route as RemindersIndexRouteImport } from './routes/reminders/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as SettingsModesIndexRouteImport } from './routes/settings/modes/index'
+import { Route as SettingsIntegrationsIndexRouteImport } from './routes/settings/integrations/index'
 import { Route as SettingsAlertsIndexRouteImport } from './routes/settings/alerts/index'
 import { Route as RemindersNewIndexRouteImport } from './routes/reminders/new/index'
 import { Route as RemindersIdEditIndexRouteImport } from './routes/reminders/$id/edit/index'
@@ -38,11 +40,22 @@ const LoginIndexRoute = LoginIndexRouteImport.update({
   path: '/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsModesIndexRoute = SettingsModesIndexRouteImport.update({
   id: '/settings/modes/',
   path: '/settings/modes/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsIntegrationsIndexRoute =
+  SettingsIntegrationsIndexRouteImport.update({
+    id: '/settings/integrations/',
+    path: '/settings/integrations/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SettingsAlertsIndexRoute = SettingsAlertsIndexRouteImport.update({
   id: '/settings/alerts/',
   path: '/settings/alerts/',
@@ -61,32 +74,38 @@ const RemindersIdEditIndexRoute = RemindersIdEditIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/login/': typeof LoginIndexRoute
   '/reminders/': typeof RemindersIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/reminders/new/': typeof RemindersNewIndexRoute
   '/settings/alerts/': typeof SettingsAlertsIndexRoute
+  '/settings/integrations/': typeof SettingsIntegrationsIndexRoute
   '/settings/modes/': typeof SettingsModesIndexRoute
   '/reminders/$id/edit/': typeof RemindersIdEditIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardIndexRoute
   '/login': typeof LoginIndexRoute
   '/reminders': typeof RemindersIndexRoute
   '/settings': typeof SettingsIndexRoute
   '/reminders/new': typeof RemindersNewIndexRoute
   '/settings/alerts': typeof SettingsAlertsIndexRoute
+  '/settings/integrations': typeof SettingsIntegrationsIndexRoute
   '/settings/modes': typeof SettingsModesIndexRoute
   '/reminders/$id/edit': typeof RemindersIdEditIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/login/': typeof LoginIndexRoute
   '/reminders/': typeof RemindersIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/reminders/new/': typeof RemindersNewIndexRoute
   '/settings/alerts/': typeof SettingsAlertsIndexRoute
+  '/settings/integrations/': typeof SettingsIntegrationsIndexRoute
   '/settings/modes/': typeof SettingsModesIndexRoute
   '/reminders/$id/edit/': typeof RemindersIdEditIndexRoute
 }
@@ -94,42 +113,50 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/dashboard/'
     | '/login/'
     | '/reminders/'
     | '/settings/'
     | '/reminders/new/'
     | '/settings/alerts/'
+    | '/settings/integrations/'
     | '/settings/modes/'
     | '/reminders/$id/edit/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/dashboard'
     | '/login'
     | '/reminders'
     | '/settings'
     | '/reminders/new'
     | '/settings/alerts'
+    | '/settings/integrations'
     | '/settings/modes'
     | '/reminders/$id/edit'
   id:
     | '__root__'
     | '/'
+    | '/dashboard/'
     | '/login/'
     | '/reminders/'
     | '/settings/'
     | '/reminders/new/'
     | '/settings/alerts/'
+    | '/settings/integrations/'
     | '/settings/modes/'
     | '/reminders/$id/edit/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
   RemindersIndexRoute: typeof RemindersIndexRoute
   SettingsIndexRoute: typeof SettingsIndexRoute
   RemindersNewIndexRoute: typeof RemindersNewIndexRoute
   SettingsAlertsIndexRoute: typeof SettingsAlertsIndexRoute
+  SettingsIntegrationsIndexRoute: typeof SettingsIntegrationsIndexRoute
   SettingsModesIndexRoute: typeof SettingsModesIndexRoute
   RemindersIdEditIndexRoute: typeof RemindersIdEditIndexRoute
 }
@@ -164,11 +191,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings/modes/': {
       id: '/settings/modes/'
       path: '/settings/modes'
       fullPath: '/settings/modes/'
       preLoaderRoute: typeof SettingsModesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/integrations/': {
+      id: '/settings/integrations/'
+      path: '/settings/integrations'
+      fullPath: '/settings/integrations/'
+      preLoaderRoute: typeof SettingsIntegrationsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings/alerts/': {
@@ -197,11 +238,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
   RemindersIndexRoute: RemindersIndexRoute,
   SettingsIndexRoute: SettingsIndexRoute,
   RemindersNewIndexRoute: RemindersNewIndexRoute,
   SettingsAlertsIndexRoute: SettingsAlertsIndexRoute,
+  SettingsIntegrationsIndexRoute: SettingsIntegrationsIndexRoute,
   SettingsModesIndexRoute: SettingsModesIndexRoute,
   RemindersIdEditIndexRoute: RemindersIdEditIndexRoute,
 }

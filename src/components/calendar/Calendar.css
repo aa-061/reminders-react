@@ -1,0 +1,114 @@
+.Calendar {
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+}
+
+.Calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+}
+
+.Calendar__month {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  margin: 0;
+}
+
+.Calendar__today-btn {
+  margin-bottom: var(--spacing-md);
+}
+
+.Calendar__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+.Calendar__weekday {
+  text-align: center;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--secondary);
+  padding: var(--spacing-sm);
+}
+
+.Calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--spacing-xs);
+}
+
+/* CalendarDay styles */
+.CalendarDay {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-xs);
+  transition: background-color var(--transition-fast);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
+
+.CalendarDay:hover {
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+}
+
+.CalendarDay--empty {
+  cursor: default;
+}
+
+.CalendarDay--empty:hover {
+  background-color: transparent;
+}
+
+.CalendarDay--today {
+  background-color: var(--primary);
+  color: light-dark(var(--foreground-dark), var(--foreground-light));
+}
+
+.CalendarDay--today:hover {
+  background-color: var(--primary-hover);
+}
+
+.CalendarDay__number {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
+.CalendarDay__dots {
+  display: flex;
+  gap: 0.125rem;
+}
+
+.CalendarDay__dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  background-color: var(--primary);
+  border-radius: var(--radius-full);
+}
+
+.CalendarDay--today .CalendarDay__dot {
+  background-color: light-dark(var(--foreground-dark), var(--foreground-light));
+}
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+  .Calendar {
+    padding: var(--spacing-xl);
+  }
+
+  .CalendarDay__number {
+    font-size: var(--fs-md);
+  }
+}

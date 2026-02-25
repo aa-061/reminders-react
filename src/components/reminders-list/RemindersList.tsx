@@ -1,12 +1,16 @@
 import "./RemindersList.css";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, type TouchEvent } from "react";
+import { RefreshCw } from "lucide-react";
 import type { IReminder } from "@/types";
 import ReminderCard from "./ReminderCard";
 import RemindersFilter, {
   type FilterStatus,
   type SortOption,
+  type SortDirection,
 } from "./RemindersFilter";
+
+const ITEMS_PER_PAGE = 10;
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -72,6 +76,42 @@ export default function RemindersList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState<FilterStatus>("all");
   const [sortBy, setSortBy] = useState<SortOption>("date");
+  const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+  const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Pull-to-refresh state
+  const [isPulling, setIsPulling] = useState(false);
+  const [pullDistance, setPullDistance] = useState(0);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const listRef = useRef<HTMLDivElement>(null);
+  const touchStartY = useRef(0);
+  const REFRESH_THRESHOLD = 80;
+
+  const handlePullTouchStart = (e: TouchEvent) => {
+    if (listRef.current?.scrollTop === 0) {
+      touchStartY.current = e.touches[0].clientY;
+      setIsPulling(true);
+    }
+  };
+
+  const handlePullTouchMove = (e: TouchEvent) => {
+    if (!isPulling) return;
+    const diff = e.touches[0].clientY - touchStartY.current;
+    if (diff > 0 && diff < 120) {
+      setPullDistance(diff);
+    }
+  };
+
+  const handlePullTouchEnd = async () => {
+    if (pullDistance > REFRESH_THRESHOLD) {
+      setIsRefreshing(true);
+      await queryClient.invalidateQueries({ queryKey: ["reminders"] });
+      setIsRefreshing(false);
+    }
+    setPullDistance(0);
+    setIsPulling(false);
+  };
 
   const {
     data: reminders,
@@ -118,6 +158,50 @@ export default function RemindersList() {
     setSearchQuery("");
     setFilterStatus("all");
     setSortBy("date");
+    setSortDirection("desc");
+    setCurrentPage(1);
+  };
+
+  const handleToggleSelect = (id: number) => {
+    setSelectedIds((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
+
+  const handleSelectAll = () => {
+    if (paginatedReminders.length > 0) {
+      setSelectedIds(new Set(paginatedReminders.map((r) => r.id)));
+    }
+  };
+
+  const handleDeselectAll = () => {
+    setSelectedIds(new Set());
+  };
+
+  const handleDeleteSelected = async () => {
+    if (selectedIds.size === 0) return;
+
+    const confirmed = window.confirm(
+      `Are you sure you want to delete ${selectedIds.size} reminder${selectedIds.size > 1 ? "s" : ""}?`
+    );
+
+    if (!confirmed) return;
+
+    for (const id of selectedIds) {
+      await deleteMutation.mutateAsync(id);
+    }
+    setSelectedIds(new Set());
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    setSelectedIds(new Set());
   };
 
   const filteredAndSortedReminders = useMemo(() => {
@@ -143,21 +227,62 @@ export default function RemindersList() {
       });
     }
 
+    const now = new Date();
+
     filtered.sort((a, b) => {
+      let comparison = 0;
+
       if (sortBy === "date") {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+
+        // If sorting descending (default), put upcoming reminders first
+        if (sortDirection === "desc") {
+          const aIsFuture = dateA >= now;
+          const bIsFuture = dateB >= now;
+
+          // Future reminders come before past reminders
+          if (aIsFuture && !bIsFuture) return -1;
+          if (!aIsFuture && bIsFuture) return 1;
+
+          // Within the same group, sort by date
+          if (aIsFuture && bIsFuture) {
+            // For future reminders, closest first
+            comparison = dateA.getTime() - dateB.getTime();
+          } else {
+            // For past reminders, most recent first
+            comparison = dateB.getTime() - dateA.getTime();
+          }
+        } else {
+          comparison = dateA.getTime() - dateB.getTime();
+        }
+      } else if (sortBy === "title") {
+        comparison = a.title.localeCompare(b.title);
+        if (sortDirection === "desc") comparison = -comparison;
+      } else if (sortBy === "created") {
+        comparison = a.id - b.id;
+        if (sortDirection === "desc") comparison = -comparison;
       }
-      if (sortBy === "title") {
-        return a.title.localeCompare(b.title);
-      }
-      if (sortBy === "created") {
-        return a.id - b.id;
-      }
-      return 0;
+
+      return comparison;
     });
 
     return filtered;
-  }, [reminders, searchQuery, filterStatus, sortBy]);
+  }, [reminders, searchQuery, filterStatus, sortBy, sortDirection]);
+
+  // Pagination
+  const totalPages = Math.ceil(filteredAndSortedReminders.length / ITEMS_PER_PAGE);
+  const paginatedReminders = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredAndSortedReminders.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredAndSortedReminders, currentPage]);
+
+  // Reset to page 1 when filters change
+  useMemo(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(1);
+    }
+  }, [totalPages, currentPage]);
 
   if (isPending) {
     return (
@@ -184,18 +309,64 @@ export default function RemindersList() {
   const hasFilteredResults = filteredAndSortedReminders.length > 0;
 
   return (
-    <div className="RemindersList">
+    <div
+      className="RemindersList"
+      ref={listRef}
+      onTouchStart={handlePullTouchStart}
+      onTouchMove={handlePullTouchMove}
+      onTouchEnd={handlePullTouchEnd}
+    >
+      {/* Pull-to-refresh indicator */}
+      <div
+        className={`RemindersList__pull-indicator ${pullDistance > 0 || isRefreshing ? "RemindersList__pull-indicator--active" : ""}`}
+        style={{ height: pullDistance > 0 ? `${pullDistance}px` : undefined }}
+      >
+        <RefreshCw
+          size={20}
+          className={isRefreshing ? "spinner" : ""}
+          style={{ transform: `rotate(${pullDistance * 2}deg)` }}
+        />
+        <span>
+          {isRefreshing
+            ? "Refreshing..."
+            : pullDistance > REFRESH_THRESHOLD
+              ? "Release to refresh"
+              : "Pull to refresh"}
+        </span>
+      </div>
+
       {hasReminders && (
         <RemindersFilter
           searchQuery={searchQuery}
           filterStatus={filterStatus}
           sortBy={sortBy}
-          onSearchChange={setSearchQuery}
-          onFilterChange={setFilterStatus}
-          onSortChange={setSortBy}
+          sortDirection={sortDirection}
+          onSearchChange={(query) => {
+            setSearchQuery(query);
+            setCurrentPage(1);
+          }}
+          onFilterChange={(status) => {
+            setFilterStatus(status);
+            setCurrentPage(1);
+          }}
+          onSortChange={(sort) => {
+            setSortBy(sort);
+            setCurrentPage(1);
+          }}
+          onSortDirectionChange={(direction) => {
+            setSortDirection(direction);
+            setCurrentPage(1);
+          }}
           onClearFilters={handleClearFilters}
           totalCount={reminders.length}
           filteredCount={filteredAndSortedReminders.length}
+          selectedCount={selectedIds.size}
+          onSelectAll={handleSelectAll}
+          onDeselectAll={handleDeselectAll}
+          onDeleteSelected={handleDeleteSelected}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
         />
       )}
 
@@ -219,12 +390,14 @@ export default function RemindersList() {
 
       {hasFilteredResults && (
         <div className="RemindersList__grid">
-          {filteredAndSortedReminders.map((reminder) => (
+          {paginatedReminders.map((reminder) => (
             <ReminderCard
               key={reminder.id}
               reminder={reminder}
               onDelete={handleDelete}
               onToggleActive={handleToggleActive}
+              isSelected={selectedIds.has(reminder.id)}
+              onToggleSelect={handleToggleSelect}
             />
           ))}
         </div>

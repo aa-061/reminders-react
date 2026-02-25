@@ -3,6 +3,12 @@ import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
 import Layout from "@/components/layout/Layout";
 import PWAInstallPrompt from "@/components/pwa/PWAInstallPrompt";
 import PWAUpdatePrompt from "@/components/pwa/PWAUpdatePrompt";
+import { useGlobalShortcuts } from "@/hooks/useKeyboardShortcuts";
+
+function GlobalShortcuts() {
+  useGlobalShortcuts();
+  return null;
+}
 
 function NotFound() {
   return (
@@ -22,8 +28,14 @@ function NotFound() {
 export const Route = createRootRoute({
   component: () => (
     <>
+      <GlobalShortcuts />
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <Layout>
-        <Outlet />
+        <main id="main-content">
+          <Outlet />
+        </main>
       </Layout>
       <PWAUpdatePrompt />
       <PWAInstallPrompt />

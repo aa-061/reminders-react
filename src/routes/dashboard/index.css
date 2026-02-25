@@ -1,0 +1,64 @@
+.DashboardPage {
+  padding: var(--spacing-lg);
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.DashboardPage__title {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  margin-bottom: var(--spacing-xl);
+}
+
+.DashboardPage__loading {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  font-size: var(--fs-lg);
+  color: var(--secondary);
+}
+
+.DashboardPage__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.DashboardPage__section {
+  background-color: light-dark(var(--surface-light), var(--surface-dark));
+  border: 0.0625rem solid light-dark(var(--border-light), var(--border-dark));
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
+
+.DashboardPage__section-title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--spacing-lg);
+}
+
+.DashboardPage__months {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.DashboardPage__month-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: light-dark(var(--surface-alt-light), var(--surface-alt-dark));
+  border-radius: var(--radius-md);
+}
+
+.DashboardPage__month-label {
+  font-size: var(--fs-sm);
+  color: var(--secondary);
+}
+
+.DashboardPage__month-count {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: light-dark(var(--foreground-light), var(--foreground-dark));
+}
