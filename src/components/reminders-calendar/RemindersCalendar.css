@@ -33,7 +33,11 @@
 }
 
 .RemindersCalendar__container {
-  min-height: 25rem;
+  height: 31.25rem;
+}
+
+.RemindersCalendar__container .rbc-calendar {
+  height: 100%;
 }
 
 /* Override react-big-calendar styles to match theme */
@@ -219,7 +223,7 @@
   }
 
   .RemindersCalendar__container {
-    min-height: 20rem;
+    height: 25rem;
   }
 
   .RemindersCalendar .rbc-toolbar {

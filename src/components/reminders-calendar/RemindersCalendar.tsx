@@ -103,6 +103,7 @@ export default function RemindersCalendar({
           defaultView="month"
           popup
           selectable={false}
+          style={{ height: "100%" }}
         />
       </div>
     </div>
