@@ -57,13 +57,17 @@ export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
 
   // Pre-populate form in edit mode
   useEffect(() => {
-    if (editMode && existingReminder) {
+    if (editMode && existingReminder && modes.length > 0) {
+      // Match reminder modes by mode type and address to find actual mode IDs
+      const modeIds = existingReminder.reminders
+        .map((r) => modes.find((m) => m.mode === r.mode && m.address === r.address))
+        .filter((m) => m !== undefined)
+        .map((m) => m.id);
+
       reminderFormStore.setState({
         title: existingReminder.title,
         date: existingReminder.date,
-        reminders: existingReminder.reminders
-          .filter((r) => r.id !== undefined && r.id !== null)
-          .map((r) => parseInt(r.id, 10)),
+        reminders: modeIds,
         alerts: existingReminder.alerts
           .filter((a) => a.id !== undefined && a.id !== null)
           .map((a) => parseInt(a.id, 10)),
@@ -75,7 +79,7 @@ export default ({ editMode = false, existingReminder }: ReminderFormProps) => {
         description: existingReminder.description || "",
       });
     }
-  }, [editMode, existingReminder]);
+  }, [editMode, existingReminder, modes]);
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (newAugmentedReminder: IAugmentedReminder) => {
