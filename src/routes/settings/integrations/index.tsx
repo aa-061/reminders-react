@@ -1,6 +1,7 @@
 import "./index.css";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import GoogleCalendarSettings from "@/components/google-calendar-settings/GoogleCalendarSettings";
+import IcsUpload from "@/components/ics-upload/IcsUpload";
 import { authClient } from "@/lib/auth-client";
 
 export const Route = createFileRoute("/settings/integrations/")({
@@ -28,6 +29,7 @@ function SettingsIntegrationsPage() {
         </p>
 
         <div className="SettingsIntegrationsPage__content">
+          <IcsUpload />
           <GoogleCalendarSettings />
         </div>
       </div>
