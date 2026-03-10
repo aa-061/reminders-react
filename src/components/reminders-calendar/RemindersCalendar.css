@@ -214,11 +214,9 @@
   margin-left: 0;
 }
 
-/* Row content styling - limit to 1 visible event */
+/* Row content styling */
 .RemindersCalendar .rbc-row-content {
   z-index: 1;
-  max-height: 2.5rem;
-  overflow: hidden;
 }
 
 .RemindersCalendar .rbc-row-segment {
@@ -260,12 +258,6 @@
     font-size: 0.625rem;
     padding: 0.125rem var(--spacing-xs);
     margin-bottom: 2px;
-  }
-
-  /* Limit visible events on mobile, show +more after 1 event */
-  .RemindersCalendar .rbc-row-content {
-    max-height: 2rem;
-    overflow: hidden;
   }
 
   .RemindersCalendar .rbc-show-more {
