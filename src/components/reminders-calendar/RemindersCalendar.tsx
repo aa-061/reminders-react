@@ -24,6 +24,7 @@ interface CalendarEvent {
   title: string;
   start: Date;
   end: Date;
+  isRecurring: boolean;
 }
 
 interface RemindersCalendarProps {
@@ -39,13 +40,22 @@ export default function RemindersCalendar({
 
   const { data: fetchedReminders, isPending } = useQuery<IReminder[]>({
     queryKey: ["reminders"],
-    queryFn: () =>
-      fetch(`${url}/reminders`, {
+    queryFn: async () => {
+      const response = await fetch(`${url}/reminders`, {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
-      }).then((r) => r.json()),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      const data = await response.json();
+      if (!Array.isArray(data)) {
+        throw new Error("Invalid response format");
+      }
+      return data;
+    },
     enabled: !externalReminders,
   });
 
@@ -57,8 +67,23 @@ export default function RemindersCalendar({
       title: reminder.title,
       start: new Date(reminder.date),
       end: new Date(reminder.date),
+      isRecurring: reminder.is_recurring,
     }));
   }, [reminders]);
+
+  const eventStyleGetter = useCallback((event: CalendarEvent) => {
+    const style: React.CSSProperties = {
+      borderRadius: "var(--radius-sm)",
+      border: "none",
+    };
+
+    if (event.isRecurring) {
+      style.backgroundColor = "var(--recurring-event-bg)";
+      style.borderLeft = "3px solid var(--recurring-event-border)";
+    }
+
+    return { style };
+  }, []);
 
   const handleSelectEvent = useCallback(
     (event: CalendarEvent) => {
@@ -104,6 +129,7 @@ export default function RemindersCalendar({
           popup
           selectable={false}
           style={{ height: "100%" }}
+          eventPropGetter={eventStyleGetter}
         />
       </div>
     </div>

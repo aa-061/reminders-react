@@ -41,18 +41,30 @@ export default function ReminderCard({
   const [swipeOffset, setSwipeOffset] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
   const touchStartX = useRef(0);
-  const SWIPE_THRESHOLD = 100;
+  const touchStartY = useRef(0);
+  const isHorizontalSwipe = useRef(false);
+  const SWIPE_THRESHOLD = 80;
+  const SWIPE_START_THRESHOLD = 10; // Minimum horizontal movement to trigger swipe
+  const MAX_SWIPE_WIDTH = 80; // Reduced from 120
 
   const handleTouchStart = (e: TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
-    setIsSwiping(true);
+    touchStartY.current = e.touches[0].clientY;
+    isHorizontalSwipe.current = false;
   };
 
   const handleTouchMove = (e: TouchEvent) => {
-    if (!isSwiping) return;
-    const diff = touchStartX.current - e.touches[0].clientX;
-    if (diff > 0) {
-      setSwipeOffset(Math.min(diff, 120));
+    const diffX = touchStartX.current - e.touches[0].clientX;
+    const diffY = Math.abs(e.touches[0].clientY - touchStartY.current);
+
+    // Determine if this is a horizontal swipe (not scrolling)
+    if (!isHorizontalSwipe.current && diffX > SWIPE_START_THRESHOLD && diffX > diffY) {
+      isHorizontalSwipe.current = true;
+      setIsSwiping(true);
+    }
+
+    if (isHorizontalSwipe.current && diffX > 0) {
+      setSwipeOffset(Math.min(diffX, MAX_SWIPE_WIDTH));
     }
   };
 
@@ -64,6 +76,7 @@ export default function ReminderCard({
     }
     setSwipeOffset(0);
     setIsSwiping(false);
+    isHorizontalSwipe.current = false;
   };
 
   const reminderDate = new Date(reminder.date);
@@ -185,7 +198,13 @@ export default function ReminderCard({
             />
             <span className="ReminderCard__checkbox-custom"></span>
           </label>
-          <h3 className="ReminderCard__title">{reminder.title}</h3>
+          <Link
+            to="/reminders/$id/edit"
+            params={{ id: reminder.id.toString() }}
+            className="ReminderCard__title-link"
+          >
+            <h3 className="ReminderCard__title">{reminder.title}</h3>
+          </Link>
           <div className="ReminderCard__badges">
             {reminder.is_recurring && (
               <span className="ReminderCard__badge ReminderCard__badge--recurring">

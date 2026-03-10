@@ -1,9 +1,10 @@
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
+import { Link, Outlet, createRootRoute, redirect } from "@tanstack/react-router";
 import Layout from "@/components/layout/Layout";
 import PWAInstallPrompt from "@/components/pwa/PWAInstallPrompt";
 import PWAUpdatePrompt from "@/components/pwa/PWAUpdatePrompt";
 import { useGlobalShortcuts } from "@/hooks/useKeyboardShortcuts";
+import { authClient } from "@/lib/auth-client";
 
 function GlobalShortcuts() {
   useGlobalShortcuts();
@@ -26,6 +27,22 @@ function NotFound() {
 }
 
 export const Route = createRootRoute({
+  beforeLoad: async ({ location }) => {
+    // Allow access to login page without authentication
+    if (location.pathname === "/login" || location.pathname === "/login/") {
+      return;
+    }
+
+    const session = await authClient.getSession();
+    if (!session.data) {
+      throw redirect({
+        to: "/login",
+        search: {
+          redirect: location.href,
+        },
+      });
+    }
+  },
   component: () => (
     <>
       <GlobalShortcuts />
@@ -33,9 +50,7 @@ export const Route = createRootRoute({
         Skip to main content
       </a>
       <Layout>
-        <main id="main-content">
-          <Outlet />
-        </main>
+        <Outlet />
       </Layout>
       <PWAUpdatePrompt />
       <PWAInstallPrompt />

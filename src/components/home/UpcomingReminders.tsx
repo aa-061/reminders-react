@@ -30,13 +30,22 @@ export default function UpcomingReminders() {
 
   const { data: reminders, isPending } = useQuery<Reminder[]>({
     queryKey: ["reminders"],
-    queryFn: () =>
-      fetch(`${url}/reminders`, {
+    queryFn: async () => {
+      const response = await fetch(`${url}/reminders`, {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
-      }).then((r) => r.json()),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      const data = await response.json();
+      if (!Array.isArray(data)) {
+        throw new Error("Invalid response format");
+      }
+      return data;
+    },
   });
 
   if (isPending) {

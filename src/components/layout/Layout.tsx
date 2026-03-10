@@ -34,7 +34,7 @@ export default ({ children }: { children: ReactNode }) => {
   return (
     <div className="Layout">
       <Navbar />
-      <main>{children}</main>
+      <main id="main-content">{children}</main>
       <Footer />
       <MobileNav />
       <ToastContainer />

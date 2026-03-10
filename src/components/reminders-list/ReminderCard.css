@@ -10,7 +10,7 @@
   right: 0;
   top: 0;
   bottom: 0;
-  width: 7.5rem;
+  width: 5rem;
   background-color: var(--error);
   display: flex;
   align-items: center;
@@ -20,6 +20,7 @@
   border-radius: var(--radius-md);
   opacity: 0;
   pointer-events: none;
+  transition: opacity var(--transition-fast);
 }
 
 .ReminderCard {
@@ -130,11 +131,20 @@
   gap: var(--spacing-xs);
 }
 
+.ReminderCard__title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.ReminderCard__title-link:hover .ReminderCard__title {
+  color: var(--primary);
+}
+
 .ReminderCard__title {
   margin: 0 0 var(--spacing-sm) 0;
   font-size: var(--fs-md);
   font-weight: var(--fw-semibold);
-  /* color: light-dark(var(--foreground-light), var(--foreground-dark)); */
+  transition: color var(--transition-fast);
   word-wrap: break-word;
 }
 

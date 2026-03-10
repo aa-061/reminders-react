@@ -29,6 +29,12 @@
   --error-border-light: #f5c6cb;
   --error-border-dark: #5c2828;
 
+  /* Recurring Event Colors */
+  --recurring-event-bg: #6366f1;
+  --recurring-event-bg-light: #e0e7ff;
+  --recurring-event-bg-dark: #312e81;
+  --recurring-event-border: #4f46e5;
+
   /* Typography */
   --font-primary: "Google Sans", sans-serif;
   --fs-xs: clamp(0.75rem, 0.7rem + 0.3vw, 0.875rem);

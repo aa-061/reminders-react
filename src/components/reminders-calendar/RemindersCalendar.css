@@ -150,6 +150,13 @@
   font-weight: var(--fw-medium);
   cursor: pointer;
   transition: all var(--transition-fast);
+  margin-bottom: 1px;
+}
+
+/* Recurring event styling */
+.RemindersCalendar .rbc-event--recurring {
+  background-color: light-dark(var(--recurring-event-bg-light), var(--recurring-event-bg-dark));
+  border-left: 3px solid var(--primary);
 }
 
 .RemindersCalendar .rbc-event:hover {
@@ -207,13 +214,20 @@
   margin-left: 0;
 }
 
-/* Row content styling */
+/* Row content styling - limit to 1 visible event */
 .RemindersCalendar .rbc-row-content {
   z-index: 1;
+  max-height: 2.5rem;
+  overflow: hidden;
 }
 
 .RemindersCalendar .rbc-row-segment {
   padding: 0 var(--spacing-xs);
+}
+
+/* Row segment spacing for events */
+.RemindersCalendar .rbc-row-segment .rbc-event {
+  margin-bottom: 2px;
 }
 
 /* Responsive adjustments */
@@ -245,5 +259,17 @@
   .RemindersCalendar .rbc-event {
     font-size: 0.625rem;
     padding: 0.125rem var(--spacing-xs);
+    margin-bottom: 2px;
+  }
+
+  /* Limit visible events on mobile, show +more after 1 event */
+  .RemindersCalendar .rbc-row-content {
+    max-height: 2rem;
+    overflow: hidden;
+  }
+
+  .RemindersCalendar .rbc-show-more {
+    font-size: 0.625rem;
+    padding: 0.125rem;
   }
 }

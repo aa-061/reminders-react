@@ -1,5 +1,4 @@
 .SettingsPage {
-  padding: var(--spacing-lg);
   min-height: calc(100vh - 4rem);
 }
 
@@ -57,10 +56,6 @@
 }
 
 @media (min-width: 640px) {
-  .SettingsPage {
-    padding: var(--spacing-2xl);
-  }
-
   .SettingsPage__grid {
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   }

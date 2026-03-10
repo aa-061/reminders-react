@@ -19,7 +19,12 @@ async function fetchReminders(): Promise<IReminder[]> {
     throw new Error(`Failed to fetch reminders: ${response.statusText}`);
   }
 
-  return response.json();
+  const data = await response.json();
+  if (!Array.isArray(data)) {
+    throw new Error("Invalid response format");
+  }
+
+  return data;
 }
 
 function DashboardPage() {
